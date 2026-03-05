@@ -17,14 +17,13 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
     <html lang="en" className="jade-v2">
 
       <body>
-        <MathJaxContext>
-
-          <Header />
-
-          {children}
 
 
-        </MathJaxContext>
+        <Header />
+
+        {children}
+
+
       </body>
     </html>
   );

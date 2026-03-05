@@ -1,6 +1,7 @@
 'use client';
 
 import MainNav from "@/components/client/MainNav";
+import { MathJaxContext } from "better-react-mathjax";
 
 export default function Layout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
@@ -16,14 +17,11 @@ export default function Layout({ children, }: Readonly<{ children: React.ReactNo
           </div>
         </div>
 
-        <div className='grow jade-card ml-[15px] mr-[20px]'>
-          <div className="m-[5px]">
 
 
-            {children}
-
-          </div>
-        </div>
+        <MathJaxContext>
+          {children}
+        </MathJaxContext>
 
       </div>
     </>

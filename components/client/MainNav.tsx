@@ -15,15 +15,13 @@ export default function MainNav() {
 
                 <NavDrawer name='Math for Machine Learning'>
 
-                    <NavDrawer2 name='Linear algebra'>
+                    <NavDrawer2 name='Calculus'>
 
-                        <NavDrawerItem href='/mmldss/course1/week1' isFirst={true} >
-                            systems of linear eq
+                        <NavDrawerItem href='/mmldss/course2/week2' isFirst={true} >
+                            Week 2
                         </NavDrawerItem>
 
-                        <NavDrawerItem href='/mmldss/course1/week2' isFirst={false} >
-                            solving sys of linear eq
-                        </NavDrawerItem>
+
 
 
 

@@ -12,6 +12,8 @@
   --jade-card-background: rgb(24, 27, 31);
   --jade-collapse-title: #cccccc;
   --jade-dialog-background: rgb(45, 48, 53);
+  --tab-bg: rgb(24, 27, 31);
+  --tab-border-color: rgba(204, 204, 220, 0.12);
 }
 
 @theme inline {

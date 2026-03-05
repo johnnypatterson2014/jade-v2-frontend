@@ -1,10 +1,11 @@
 'use client';
 
 import ButtonDropdown from '@/components/client/ButtonDropdown';
+import Link from 'next/link';
 
 export default function Header() {
 
-    const updateInputForDropdown = (value: string) => {
+    const blurInput = () => {
         // const myDiv = document.getElementById(value);
         // myDiv.value = value;
         document.activeElement.blur();
@@ -24,10 +25,16 @@ export default function Header() {
                 </div>
                 <div className="flex-none mr-[20px]">
 
-                    <ButtonDropdown name='quick nav'>
-                        <ul tabIndex={0} className="w-[300px] dropdown-content text-xs jade-menu menu bg-zinc-900 z-10 w-40 mt-[5px] mb-[2px] ml-[2px] mr-[2px]">
-                            <li className='jade-menu-li'><a onClick={() => updateInputForDropdown('user')}>home</a></li>
-                            <li className='jade-menu-li jade-menu-li-bottom'><a onClick={() => updateInputForDropdown('developer')}>math for machine learning and data science</a></li>
+                    <ButtonDropdown name='launch'>
+                        <ul tabIndex={0} className="w-[250px] dropdown-content text-xs jade-menu menu bg-zinc-900 z-10 w-40 mt-[5px] mb-[0px] ml-[2px] mr-[2px]">
+                            <li className='jade-menu-li jade-border-bottom'>
+                                <Link onClick={() => blurInput()} href='/'>Home</Link>
+                                {/* <a onClick={() => updateInputForDropdown('user')}>Home</a> */}
+                            </li>
+                            <li className='jade-menu-li'>
+                                <Link onClick={() => blurInput()} href='/mmldss'>Math for Machine Learning</Link>
+                            </li>
+
                         </ul>
                     </ButtonDropdown>
 

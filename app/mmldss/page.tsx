@@ -2,17 +2,14 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center">
-      <main className="flex w-full flex-col items-center justify-between">
-
-        <div className="flex flex-col items-center text-center">
-          <p>
-            mmldss
-          </p>
-
+    <>
+      <div className='mt-[0px] ml-[40px] mr-[20px] mb-[10px]'>
+        <div className='jade-h1'>
+          Math for Machine Learning and Data Science
         </div>
 
-      </main>
-    </div>
+
+      </div>
+    </>
   );
 }
