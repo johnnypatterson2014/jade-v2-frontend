@@ -1,0 +1,150 @@
+.jade-v2 {
+    background: var(--jade-background);
+    color: var(--jade-foreground);
+}
+
+.jade-v2 h1 {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    vertical-align: top;
+    line-height: 30px;
+    margin: 0 20px 0 20px;
+    padding: 0 23px 0 0;
+}
+
+.right-border {
+    border-right: 1px solid var(--jade-line);
+}
+
+.jade-v2 h2 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 30px;
+    margin: 0
+}
+
+.jade-card {
+    border: 1px solid var(--jade-card-border);
+    padding: 0px;
+    background: var(--jade-card-background);
+    border-radius: 3px;
+}
+
+.main-nav {
+    margin: 2px;
+    padding: 0px;
+    width: 250px;
+}
+
+.jade-drawer {
+    margin: 2px;
+    padding: 3px;
+    border: 1px solid var(--jade-card-border);
+    border-radius: 5px;
+    background: var(--jade-card-background);
+}
+
+.jade-collapse-title {
+    margin: 0px;
+    color: var(--jade-collapse-title);
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+.jade-drawer-title {
+    line-height: 16px;
+    margin-bottom: 6px;
+    padding-left: 5px;
+}
+
+.jade-drawer-title2 {
+    margin-bottom: 6px;
+    margin-top: 6px;
+    padding-left: 5px;
+    color: var(--color-zinc-200);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    font-family: Consolas;
+}
+
+.jade-font {
+    font-family: Consolas;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+.jade-nav {
+    padding: 4px;
+    margin: 0px;
+    color: var(--color-zinc-400);
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+    transition: background-color 0.1s ease;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.jade-nav-border-top {
+    border-top: 1px solid var(--jade-card-border);
+}
+
+.jade-nav:hover {
+    background-color: var(--jade-dialog-background);
+    color: var(--color-zinc-200);
+}
+
+.jade-nav-link {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.collapse {
+    width: auto;
+}
+
+.collapse-title {
+    padding: 0px;
+}
+
+.collapse-content {
+    padding: 0px;
+}
+
+.collapse>input[type="checkbox"] {
+    padding: 0px;
+}
+
+.jade-menu {
+    padding: 0px;
+    --menu-active-fg: var(--color-zinc-800);
+    --menu-active-bg: var(--color-zinc-300);
+    border: 1px solid var(--color-zinc-600);
+    font-family: Consolas, monospace;
+}
+
+.jade-menu-li {
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--color-zinc-500);
+    font-family: Consolas, monospace;
+}
+
+.jade-menu-li:hover {
+    background-color: var(--color-zinc-600);
+    color: var(--color-zinc-100);
+}
+
+.jade-menu-li-bottom {
+    padding: 0px;
+    margin: 0px;
+    border-radius: 0px;
+}
