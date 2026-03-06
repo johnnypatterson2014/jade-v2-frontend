@@ -34,7 +34,7 @@
 .main-nav {
     margin-top: 11px;
     padding: 0px;
-    width: 250px;
+    width: 370px;
 }
 
 .jade-tab {
@@ -123,7 +123,7 @@
 
 .jade-nav:hover {
     background-color: var(--jade-dialog-background);
-    color: var(--color-zinc-200);
+    color: var(--color-blue-300);
 }
 
 .jade-nav-link {
@@ -165,7 +165,7 @@
 
 .jade-menu-li:hover {
     background-color: var(--jade-dialog-background);
-    color: var(--color-zinc-200);
+    color: var(--color-blue-300);
 
 }
 
@@ -175,7 +175,7 @@
 
 
 .jade-border-body {
-    border: 1px solid var(--fesk-card-border);
+    border: 1px solid var(--jade-card-border);
     padding-top: 10px;
     padding-right: 10px;
     padding-bottom: 12px;
@@ -188,7 +188,7 @@
 }
 
 .jade-border2 {
-    border: 1px solid var(--fesk-card-border);
+    border: 1px solid var(--jade-card-border);
     border-radius: 5px;
 }
 
@@ -213,7 +213,7 @@
     line-height: var(--tw-leading, var(--text-xs--line-height));
     color: var(--color-zinc-400);
     font-family: var(--font-mono);
-    border: 1px solid var(--fesk-card-border);
+    border: 1px solid var(--jade-card-border);
     padding-top: 15px;
     padding-right: 15px;
     padding-left: 15px;
@@ -237,6 +237,17 @@
 
 .jade-code-2 {
     color: rgb(197, 134, 192)
+}
+
+.lab-links {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 12px;
+    color: var(--color-blue-300);
+}
+
+.lab-links a:hover {
+    color: var(--color-zinc-200);
 }
 
 .derivatives-summary {
@@ -420,10 +431,30 @@ mjx-container[jax="CHTML"][display="true"] {
 .jupyter-nb {
     background-color: #ffffff;
     padding: 10px;
-    border: 1px solid var(--fesk-card-border);
+    border: 1px solid var(--jade-card-border);
     border-radius: 10px;
+}
+
+.code {
+    font-family: monospace;
+}
+
+.nav-active {
+    color: var(--color-orange-300);
+    background-color: var(--jade-dialog-background);
 }
 
 code {
     font-family: monospace;
+}
+
+.bc-active {
+    color: var(--color-orange-300);
+}
+
+.jupyter-nb {
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid var(--fesk-card-border);
+    border-radius: 10px;
 }

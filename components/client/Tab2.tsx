@@ -13,7 +13,7 @@ export default function Tab2({ title, isChecked, children }: { title: string, is
         <div className="page-notes">
 
           <div className="grid min-w-[800px] grid-cols-1 justify-items-center">
-            <div className="w-[800px] m-[10px] p-[10px]">
+            <div className="w-[1000px] m-[10px] p-[10px]">
 
 
               {children}

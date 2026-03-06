@@ -2,6 +2,7 @@
 
 import ButtonDropdown from '@/components/client/ButtonDropdown';
 import Link from 'next/link';
+import { usePathname } from "next/navigation";
 
 export default function Header() {
 
@@ -10,6 +11,15 @@ export default function Header() {
         // myDiv.value = value;
         document.activeElement.blur();
     }
+
+    const pathname = usePathname();
+    const pathSegments = pathname.split('/').filter(segment => segment);
+
+    const breadcrumbs = pathSegments.map((segment, index) => {
+        const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
+        const label = segment.charAt(0) + segment.slice(1).replace(/-/g, " ");
+        return { label, path };
+    });
 
     return (
         <>
@@ -22,6 +32,21 @@ export default function Header() {
                     <div className="inline-block">
                         <h2>powered by jade</h2>
                     </div>
+                    <div className='inline-block ml-[50px] code'>
+                        {breadcrumbs.map((item, index) => (
+                            <span key={index}>
+                                <span>&nbsp;&#47;&nbsp;</span>
+
+                                {index === breadcrumbs.length - 1 ? (
+                                    <span className='bc-active'>{item.label}</span >
+                                ) : (
+                                    // <Link href={item.path}>{item.label} / </Link>
+                                    <span>{item.label}</span >
+                                )}
+                            </span>
+
+                        ))}
+                    </div>
                 </div>
                 <div className="flex-none mr-[20px]">
 
@@ -32,13 +57,14 @@ export default function Header() {
                                 {/* <a onClick={() => updateInputForDropdown('user')}>Home</a> */}
                             </li>
                             <li className='jade-menu-li'>
-                                <Link onClick={() => blurInput()} href='/mmldss'>Math for Machine Learning</Link>
+                                <Link onClick={() => blurInput()} href='/phase1/mmldss/course1/week1'>Math & Stats for Machine Learning</Link>
                             </li>
 
                         </ul>
                     </ButtonDropdown>
 
                 </div>
+
             </div>
 
         </>
