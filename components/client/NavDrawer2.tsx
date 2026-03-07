@@ -2,12 +2,12 @@
 
 import { ReactNode } from 'react'
 
-export default function NavDrawer2({ name, children }: { name: string, children: ReactNode }) {
+export default function NavDrawer2({ name, id, parent_id, children }: { name: string, id: string, parent_id: string, children: ReactNode }) {
 
     return (
         <>
             <div className="collapse mb-[4px]">
-                <input id='collapse-checkbox' className='p-[0px] jade-checkbox' type="checkbox" defaultChecked />
+                <input id={`${parent_id}-${id}`} className='p-[0px] jade-checkbox-level-2' type="checkbox" defaultChecked />
                 <div className="collapse-title">
                     <div className=''>
 

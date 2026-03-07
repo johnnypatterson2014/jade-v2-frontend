@@ -1,0 +1,13 @@
+
+Given the html below, please parse the html, perform the following text conversions, and output the html converted text according to these rules:
+ - rule 1: replace the text "<hr>" with "<hr/>"
+ - rule 2: replace the inline math formulas (which start with a $ and end with a $) as per the following examples:
+    - example: `$\Omega$` should be replaced with `<span className="math">{"\\[\\omega \\in \\Omega\\]"}</span>`
+    - example: `P(A|B) = \frac{P(A \cap B)}{P(B)}` should be replaced with `<span className="math">{"\\[P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\]"}</span>`
+ - rule 3: replace the math formulas (which start with $$ and end with $$) as per the following examples:
+    - example: `<p>$$P({1,2,3,4}) = \frac{4}{6}$$</p>` should be replaced with `<p className="formula">{"\\[P({1,2,3,4}) = \\frac{4}{6}\\]"}</p>`
+    - example: `<p>$$0 \le p_X(x) \le 1$$</p>` should be replaced with `<p className="formula">{"\\[0 \\le p_X(x) \\le 1\\]"}</p>`
+ - rule 4: remove all `<em>` and `</em>` tags that you find. 
+ - rule 5: replace `&#39;` with a single quote `'`
+
+html to convert starts here:
