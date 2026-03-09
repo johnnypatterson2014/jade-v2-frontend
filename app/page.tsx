@@ -7,7 +7,7 @@ export default function Home() {
 
         <div className="flex flex-col items-center text-center">
           <p>
-            homepage
+
           </p>
 
         </div>

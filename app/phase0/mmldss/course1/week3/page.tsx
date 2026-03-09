@@ -1,0 +1,68 @@
+'use client';
+
+import Image from "next/image";
+import Tabs from '@/components/client/Tabs';
+import Tab2 from '@/components/client/Tab2';
+import TileRowCell0 from '@/components/client/TileRowCell0';
+import { MathJaxContext } from "better-react-mathjax";
+import React, { useEffect } from 'react';
+
+
+export default function Home() {
+
+        useEffect(() => {
+                // Check if MathJax is loaded and available in the window object
+                if (typeof window?.MathJax !== "undefined") {
+                        window.MathJax.typeset(); // Triggers typesetting
+                }
+        }, []); // Run once on component mount
+
+        return (
+                <>
+                        <MathJaxContext>
+                                <div className='mt-[0px] ml-[40px] mr-[20px] mb-[10px]'>
+
+                                        <div className='jade-h1'>
+                                                Math for Machine Learning and Data Science
+                                        </div>
+
+                                        <div className='jade-h2 mb-[25px]'>
+                                                Week 3: Vectors & linear trans
+                                        </div>
+
+                                        <Tabs>
+                                                <Tab2 title="Notes" isChecked={true}>
+                                                        <TileRowCell0>
+
+
+
+                                                                Coming soon.
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+                                                <Tab2 title="Labs & Assignments" isChecked={false}>
+                                                        <TileRowCell0>
+
+                                                                <div className='lab-links'>
+
+                                                                        <ul>
+                                                                                <li><a href="/C1W3_UGL_1_vector_operations.html" target="_blank">Lab: Vector Operations: Scalar Multiplication, Sum and Dot Product of Vectors</a></li>
+                                                                                <li><a href="/C1W3_UGL_2_matrix_multiplication.html" target="_blank">Lab: Matrix Multiplication</a></li>
+                                                                                <li><a href="/C1W3_UGL_3_linear_transformations.html" target="_blank">Lab: Linear Transformations</a></li>
+                                                                                <li><a href="/C1W3_Assignment.html" target="_blank">Assignment: Linear Transformations and Neural Networks</a></li>
+                                                                        </ul>
+
+                                                                </div>
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+                                        </Tabs>
+
+
+                                </div>
+                        </MathJaxContext>
+                </>
+        );
+}

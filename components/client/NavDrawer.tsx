@@ -7,7 +7,7 @@ export default function NavDrawer({ name, id, children }: { name: string, id: st
     return (
         <>
             <div className="collapse mb-[4px]">
-                <input id={id} className='p-[0px] jade-checkbox-level-1' type="checkbox" defaultChecked />
+                <input id={id} className='p-[0px] jade-checkbox-level-1' type="checkbox" />
                 <div className="collapse-title">
                     <div className='jade-drawer'>
 

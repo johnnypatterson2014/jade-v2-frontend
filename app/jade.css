@@ -242,7 +242,7 @@
 .lab-links {
     font-family: 'Courier New', monospace;
     font-size: 14px;
-    line-height: 12px;
+    line-height: 16px;
     color: var(--color-blue-300);
 }
 
@@ -327,8 +327,13 @@ mjx-container[jax="CHTML"][display="true"] {
 .jade-h2 {
     font-size: 18px;
     font-weight: 300;
-    margin-bottom: 10px;
     color: var(--color-zinc-300);
+}
+
+.jade-h3 {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--color-blue-300);
 }
 
 .page-notes p {

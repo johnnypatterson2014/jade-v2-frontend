@@ -1,6 +1,6 @@
 'use client';
 
-import MainNavP1 from "@/components/client/MainNavP1";
+import MainNav from "@/components/client/MainNav";
 
 
 export default function Layout({ children, }: Readonly<{ children: React.ReactNode; }>) {
@@ -13,7 +13,7 @@ export default function Layout({ children, }: Readonly<{ children: React.ReactNo
         <div className='flex-none ml-[20px]'>
           <div className="grid grid-cols-1 gap-[10px]">
 
-            <MainNavP1 />
+            <MainNav />
 
           </div>
         </div>

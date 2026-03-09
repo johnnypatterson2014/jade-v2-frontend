@@ -84,21 +84,23 @@ export default function Header() {
 
                     <div className='flex shrink justify-end'>
                         <div className='flex gap-[10px]'>
-                            <div className='flex-none'>
+
+                            {/* <div className='flex-none content-end'>
                                 <Button>
                                     <a onClick={() => toggleAll(false)}>collapse all</a>
                                 </Button>
                             </div>
-                            <div className='flex-none'>
+                            <div className='flex-none content-end'>
                                 <Button>
                                     <a onClick={() => toggleAll(true)}>expand all</a>
                                 </Button>
                             </div>
-                            <div className='flex-none'>
+                            <div className='flex-none content-end'>
                                 <Button>
                                     <a onClick={() => resetCurrentNav()}>reset nav</a>
                                 </Button>
-                            </div>
+                            </div> */}
+
                             <div className='flex-none'>
                                 <ButtonDropdown name='launch'>
                                     <ul tabIndex={0} className="w-[250px] dropdown-content text-xs jade-menu menu bg-zinc-900 z-10 w-40 mt-[5px] mb-[0px] ml-[2px] mr-[2px]">
@@ -107,10 +109,10 @@ export default function Header() {
                                             {/* <a onClick={() => updateInputForDropdown('user')}>Home</a> */}
                                         </li>
                                         <li className='jade-menu-li jade-border-bottom'>
-                                            <Link onClick={() => blurInput()} href='/phase1/mmldss/course1/week1'>Math & Stats for Machine Learning</Link>
+                                            <Link onClick={() => blurInput()} href='/phase0/mmldss/course1/week1'>Phase 0: Math & Stats for ML</Link>
                                         </li>
                                         <li className='jade-menu-li'>
-                                            <Link onClick={() => blurInput()} href='/phase1/XCS221/reference'>XCS221: AI Principles</Link>
+                                            <Link onClick={() => blurInput()} href='/phase1/XCS221/week12/topic1'>Phase 1: XCS221 - AI Principles</Link>
                                         </li>
 
                                     </ul>

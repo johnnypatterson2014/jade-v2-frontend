@@ -7,7 +7,7 @@ export default function NavDrawer2({ name, id, parent_id, children }: { name: st
     return (
         <>
             <div className="collapse mb-[4px]">
-                <input id={`${parent_id}-${id}`} className='p-[0px] jade-checkbox-level-2' type="checkbox" defaultChecked />
+                <input id={`${parent_id}-${id}`} className='p-[0px] jade-checkbox-level-2' type="checkbox" />
                 <div className="collapse-title">
                     <div className=''>
 

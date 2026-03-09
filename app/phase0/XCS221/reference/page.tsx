@@ -23,13 +23,12 @@ export default function Home() {
                                 <div className='mt-[0px] ml-[40px] mr-[20px] mb-[10px]'>
 
                                         <div className='jade-h1'>
-                                                XCS221 - AI Principles & Techniques
+                                                XCS221 - Artificial Intelligence: Principles and Techniques
                                         </div>
 
-                                        <div className='jade-h2 mt-[5px] mb-[20px]'>
-                                                Reference Material | PDF guides
+                                        <div className='jade-h2 mb-[25px]'>
+                                                Reference Material
                                         </div>
-
 
                                         <Tabs>
                                                 <Tab2 title="Review of Probability Theory" isChecked={true}>
