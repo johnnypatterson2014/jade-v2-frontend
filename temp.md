@@ -1,674 +1,387 @@
 
 
-# Review of Probability Theory
+# NumPy `einsum` Cheat Sheet
 
-*Arian Maleki and Tom Do — Stanford University*
-
-Probability theory is the study of uncertainty. These notes review the basic probability concepts needed for machine learning. The full mathematical theory involves measure theory, but these notes focus on the core concepts required for practical work.
-
----
-
-# 1. Elements of Probability
-
-To define probability formally, we need three components.
-
-## Sample Space
-
-The **sample space** $\Omega$ is the set of all possible outcomes of an experiment.
-
-Each outcome $\omega \in \Omega$ represents a complete description of the experiment.
+```python
+import numpy as np
+```
 
 ---
 
-## Event Space
+# Core Rule
 
-The **event space** $F$ is a set of events where each event is a subset of the sample space.
+Einstein summation follows two rules:
 
-$$
-A \in F \Rightarrow A \subseteq \Omega
-$$
-
----
-
-## Probability Measure
-
-A **probability measure**
-
-$$
-P : F \rightarrow \mathbb{R}
-$$
-
-must satisfy the **axioms of probability**:
-
-1. $P(A) \ge 0$
-2. $P(\Omega) = 1$
-3. If $A_1, A_2, ...$ are disjoint events:
-
-$$
-P\left(\bigcup_i A_i\right) = \sum_i P(A_i)
-$$
-
----
-
-## Example: Tossing a Die
-
-Sample space:
-
-$$
-\Omega = {1,2,3,4,5,6}
-$$
-
-Example probabilities:
-
-$$
-P({1,2,3}) = \frac{3}{6}
-$$
-
-$$
-P({1,2,3,4}) = \frac{4}{6}
-$$
-
----
-
-## Useful Properties
-
-If $A \subseteq B$ then
-
-$$
-P(A) \le P(B)
-$$
-
-Intersection bound:
-
-$$
-P(A \cap B) \le \min(P(A),P(B))
-$$
-
-Union bound:
-
-$$
-P(A \cup B) \le P(A) + P(B)
-$$
-
-Complement rule:
-
-$$
-P(\Omega \setminus A) = 1 - P(A)
-$$
-
----
-
-# 1.1 Conditional Probability and Independence
-
-Conditional probability:
-
-$$
-P(A|B) = \frac{P(A \cap B)}{P(B)}
-$$
-
-Two events are **independent** if
-
-$$
-P(A \cap B) = P(A)P(B)
-$$
-
-Equivalently,
-
-$$
-P(A|B) = P(A)
-$$
-
----
-
-# 2. Random Variables
-
-A **random variable** is a function
-
-$$
-X : \Omega \rightarrow \mathbb{R}
-$$
-
-It assigns a numerical value to each outcome.
+1. **Repeated indices are summed over**
+2. **Indices appearing in the output are preserved**
 
 Example:
 
-If we flip 10 coins, define
+```python
+np.einsum('ik,kj->ij', A, B)
+```
 
-$$
-X(\omega) = \text{number of heads}
-$$
+Formula:
 
----
-
-## Discrete Random Variables
-
-Probability of a specific value:
-
-$$
-P(X = k) = P({\omega : X(\omega) = k})
-$$
-
-Possible values:
-
-$$
-Val(X) = {0,1,2,...,10}
-$$
+[
+C_{ij} = \sum_k A_{ik} B_{kj}
+]
 
 ---
 
-## Continuous Random Variables
+# 1. Vector Dot Product
 
-Probability that $X$ lies within an interval:
+```python
+# x: (d,)
+# y: (d,)
+out = np.einsum('d,d->', x, y)
+```
 
-$$
-P(a \le X \le b)
-$$
+Equivalent:
 
----
+```python
+out = x @ y
+```
 
-# 2.1 Cumulative Distribution Function (CDF)
+Formula:
 
-The **CDF** is defined as
-
-$$
-F_X(x) = P(X \le x)
-$$
-
-### Properties
-
-* $0 \le F_X(x) \le 1$
-* $F_X(x)$ is non-decreasing
-* $\lim_{x \to -\infty} F_X(x) = 0$
-* $\lim_{x \to \infty} F_X(x) = 1$
+[
+x \cdot y = \sum_d x_d y_d
+]
 
 ---
 
-# 2.2 Probability Mass Function (PMF)
+# 2. Matrix–Vector Multiply
 
-For discrete variables:
+```python
+# A: (m, n)
+# x: (n,)
+out = np.einsum('mn,n->m', A, x)
+```
 
-$$
-p_X(x) = P(X = x)
-$$
+Equivalent:
 
-### Properties
+```python
+out = A @ x
+```
 
-$$
-0 \le p_X(x) \le 1
-$$
+Formula:
 
-$$
-\sum_{x \in Val(X)} p_X(x) = 1
-$$
-
-Probability of an event $A$:
-
-$$
-P(X \in A) = \sum_{x \in A} p_X(x)
-$$
+[
+y_m = \sum_n A_{mn} x_n
+]
 
 ---
 
-# 2.3 Probability Density Function (PDF)
+# 3. Matrix Multiplication
 
-For continuous variables:
+```python
+# A: (m, n)
+# B: (n, p)
+out = np.einsum('mn,np->mp', A, B)
+```
 
-$$
-f_X(x) = \frac{dF_X(x)}{dx}
-$$
+Equivalent:
 
-Probability over a small interval:
+```python
+out = A @ B
+```
 
-$$
-P(x \le X \le x+\Delta x) \approx f_X(x)\Delta x
-$$
+Formula:
 
-### Properties
-
-$$
-f_X(x) \ge 0
-$$
-
-$$
-\int_{-\infty}^{\infty} f_X(x),dx = 1
-$$
-
-Probability of event $A$:
-
-$$
-P(X \in A) = \int_A f_X(x),dx
-$$
+[
+C_{mp} = \sum_n A_{mn} B_{np}
+]
 
 ---
 
-# 2.4 Expectation
+# 4. Transpose
 
-Expectation of a function $g(X)$.
+```python
+# X: (m, n)
+out = np.einsum('mn->nm', X)
+```
 
-### Discrete Case
+Equivalent:
 
-$$
-E[g(X)] = \sum_{x \in Val(X)} g(x)p_X(x)
-$$
-
-### Continuous Case
-
-$$
-E[g(X)] = \int_{-\infty}^{\infty} g(x)f_X(x)dx
-$$
-
-Mean of a random variable:
-
-$$
-E[X]
-$$
+```python
+out = X.T
+```
 
 ---
 
-## Properties
+# 5. Sum Over an Axis
 
-Constant:
+```python
+# X: (m, n)
 
-$$
-E[a] = a
-$$
+col_sums = np.einsum('mn->n', X)
+row_sums = np.einsum('mn->m', X)
+total    = np.einsum('mn->', X)
+```
 
-Scaling:
+Equivalent:
 
-$$
-E[af(X)] = aE[f(X)]
-$$
-
-Linearity:
-
-$$
-E[f(X) + g(X)] = E[f(X)] + E[g(X)]
-$$
+```python
+col_sums = X.sum(axis=0)
+row_sums = X.sum(axis=1)
+total    = X.sum()
+```
 
 ---
 
-# 2.5 Variance
+# 6. Column-wise Squared Norms
 
-Variance measures how spread out a random variable is.
+```python
+# X: (m, n)
 
-$$
-Var[X] = E[(X - E[X])^2]
-$$
+out = np.einsum('mn,mn->n', X, X)
+```
 
-Equivalent form:
+Equivalent:
 
-$$
-Var[X] = E[X^2] - (E[X])^2
-$$
+```python
+np.sum(X**2, axis=0)
+```
 
----
+Formula:
 
-## Example: Uniform(0,1)
+[
+|X_{\cdot n}|^2 = \sum_m X_{mn}^2
+]
 
-Mean:
+Also equal to:
 
-$$
-E[X] = \int_0^1 x,dx = \frac12
-$$
-
-Second moment:
-
-$$
-E[X^2] = \int_0^1 x^2,dx = \frac13
-$$
-
-Variance:
-
-$$
-Var[X] = \frac13 - \frac14 = \frac1{12}
-$$
+[
+\text{diag}(X^T X)
+]
 
 ---
 
-# 2.6 Common Random Variables
+# 7. Row-wise Squared Norms
 
-## Discrete Distributions
+```python
+# X: (m, n)
 
-### Bernoulli
+out = np.einsum('mn,mn->m', X, X)
+```
 
-$$
-X \sim Bernoulli(p)
-$$
+Equivalent:
 
-$$
-p(x) =
-\begin{cases}
-p & x=1 \
-1-p & x=0
-\end{cases}
-$$
+```python
+np.sum(X**2, axis=1)
+```
 
-Mean:
+Formula:
 
-$$
-E[X] = p
-$$
+[
+|X_{m\cdot}|^2 = \sum_n X_{mn}^2
+]
 
-Variance:
+Also equal to:
 
-$$
-Var[X] = p(1-p)
-$$
+[
+\text{diag}(X X^T)
+]
 
 ---
 
-### Binomial
+# 8. Pairwise Row Dot Products (Gram Matrix)
 
-$$
-X \sim Binomial(n,p)
-$$
+```python
+# X: (m, d)
 
-$$
-p(x) = \binom{n}{x}p^x(1-p)^{n-x}
-$$
+out = np.einsum('md,nd->mn', X, X)
+```
 
-Mean:
+Equivalent:
 
-$$
-np
-$$
+```python
+X @ X.T
+```
 
-Variance:
+Formula:
 
-$$
-np(1-p)
-$$
+[
+G_{mn} = \sum_d X_{md} X_{nd}
+]
 
 ---
 
-### Geometric
+# 9. Outer Product
 
-$$
-p(x) = p(1-p)^{x-1}
-$$
+```python
+# x: (m,)
+# y: (n,)
 
-Mean:
+out = np.einsum('m,n->mn', x, y)
+```
 
-$$
-\frac1p
-$$
+Equivalent:
 
-Variance:
+```python
+np.outer(x, y)
+```
 
-$$
-\frac{1-p}{p^2}
-$$
+Formula:
 
----
-
-### Poisson
-
-$$
-p(x) = e^{-\lambda}\frac{\lambda^x}{x!}
-$$
-
-Mean and variance:
-
-$$
-\lambda
-$$
+[
+M_{mn} = x_m y_n
+]
 
 ---
 
-## Continuous Distributions
+# 10. Batch Matrix Multiplication
 
-### Uniform
+```python
+# A: (b, m, n)
+# B: (b, n, p)
 
-$$
-f(x) =
-\begin{cases}
-\frac{1}{b-a} & a \le x \le b \
-0 & \text{otherwise}
-\end{cases}
-$$
+out = np.einsum('bmn,bnp->bmp', A, B)
+```
 
-Mean:
+Equivalent:
 
-$$
-\frac{a+b}{2}
-$$
+```python
+A @ B
+```
 
-Variance:
+Formula:
 
-$$
-\frac{(b-a)^2}{12}
-$$
+[
+C_{bmp} = \sum_n A_{bmn} B_{bnp}
+]
 
 ---
 
-### Exponential
+# 11. Batched Linear Layer
 
-$$
-f(x) = \lambda e^{-\lambda x}, \quad x \ge 0
-$$
+```python
+# X: (b, t, d_in)
+# W: (d_in, d_out)
 
-Mean:
+out = np.einsum('btd,df->btf', X, W)
+```
 
-$$
-\frac1\lambda
-$$
+Equivalent:
 
-Variance:
+```python
+out = X @ W
+```
 
-$$
-\frac1{\lambda^2}
-$$
+Formula:
 
----
-
-### Normal (Gaussian)
-
-$$
-f(x) =
-\frac{1}{\sigma\sqrt{2\pi}}
-e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-$$
-
-Mean:
-
-$$
-\mu
-$$
-
-Variance:
-
-$$
-\sigma^2
-$$
+[
+Y_{btf} = \sum_d X_{btd} W_{df}
+]
 
 ---
 
-# 3. Two Random Variables
+# 12. Attention Scores
 
-Joint CDF:
+```python
+# Q: (b, t, d)
+# K: (b, s, d)
 
-$$
-F_{XY}(x,y) = P(X \le x, Y \le y)
-$$
+scores = np.einsum('btd,bsd->bts', Q, K)
+```
 
-Marginal distributions:
+Equivalent:
 
-$$
-F_X(x) = \lim_{y \to \infty} F_{XY}(x,y)
-$$
+```python
+scores = Q @ K.transpose(0,2,1)
+```
 
-$$
-F_Y(y) = \lim_{x \to \infty} F_{XY}(x,y)
-$$
+Formula:
 
----
-
-# 3.2 Joint PMF
-
-$$
-p_{XY}(x,y) = P(X=x, Y=y)
-$$
-
-Marginalization:
-
-$$
-p_X(x) = \sum_y p_{XY}(x,y)
-$$
+[
+S_{bts} = \sum_d Q_{btd} K_{bsd}
+]
 
 ---
 
-# 3.3 Joint PDF
+# 13. Attention Output
 
-$$
-f_{XY}(x,y) = \frac{\partial^2 F_{XY}(x,y)}{\partial x \partial y}
-$$
+```python
+# A: (b, t, s)
+# V: (b, s, d)
 
-Probability over region $A$:
+out = np.einsum('bts,bsd->btd', A, V)
+```
 
-$$
-P((X,Y)\in A) = \int_A f_{XY}(x,y),dx,dy
-$$
+Formula:
 
----
-
-# 3.4 Conditional Distributions
-
-Discrete case:
-
-$$
-p_{Y|X}(y|x) = \frac{p_{XY}(x,y)}{p_X(x)}
-$$
-
-Continuous case:
-
-$$
-f_{Y|X}(y|x) = \frac{f_{XY}(x,y)}{f_X(x)}
-$$
+[
+O_{btd} = \sum_s A_{bts} V_{bsd}
+]
 
 ---
 
-# 3.5 Bayes Rule
+# 14. Multi-Head Attention Scores
 
-Discrete:
+```python
+# Q: (b, h, t, k)
+# K: (b, h, s, k)
 
-$$
-P_{Y|X}(y|x) =
-\frac{P_{X|Y}(x|y)P_Y(y)}
-{\sum_{y'}P_{X|Y}(x|y')P_Y(y')}
-$$
+scores = np.einsum('bhtk,bhsk->bhts', Q, K)
+```
 
-Continuous:
+Formula:
 
-$$
-f_{Y|X}(y|x) =
-\frac{f_{X|Y}(x|y)f_Y(y)}
-{\int f_{X|Y}(x|y')f_Y(y')dy'}
-$$
+[
+S_{bhts} = \sum_k Q_{bhtk} K_{bhsk}
+]
 
 ---
 
-# 3.6 Independence
+# 15. Multi-Head Attention Output
 
-Random variables are independent if
+```python
+# A: (b, h, t, s)
+# V: (b, h, s, k)
 
-$$
-p_{XY}(x,y) = p_X(x)p_Y(y)
-$$
+out = np.einsum('bhts,bhsk->bhtk', A, V)
+```
 
-or
+Formula:
 
-$$
-f_{XY}(x,y) = f_X(x)f_Y(y)
-$$
-
----
-
-# 3.7 Covariance
-
-$$
-Cov[X,Y] = E[(X-E[X])(Y-E[Y])]
-$$
-
-Equivalent form:
-
-$$
-Cov[X,Y] = E[XY] - E[X]E[Y]
-$$
+[
+O_{bhtk} = \sum_s A_{bhts} V_{bhsk}
+]
 
 ---
 
-# 4. Multiple Random Variables
+# Quick Pattern Reference
 
-For variables $X_1,...,X_n$.
-
-Joint density:
-
-$$
-f(x_1,...,x_n)
-$$
-
-Chain rule:
-
-$$
-f(x_1,...,x_n) =
-f(x_1)\prod_{i=2}^{n} f(x_i|x_1,...,x_{i-1})
-$$
-
----
-
-# Random Vectors
-
-Random vector:
-
-$$
-X=[X_1,X_2,...,X_n]^T
-$$
-
-Expectation:
-
-$$
-E[g(X)] = \int g(x)f_X(x),dx
-$$
+| Operation            | einsum pattern      |
+| -------------------- | ------------------- |
+| dot product          | `'d,d->'`           |
+| matrix multiply      | `'mn,np->mp'`       |
+| outer product        | `'m,n->mn'`         |
+| Gram matrix          | `'md,nd->mn'`       |
+| column norms         | `'mn,mn->n'`        |
+| row norms            | `'mn,mn->m'`        |
+| batched linear layer | `'btd,df->btf'`     |
+| attention scores     | `'btd,bsd->bts'`    |
+| attention output     | `'bts,bsd->btd'`    |
+| multi-head scores    | `'bhtk,bhsk->bhts'` |
+| multi-head output    | `'bhts,bhsk->bhtk'` |
 
 ---
 
-# Covariance Matrix
+# Debugging Trick
 
-$$
-\Sigma = Cov(X)
-$$
+When reading an einsum expression:
 
-$$
-\Sigma = E[(X-E[X])(X-E[X])^T]
-$$
+1. Write the shapes under each index.
+2. Identify repeated indices not in the output.
+3. Those indices are **summed over**.
 
-Properties:
+Example:
 
-* symmetric
-* positive semidefinite
+```python
+'btd,bsd->bts'
+```
 
----
-
-# Multivariate Gaussian
-
-$$
-X \sim N(\mu,\Sigma)
-$$
-
-Density:
-
-$$
-f(x)=
-\frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}
-\exp\left(
--\frac12 (x-\mu)^T\Sigma^{-1}(x-\mu)
-\right)
-$$
-
----
-
-# Why Gaussian Distributions Matter
-
-1. Noise often results from many small independent effects
-2. By the **Central Limit Theorem**, sums of random variables tend to become Gaussian
-3. Gaussian integrals often have closed-form solutions
+* `d` appears twice → summed
+* remaining indices → output shape `(b, t, s)`

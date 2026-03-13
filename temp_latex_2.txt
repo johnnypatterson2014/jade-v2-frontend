@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+
+\title{Einstein Summation (einsum) Cheat Sheet for Machine Learning}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Core Rule}
+
+Einstein summation follows two simple rules:
+
+\begin{itemize}
+\item Repeated indices are summed over.
+\item Indices that remain appear in the output tensor.
+\end{itemize}
+
+Example:
+
+\[
+C_{ij} = \sum_k A_{ik} B_{kj}
+\]
+
+Einsum pattern:
+
+\[
+\texttt{ik,kj -> ij}
+\]
+
+---
+
+\section*{Common Einsum Patterns}
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Operation & Formula & Einsum Pattern \\
+\midrule
+
+Dot Product &
+\(
+x \cdot y = \sum_k x_k y_k
+\)
+&
+\texttt{k,k ->}
+\\[10pt]
+
+Matrix Multiplication &
+\(
+C_{ij} = \sum_k A_{ik} B_{kj}
+\)
+&
+\texttt{ik,kj -> ij}
+\\[10pt]
+
+Gram Matrix (Pairwise Dot Products) &
+\(
+S_{ij} = \sum_k X_{ik} X_{jk}
+\)
+&
+\texttt{ik,jk -> ij}
+\\[10pt]
+
+Attention Scores &
+\(
+S_{bts} = \sum_d Q_{btd} K_{bsd}
+\)
+&
+\texttt{btd,bsd -> bts}
+\\[10pt]
+
+Attention Output &
+\(
+O_{btd} = \sum_s A_{bts} V_{bsd}
+\)
+&
+\texttt{bts,bsd -> btd}
+\\[10pt]
+
+Multi-Head Attention Scores &
+\(
+S_{bhts} = \sum_k Q_{bhtk} K_{bhsk}
+\)
+&
+\texttt{bhtk,bhsk -> bhts}
+\\
+
+\bottomrule
+\end{tabular}
+\end{center}
+
+---
+
+\section*{Index Meaning in Transformers}
+
+\[
+\begin{array}{c|l}
+\text{Index} & \text{Meaning} \\
+\hline
+b & \text{batch size} \\
+t & \text{query token position} \\
+s & \text{key/value token position} \\
+d & \text{embedding dimension} \\
+h & \text{attention head} \\
+k & \text{head dimension}
+\end{array}
+\]
+
+---
+
+\section*{Mental Model}
+
+Most deep learning tensor operations follow the same pattern:
+
+\[
+A_{\dots k} \; B_{\dots k} \rightarrow \sum_k
+\]
+
+Meaning:
+
+\begin{enumerate}
+\item Align tensors along a shared dimension.
+\item Multiply elementwise.
+\item Sum over the shared index.
+\end{enumerate}
+
+This produces a matrix or tensor of pairwise interactions.
+
+---
+
+\section*{Key Insight}
+
+Most neural network layers reduce to computing many dot products:
+
+\begin{itemize}
+\item Linear layers $\rightarrow$ matrix multiplication
+\item Attention $\rightarrow$ query-key dot products
+\item Kernel methods $\rightarrow$ Gram matrices
+\item Convolutions $\rightarrow$ local dot products
+\end{itemize}
+
+Einstein summation simply makes these interactions explicit.
+
+\end{document}

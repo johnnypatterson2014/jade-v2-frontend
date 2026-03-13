@@ -1,0 +1,37 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{testing}
+\author{Johnny Patterson}
+\date{March 2026}
+
+\begin{document}
+
+\maketitle
+
+\[
+\begin{array}{c|c}
+\text{Operation} & \text{Formula} \\
+\hline
+\text{Dot Product} &
+x \cdot y = \sum_k x_k y_k \\
+
+\text{Matrix Multiply} &
+C_{ij} = \sum_k A_{ik} B_{kj} \\
+
+\text{Gram Matrix} &
+S_{ij} = \sum_k X_{ik} X_{jk} \\
+
+\text{Attention Scores} &
+S_{bts} = \sum_d Q_{btd} K_{bsd} \\
+
+\text{Attention Output} &
+O_{btd} = \sum_s A_{bts} V_{bsd} \\
+
+\text{Multihead Scores} &
+S_{bhts} = \sum_k Q_{bhtk} K_{bhsk}
+\end{array}
+\]
+
+\end{document}

@@ -449,9 +449,6 @@ mjx-container[jax="CHTML"][display="true"] {
     background-color: var(--jade-dialog-background);
 }
 
-code {
-    font-family: monospace;
-}
 
 .bc-active {
     color: var(--color-orange-300);

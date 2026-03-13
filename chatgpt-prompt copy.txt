@@ -1,0 +1,33 @@
+
+Given the html below, please parse the html, perform the following text conversions, and output the html converted text according to these rules:
+ - rule 1: remove the text "<hr>" 
+ - rule 2: replace the math formulas in <p> tags as per the following examples:
+    - example 1: 
+    `<p>[
+  C_{ij} = \sum<em>k A</em>{ik} B_{kj}
+  ]</p>`
+    - should be replaced with: `<p className="formula">{"\\[C_{ij} = \\sum_k A_{ik} B_{kj}\\]"}</p>`
+
+    - example 2: 
+    `<p>[
+  x \cdot y = \sum_d x_d y_d
+  ]</p>`
+    - should be replaced with: `<p className="formula">{"\\[x \\cdot y = \\sum_d x_d y_d\\]"}</p>`
+
+    - example 3: 
+    `<p>[
+  C_{mp} = \sum<em>n A</em>{mn} B_{np}
+  ]</p>`
+    - should be replaced with: `<p className="formula">{"\\[C_{mp} = \\sum_n A_{mn} B_{np}\\]"}</p>`
+
+    - example 4: 
+    `<p>[
+  \text{diag}(X^T X)
+  ]</p>`
+    - should be replaced with: `<p className="formula">{"\\[\\text{diag}(X^T X)\\]"}</p>`
+    
+ - rule 4: replace `&#39;` with a single quote `'`
+ - rule 5: replace `class=` with `className=`
+
+html to convert starts here:
+

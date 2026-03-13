@@ -1,0 +1,25 @@
+
+Given the html below, please parse the html, perform the following text conversions, and output the html converted text according to these rules:
+ - rule 1: remove the text "<hr>" 
+ - rule 2: replace the inline math formulas (which start with a $$ and end with a $$) as per the following examples:
+    - example 1: 
+    `$$x \cdot y = \sum_k x_k y_k$$`
+    - should be replaced with: `<span className="math">{"\\[x \\cdot y = \\sum_k x_k y_k\\]"}</span>`
+
+    - example 2: 
+    `$$
+  C_{ij} = \sum<em>k A</em>{ik} B_{kj}
+  $$`
+    - should be replaced with: `<span className="math">{"\\[C_{ij} = \\sum_k A_{ik} B_{kj}\\]"}</span>`
+
+    - example 3: 
+    `$$
+  A<em>{\dots k} ; B</em>{\dots k} \rightarrow \sum_k
+  $$`
+    - should be replaced with: `<span className="math">{"\\[A_{\\dots k} ; B_{\\dots k} \\rightarrow \\sum_k\\]"}</span>`
+
+ - rule 4: replace `&#39;` with a single quote `'`
+ - rule 5: replace `class=` with `className=`
+
+html to convert starts here:
+

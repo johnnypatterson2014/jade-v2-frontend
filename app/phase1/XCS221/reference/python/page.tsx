@@ -27,7 +27,7 @@ export default function Home() {
                                         </div>
 
                                         <div className='jade-h2 mt-[5px] mb-[20px]'>
-                                                Week 1 & 2 | Machine Learning | 2.1: Tensors and Einops
+                                                Python Quick Reference
                                         </div>
 
 

@@ -1,6 +1,130 @@
+<p>Here is your <strong>LaTeX document converted to GitHub-friendly Markdown with MathJax</strong>. The mathematical
+  formulas are preserved using <code>$$ ... $$</code> blocks so they render correctly in Markdown viewers that support
+  MathJax (GitHub, Jupyter, MkDocs, etc.).</p>
+<hr>
+<h1 id="einstein-summation-einsum-cheat-sheet-for-machine-learning">Einstein Summation (einsum) Cheat Sheet for Machine
+  Learning</h1>
+<h2 id="core-rule">Core Rule</h2>
+<p>Einstein summation follows two simple rules:</p>
 <ul>
-  <li>xxxxxxxxxxxxxx</li>
-  <li>xxxxxxxxxxxxxx</li>
-  <li>xxxxxxxxxxxxxx</li>
-  <li>xxxxxxxxxxxxxx</li>
+  <li>Repeated indices are summed over.</li>
+  <li>Indices that remain appear in the output tensor.</li>
+</ul>
+<p>Example:</p>
+<p>$$
+  C_{ij} = \sum<em>k A</em>{ik} B_{kj}
+  $$</p>
+<p>Einsum pattern:</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">ik</span>,kj -&gt;</span> ij
+</code></pre>
+<hr>
+<h1 id="common-einsum-patterns">Common Einsum Patterns</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Operation</th>
+      <th>Formula</th>
+      <th>Einsum Pattern</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Dot Product</strong></td>
+      <td>$$x \cdot y = \sum_k x_k y_k$$</td>
+      <td><code>k,k -&gt;</code></td>
+    </tr>
+    <tr>
+      <td><strong>Matrix Multiplication</strong></td>
+      <td>$$C_{ij} = \sum<em>k A</em>{ik} B_{kj}$$</td>
+      <td><code>ik,kj -&gt; ij</code></td>
+    </tr>
+    <tr>
+      <td><strong>Gram Matrix (Pairwise Dot Products)</strong></td>
+      <td>$$S_{ij} = \sum<em>k X</em>{ik} X_{jk}$$</td>
+      <td><code>ik,jk -&gt; ij</code></td>
+    </tr>
+    <tr>
+      <td><strong>Attention Scores</strong></td>
+      <td>$$S_{bts} = \sum<em>d Q</em>{btd} K_{bsd}$$</td>
+      <td><code>btd,bsd -&gt; bts</code></td>
+    </tr>
+    <tr>
+      <td><strong>Attention Output</strong></td>
+      <td>$$O_{btd} = \sum<em>s A</em>{bts} V_{bsd}$$</td>
+      <td><code>bts,bsd -&gt; btd</code></td>
+    </tr>
+    <tr>
+      <td><strong>Multi-Head Attention Scores</strong></td>
+      <td>$$S_{bhts} = \sum<em>k Q</em>{bhtk} K_{bhsk}$$</td>
+      <td><code>bhtk,bhsk -&gt; bhts</code></td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="index-meaning-in-transformers">Index Meaning in Transformers</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>b</strong></td>
+      <td>batch size</td>
+    </tr>
+    <tr>
+      <td><strong>t</strong></td>
+      <td>query token position</td>
+    </tr>
+    <tr>
+      <td><strong>s</strong></td>
+      <td>key/value token position</td>
+    </tr>
+    <tr>
+      <td><strong>d</strong></td>
+      <td>embedding dimension</td>
+    </tr>
+    <tr>
+      <td><strong>h</strong></td>
+      <td>attention head</td>
+    </tr>
+    <tr>
+      <td><strong>k</strong></td>
+      <td>head dimension</td>
+    </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="mental-model">Mental Model</h1>
+<p>Most deep learning tensor operations follow the same pattern:</p>
+<p>$$
+  A<em>{\dots k} ; B</em>{\dots k} \rightarrow \sum_k
+  $$</p>
+<p>Meaning:</p>
+<ol>
+  <li>Align tensors along a shared dimension.</li>
+  <li>Multiply elementwise.</li>
+  <li>Sum over the shared index.</li>
+</ol>
+<p>This produces a matrix or tensor of pairwise interactions.</p>
+<hr>
+<h1 id="key-insight">Key Insight</h1>
+<p>Most neural network layers reduce to computing many dot products:</p>
+<ul>
+  <li>Linear layers → matrix multiplication</li>
+  <li>Attention → query-key dot products</li>
+  <li>Kernel methods → Gram matrices</li>
+  <li>Convolutions → local dot products</li>
+</ul>
+<p>Einstein summation simply makes these interactions explicit.</p>
+<hr>
+<p>✅ If you&#39;d like, I can also give you a <strong>much nicer version optimized for documentation sites (MkDocs /
+    Docusaurus / GitHub Pages)</strong> with:</p>
+<ul>
+  <li>better layout</li>
+  <li>highlighted einsum patterns</li>
+  <li>diagrams showing tensor contractions</li>
+  <li>NumPy code examples (<code>np.einsum</code>) next to each formula.</li>
 </ul>

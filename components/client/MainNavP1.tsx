@@ -68,45 +68,36 @@ export default function MainNavP1() {
                 </div>
 
 
-                <NavDrawer id='week12' name='Week 1 & 2'>
+                <NavDrawer id='XCS221' name='XCS221: AI Principles and Techniques'>
 
-                    <NavDrawer2 id='1' parent_id='week12' name='Machine Learning'>
-                        <NavDrawerItem href='/phase1/XCS221/week12/topic1' isFirst={true} isActive={pathname === "/phase1/XCS221/week12/topic1"} >
-                            2.1: Tensors and Einops
-                        </NavDrawerItem>
-                        <NavDrawerItem href='/phase1/XCS221/weekX/topicX' isFirst={false} isActive={pathname === "/phase1/XCS221/weekX/topicX"} >
-                            2.2: Foundational ML
-                        </NavDrawerItem>
-                        <NavDrawerItem href='/phase1/XCS221/weekX/topicX' isFirst={false} isActive={pathname === "/phase1/XCS221/weekX/topicX"} >
-                            2.3: Classification
-                        </NavDrawerItem>
-                    </NavDrawer2>
 
-                    <NavDrawer2 id='2' parent_id='week12' name='AI, Ethics, and Society'>
-                        <NavDrawerItem href='/phase1/XCS221/weekX/topicX' isFirst={true} isActive={pathname === "/phase1/XCS221/weekX/topicX"} >
-                            3.1: Ethics
-                        </NavDrawerItem>
-                    </NavDrawer2>
-
-                </NavDrawer>
-
-                <NavDrawer id='week34' name='Week 3 & 4'>
-
-                    <NavDrawer2 id='1' parent_id='week34' name='Testing'>
-                        <NavDrawerItem href='/phase1/XCS221/weekX/topicX' isFirst={true} isActive={pathname === "/phase1/XCS221/weekX/topicX"} >
-                            Testing
-                        </NavDrawerItem>
-                    </NavDrawer2>
-
-                </NavDrawer>
-
-                <NavDrawer id='references' name='Reference Material'>
-
-                    <NavDrawer2 id='1' parent_id='references' name='Reference Material'>
+                    <NavDrawer2 id='2' parent_id='XCS221' name='Module 1: Introduction'>
                         <NavDrawerItem href='/phase1/XCS221/reference' isFirst={true} isActive={pathname === "/phase1/XCS221/reference"} >
-                            PDF guides
+                            Stanford PDF review guides
                         </NavDrawerItem>
                     </NavDrawer2>
+
+                    <NavDrawer2 id='3' parent_id='XCS221' name='Module 2: Machine Learning'>
+                        <NavDrawerItem href='/phase1/XCS221/module2/s2_1' isFirst={false} isActive={pathname === "/phase1/XCS221/module2/s2_1"} >
+                            2.1 | Tensors and Einops
+                        </NavDrawerItem>
+                    </NavDrawer2>
+
+                    <NavDrawer2 id='1' parent_id='XCS221' name='Assignments'>
+                        <NavDrawerItem href='/phase1/XCS221/assignments/a1' isFirst={false} isActive={pathname === "/phase1/XCS221/assignments/a1"} >
+                            Assignment 1
+                        </NavDrawerItem>
+                    </NavDrawer2>
+
+                </NavDrawer>
+
+
+                <NavDrawer id='references' name='Quick Reference'>
+
+                    <NavDrawerItem href='/phase1/XCS221/reference/python' isFirst={true} isActive={pathname === "/phase1/XCS221/reference/python"} >
+                        python quick reference
+                    </NavDrawerItem>
+
 
                 </NavDrawer>
 

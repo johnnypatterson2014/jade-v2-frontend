@@ -1,6 +1,6 @@
 
 Given the html below, please parse the html, perform the following text conversions, and output the html converted text according to these rules:
- - rule 1: replace the text "<hr>" with "<hr/>"
+ - rule 1: remove the text "<hr>" 
  - rule 2: replace the inline math formulas (which start with a $ and end with a $) as per the following examples:
     - example: `$\Omega$` should be replaced with `<span className="math">{"\\[\\omega \\in \\Omega\\]"}</span>`
     - example: `P(A|B) = \frac{P(A \cap B)}{P(B)}` should be replaced with `<span className="math">{"\\[P(A|B) = \\frac{P(A \\cap B)}{P(B)}\\]"}</span>`
