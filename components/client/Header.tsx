@@ -4,6 +4,7 @@ import ButtonDropdown from '@/components/client/ButtonDropdown';
 import Button from '@/components/client/Button';
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
+import ButtonIcon from '@/components/client/ButtonIcon';
 
 export default function Header() {
 
@@ -64,7 +65,7 @@ export default function Header() {
                     <div className="inline-block">
                         <h2>powered by jade</h2>
                     </div>
-                    <div className='inline-block ml-[50px] code'>
+                    <div className='inline-block ml-[160px] code'>
                         {breadcrumbs.map((item, index) => (
                             <span key={index}>
                                 <span>&nbsp;&#47;&nbsp;</span>
@@ -94,12 +95,13 @@ export default function Header() {
                                 <Button>
                                     <a onClick={() => toggleAll(true)}>expand all</a>
                                 </Button>
+                            </div>*/}
+
+                            <div className='flex-none content-center'>
+                                <ButtonIcon>
+                                    <a onClick={() => window.MathJax.typeset()}>run mathjax typeset</a>
+                                </ButtonIcon>
                             </div>
-                            <div className='flex-none content-end'>
-                                <Button>
-                                    <a onClick={() => resetCurrentNav()}>reset nav</a>
-                                </Button>
-                            </div> */}
 
                             <div className='flex-none'>
                                 <ButtonDropdown name='launch'>
