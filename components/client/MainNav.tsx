@@ -11,8 +11,8 @@ import Button from '@/components/client/Button';
 export default function MainNav() {
 
     useEffect(() => {
-        // toggleAll(true)
-        resetCurrentNav();
+        toggleAll(true)
+        // resetCurrentNav();
     }, []); // Run once on component mount
 
     const pathname = usePathname();
@@ -59,11 +59,11 @@ export default function MainNav() {
                                 <a onClick={() => toggleAll(true)}>expand</a>
                             </Button>
                         </div>
-                        <div className='flex-none content-end'>
+                        {/* <div className='flex-none content-end'>
                             <Button>
                                 <a onClick={() => resetCurrentNav()}>reset</a>
                             </Button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 

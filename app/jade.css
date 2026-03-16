@@ -173,6 +173,15 @@
     border-bottom: 1px solid var(--color-zinc-700);
 }
 
+.jade-border-lr {
+    border-left: 1px solid var(--jade-card-border);
+    border-right: 1px solid var(--jade-card-border);
+}
+
+.jade-border-bottom2 {
+    border-bottom: 1px solid var(--jade-card-border);
+}
+
 
 .jade-border-body {
     border: 1px solid var(--jade-card-border);
@@ -195,7 +204,12 @@
 .jade-border3 {
     border: 1px solid var(--color-zinc-600);
     border-radius: 5px;
-    padding: 10px;
+}
+
+.jade-border4 {
+    border: 1px solid var(--jade-card-border);
+    border-radius: 3px;
+    background-color: rgba(8, 8, 8, 0.292);
 }
 
 .jade-border-body-text {
@@ -324,6 +338,13 @@ mjx-container[jax="CHTML"][display="true"] {
     color: var(--color-blue-300);
 }
 
+.jade-h11 {
+    font-family: 'Segoe UI Light';
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--color-orange-300);
+}
+
 .jade-h2 {
     font-size: 18px;
     font-weight: 300;
@@ -334,6 +355,13 @@ mjx-container[jax="CHTML"][display="true"] {
     font-size: 18px;
     font-weight: 300;
     color: var(--color-blue-300);
+}
+
+.jade-h4 {
+    font-size: 18px;
+    font-weight: 200;
+    font-family: Consolas;
+    color: rgb(156, 220, 254);
 }
 
 .page-notes p {
@@ -407,10 +435,10 @@ mjx-container[jax="CHTML"][display="true"] {
 
 .page-notes code {
     overflow: hidden;
-    border: 1px solid #e0e0e0;
-    border-radius: 0px;
-    background: #f5f5f5;
-    color: #000000;
+    /* border: 1px solid #e0e0e0;
+    border-radius: 0px; */
+    /* background: #f5f5f56f; */
+    color: var(--color-blue-300);
     margin: 10px;
     padding: 5px;
 }
@@ -440,8 +468,33 @@ mjx-container[jax="CHTML"][display="true"] {
     border-radius: 10px;
 }
 
+.jade-einsum-table {
+    font-size: 14px;
+    line-height: 18px;
+    color: var(--color-zinc-400);
+    font-family: monospace;
+    border: 1px solid var(--jade-card-border);
+    padding: 10px;
+    background-color: rgba(8, 8, 8, 0.175);
+    border-radius: 5px;
+    margin: 2px;
+}
+
+.jade-einsum-table td {
+    padding: 3px 5px 5px 8px;
+    border-bottom: 1px solid var(--jade-card-border);
+}
+
+.einsum-right-border {
+    border-right: 2px solid var(--jade-line);
+}
+
 .code {
     font-family: monospace;
+}
+
+.green {
+    color: rgb(106, 153, 85);
 }
 
 .nav-active {
@@ -459,4 +512,16 @@ mjx-container[jax="CHTML"][display="true"] {
     padding: 10px;
     border: 1px solid var(--fesk-card-border);
     border-radius: 10px;
+}
+
+.assignment-text {
+    color: var(--color-zinc-200);
+}
+
+.assignment-answer {
+    /* background-color: rgb(31, 31, 31); */
+    background-color: #0000003e;
+    border: 1px solid var(--jade-card-border);
+    font-family: Consolas;
+    color: var(--color-zinc-400);
 }

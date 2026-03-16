@@ -1,228 +1,48 @@
 <div dir="ltr">
-  <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
-    <div><span style="color:rgb(106,153,85)"># NumPy einsum cheat sheet</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Vector dot product</span></div>
-    <div><span style="color:rgb(106,153,85)"># x: (d,)</span></div>
-    <div><span style="color:rgb(106,153,85)"># y: (d,)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'d,d-&gt;'</span>, <span style="color:rgb(156,220,254)">x</span>, <span
-        style="color:rgb(156,220,254)">y</span>) &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># scalar</span>
-    </div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(156,220,254)">x</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(156,220,254)">y</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># \sum_d x_d y_d</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Matrix-vector multiply</span></div>
-    <div><span style="color:rgb(106,153,85)"># A: (m, n)</span></div>
-    <div><span style="color:rgb(106,153,85)"># x: (n,)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn,n-&gt;m'</span>, <span style="color:rgb(79,193,255)">A</span>, <span
-        style="color:rgb(156,220,254)">x</span>) &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># (m,)</span></div>
-    <br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">A</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(156,220,254)">x</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># \sum_n A_{mn} x_n</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Matrix multiplication</span></div>
-    <div><span style="color:rgb(106,153,85)"># A: (m, n)</span></div>
-    <div><span style="color:rgb(106,153,85)"># B: (n, p)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn,np-&gt;mp'</span>, <span style="color:rgb(79,193,255)">A</span>, <span
-        style="color:rgb(79,193,255)">B</span>) &nbsp;<span style="color:rgb(106,153,85)"># (m, p)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">A</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(79,193,255)">B</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># \sum_n A_{mn} B_{np}</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Transpose</span></div>
-    <div><span style="color:rgb(106,153,85)"># X: (m, n)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn-&gt;nm'</span>, <span style="color:rgb(79,193,255)">X</span>) &nbsp; &nbsp;
-      &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># (n, m)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(156,220,254)">T</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Sum over an axis</span></div>
-    <div><span style="color:rgb(106,153,85)"># X: (m, n)</span></div>
-    <div><span style="color:rgb(156,220,254)">col_sums</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn-&gt;n'</span>, <span style="color:rgb(79,193,255)">X</span>) &nbsp;
-      &nbsp;<span style="color:rgb(106,153,85)"># (n,)</span></div>
-    <div><span style="color:rgb(156,220,254)">row_sums</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn-&gt;m'</span>, <span style="color:rgb(79,193,255)">X</span>) &nbsp;
-      &nbsp;<span style="color:rgb(106,153,85)"># (m,)</span></div>
-    <div><span style="color:rgb(156,220,254)">total</span> &nbsp; &nbsp;<span style="color:rgb(212,212,212)">=</span>
-      <span style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn-&gt;'</span>, <span style="color:rgb(79,193,255)">X</span>) &nbsp; &nbsp;
-      <span style="color:rgb(106,153,85)"># scalar</span>
-    </div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">col_sums</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(220,220,170)">sum</span>(<span
-        style="color:rgb(156,220,254)">axis</span><span style="color:rgb(212,212,212)">=</span><span
-        style="color:rgb(181,206,168)">0</span>)</div>
-    <div><span style="color:rgb(156,220,254)">row_sums</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(220,220,170)">sum</span>(<span
-        style="color:rgb(156,220,254)">axis</span><span style="color:rgb(212,212,212)">=</span><span
-        style="color:rgb(181,206,168)">1</span>)</div>
-    <div><span style="color:rgb(156,220,254)">total</span> &nbsp; &nbsp;<span style="color:rgb(212,212,212)">=</span>
-      <span style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(220,220,170)">sum</span>()
-    </div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Column-wise squared norms</span></div>
-    <div><span style="color:rgb(106,153,85)"># X: (m, n)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn,mn-&gt;n'</span>, <span style="color:rgb(79,193,255)">X</span>, <span
-        style="color:rgb(79,193,255)">X</span>) &nbsp; <span style="color:rgb(106,153,85)"># (n,)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">sum</span>(<span
-        style="color:rgb(79,193,255)">X</span><span style="color:rgb(220,220,170)">**</span><span
-        style="color:rgb(181,206,168)">2</span>, <span style="color:rgb(156,220,254)">axis</span><span
-        style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">0</span>)</div>
-    <div><span style="color:rgb(106,153,85)"># or</span></div>
-    <div><span style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">diag</span>(<span
-        style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(156,220,254)">T</span> <span
-        style="color:rgb(220,220,170)">@</span> <span style="color:rgb(79,193,255)">X</span>)</div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># {"\\[|X_{\\cdot n}|^2 = \\sum_m X_{mn}^2\\]"}</span></div>
-    <div><span style="color:rgb(106,153,85)"># also equal to</span></div>
-    <div><span style="color:rgb(106,153,85)"># {"\\[\\text{diag}(X^T X)\\]"}</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Row-wise squared norms</span></div>
-    <div><span style="color:rgb(106,153,85)"># X: (m, n)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'mn,mn-&gt;m'</span>, <span style="color:rgb(79,193,255)">X</span>, <span
-        style="color:rgb(79,193,255)">X</span>) &nbsp; <span style="color:rgb(106,153,85)"># (m,)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">sum</span>(<span
-        style="color:rgb(79,193,255)">X</span><span style="color:rgb(220,220,170)">**</span><span
-        style="color:rgb(181,206,168)">2</span>, <span style="color:rgb(156,220,254)">axis</span><span
-        style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>)</div>
-    <div><span style="color:rgb(106,153,85)"># or</span></div>
-    <div><span style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">diag</span>(<span
-        style="color:rgb(79,193,255)">X</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(156,220,254)">T</span>)</div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Pairwise row dot products (Gram matrix)</span></div>
-    <div><span style="color:rgb(106,153,85)"># X: (m, d)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'md,nd-&gt;mn'</span>, <span style="color:rgb(79,193,255)">X</span>, <span
-        style="color:rgb(79,193,255)">X</span>) &nbsp;<span style="color:rgb(106,153,85)"># (m, m)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">X</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(79,193,255)">X</span>.<span style="color:rgb(156,220,254)">T</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># \sum_d X_{md} X_{nd}</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Outer product</span></div>
-    <div><span style="color:rgb(106,153,85)"># x: (m,)</span></div>
-    <div><span style="color:rgb(106,153,85)"># y: (n,)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'m,n-&gt;mn'</span>, <span style="color:rgb(156,220,254)">x</span>, <span
-        style="color:rgb(156,220,254)">y</span>) &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># (m, n)</span></div>
-    <br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">outer</span>(<span
-        style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">y</span>)</div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Batch matrix multiplication</span></div>
-    <div><span style="color:rgb(106,153,85)"># A: (b, m, n)</span></div>
-    <div><span style="color:rgb(106,153,85)"># B: (b, n, p)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'bmn,bnp-&gt;bmp'</span>, <span style="color:rgb(79,193,255)">A</span>, <span
-        style="color:rgb(79,193,255)">B</span>) &nbsp; <span style="color:rgb(106,153,85)"># (b, m, p)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">A</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(79,193,255)">B</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Batched linear layer</span></div>
-    <div><span style="color:rgb(106,153,85)"># X: (b, t, d_in)</span></div>
-    <div><span style="color:rgb(106,153,85)"># W: (d_in, d_out)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'btd,df-&gt;btf'</span>, <span style="color:rgb(79,193,255)">X</span>, <span
-        style="color:rgb(79,193,255)">W</span>) &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># (b, t, d_out)</span>
-    </div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">X</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(79,193,255)">W</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># with bias:</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'btd,df-&gt;btf'</span>, <span style="color:rgb(79,193,255)">X</span>, <span
-        style="color:rgb(79,193,255)">W</span>) <span style="color:rgb(212,212,212)">+</span> <span
-        style="color:rgb(156,220,254)">b</span> &nbsp; <span style="color:rgb(106,153,85)"># b: (d_out,)</span></div>
-    <br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Attention scores</span></div>
-    <div><span style="color:rgb(106,153,85)"># Q: (b, t, d)</span></div>
-    <div><span style="color:rgb(106,153,85)"># K: (b, s, d)</span></div>
-    <div><span style="color:rgb(156,220,254)">scores</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'btd,bsd-&gt;bts'</span>, <span style="color:rgb(79,193,255)">Q</span>, <span
-        style="color:rgb(79,193,255)">K</span>) &nbsp; <span style="color:rgb(106,153,85)"># (b, t, s)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># equivalent to:</span></div>
-    <div><span style="color:rgb(156,220,254)">scores</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(79,193,255)">Q</span> <span style="color:rgb(220,220,170)">@</span> <span
-        style="color:rgb(79,193,255)">K</span>.<span style="color:rgb(220,220,170)">transpose</span>(<span
-        style="color:rgb(181,206,168)">0</span>, <span style="color:rgb(181,206,168)">2</span>, <span
-        style="color:rgb(181,206,168)">1</span>)</div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># \sum_d Q_{btd} K_{bsd}</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Attention output</span></div>
-    <div><span style="color:rgb(106,153,85)"># A: (b, t, s) &nbsp; &nbsp;attention weights</span></div>
-    <div><span style="color:rgb(106,153,85)"># V: (b, s, d)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'bts,bsd-&gt;btd'</span>, <span style="color:rgb(79,193,255)">A</span>, <span
-        style="color:rgb(79,193,255)">V</span>) &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># (b, t,
-        d)</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># laytex formula:</span></div>
-    <div><span style="color:rgb(106,153,85)"># \sum_s A_{bts} V_{bsd}</span></div><br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Multi-head attention scores</span></div>
-    <div><span style="color:rgb(106,153,85)"># Q: (b, h, t, k)</span></div>
-    <div><span style="color:rgb(106,153,85)"># K: (b, h, s, k)</span></div>
-    <div><span style="color:rgb(156,220,254)">scores</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'bhtk,bhsk-&gt;bhts'</span>, <span style="color:rgb(79,193,255)">Q</span>, <span
-        style="color:rgb(79,193,255)">K</span>) &nbsp; <span style="color:rgb(106,153,85)"># (b, h, t, s)</span></div>
-    <br>
-    <div><span style="color:rgb(106,153,85)"># ------------------------------<wbr>--------</span></div>
-    <div><span style="color:rgb(106,153,85)"># Multi-head attention output</span></div>
-    <div><span style="color:rgb(106,153,85)"># A: (b, h, t, s)</span></div>
-    <div><span style="color:rgb(106,153,85)"># V: (b, h, s, k)</span></div>
-    <div><span style="color:rgb(156,220,254)">out</span> <span style="color:rgb(212,212,212)">=</span> <span
-        style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(220,220,170)">einsum</span>(<span
-        style="color:rgb(206,145,120)">'bhts,bhsk-&gt;bhtk'</span>, <span style="color:rgb(79,193,255)">A</span>, <span
-        style="color:rgb(79,193,255)">V</span>) &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># (b, h, t,
-        k)</span></div>
-  </div>
+        <div
+                style="color:rgb(204,204,204);background-color:rgb(31,31,31);font-family:Consolas,&quot;Courier New&quot;,monospace;font-size:14px;line-height:19px;white-space:pre-wrap">
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">linear_project</span>(<span
+                                style="color:rgb(156,220,254)">x</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">W</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">b</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>:</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Compute a batched linear projection using einsum
+                                from einops.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Shapes:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - x: (batch, d_in)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - W: (d_in, d_out)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - b: (d_out,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - y: (batch, d_out) where y = x * W + b</span>
+                </div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Implementation notes:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Use einsum from einops for the matrix
+                                multiplication (no @ operator).</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Use NumPy broadcasting for the bias
+                                addition.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - No Python loops.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">pass</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># ### START CODE HERE ###</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">W</span>,
+                        <span style="color:rgb(206,145,120)">'b d_in, d_in d_out -&gt; b d_out'</span>) <span
+                                style="color:rgb(220,220,170)">+</span> <span style="color:rgb(156,220,254)">b</span>
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># ### END CODE HERE ###</span></div><br>
+                <div><span style="color:rgb(156,220,254)">y</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">linear_project</span>(<span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(79,193,255)">W</span>,
+                        <span style="color:rgb(156,220,254)">b</span>)</div>
+        </div>
 </div>

@@ -11,8 +11,8 @@ import Button from '@/components/client/Button';
 export default function MainNavP1() {
 
     useEffect(() => {
-        // toggleAll(true)
-        resetCurrentNav();
+        toggleAll(true)
+        // resetCurrentNav();
     }, []); // Run once on component mount
 
     const pathname = usePathname();
@@ -59,33 +59,29 @@ export default function MainNavP1() {
                                 <a onClick={() => toggleAll(true)}>expand</a>
                             </Button>
                         </div>
-                        <div className='flex-none content-end'>
+                        {/* <div className='flex-none content-end'>
                             <Button>
                                 <a onClick={() => resetCurrentNav()}>reset</a>
                             </Button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
 
                 <NavDrawer id='XCS221' name='XCS221: AI Principles and Techniques'>
 
-
-                    <NavDrawer2 id='2' parent_id='XCS221' name='Module 1: Introduction'>
-                        <NavDrawerItem href='/phase1/XCS221/reference' isFirst={true} isActive={pathname === "/phase1/XCS221/reference"} >
+                    <NavDrawer2 id='2' parent_id='XCS221' name='Week 1 and 2'>
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/reference' isFirst={true} isActive={pathname === "/phase1/XCS221/week1_2/reference"} >
                             Stanford PDF review guides
                         </NavDrawerItem>
-                    </NavDrawer2>
-
-                    <NavDrawer2 id='3' parent_id='XCS221' name='Module 2: Machine Learning'>
-                        <NavDrawerItem href='/phase1/XCS221/module2/s2_1' isFirst={false} isActive={pathname === "/phase1/XCS221/module2/s2_1"} >
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/s2_1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s2_1"} >
                             2.1 | Tensors and Einops
                         </NavDrawerItem>
-                    </NavDrawer2>
-
-                    <NavDrawer2 id='1' parent_id='XCS221' name='Assignments'>
-                        <NavDrawerItem href='/phase1/XCS221/assignments/a1' isFirst={false} isActive={pathname === "/phase1/XCS221/assignments/a1"} >
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/a1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/a1"} >
                             Assignment 1
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/misc_notes' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/misc_notes"} >
+                            Misc Notes
                         </NavDrawerItem>
                     </NavDrawer2>
 
