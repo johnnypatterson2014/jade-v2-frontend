@@ -77,6 +77,15 @@ export default function MainNavP1() {
                         <NavDrawerItem href='/phase1/XCS221/week1_2/s2_1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s2_1"} >
                             2.1 | Tensors and Einops
                         </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/s2_2' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s2_2"} >
+                            2.2 | Foundational ML
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/s2_3' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s2_3"} >
+                            2.3 | Classification
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/s9_1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s9_1"} >
+                            9.1 | AI Ethics
+                        </NavDrawerItem>
                         <NavDrawerItem href='/phase1/XCS221/week1_2/a1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/a1"} >
                             Assignment 1
                         </NavDrawerItem>

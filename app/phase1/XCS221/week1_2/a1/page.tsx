@@ -3,6 +3,9 @@
 import Image from "next/image";
 import Tabs from '@/components/client/Tabs';
 import Tab2 from '@/components/client/Tab2';
+import Card from '@/components/client/Card';
+import CardDrawer from '@/components/client/CardDrawer';
+import NavDrawer2 from '@/components/client/NavDrawer2';
 import TileRowCell0 from '@/components/client/TileRowCell0';
 import { MathJaxContext } from "better-react-mathjax";
 import React, { useEffect } from 'react';
@@ -94,49 +97,21 @@ export default function Home() {
                                                                         1. Linear Algebra
                                                                 </div>
 
-                                                                <div className="flex flex-row pt-[10px]">
-                                                                        <div className="flex-1 pr-[20px]">
-                                                                                <div className="jade-h4 m-[5px]">
-                                                                                        1a. Learn basic NumPy operations
-                                                                                </div>
-                                                                                <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        NumPy chat session transcript: <br />
-                                                                                        https://chatgpt.com/share/69b0fd44-61e8-8005-957f-ed073172e429
-                                                                                </div>
-                                                                        </div>
-                                                                </div>
+                                                                <CardDrawer id='1' name='1a. Learn basic NumPy operations'>
+                                                                        NumPy chat session transcript: <br />
+                                                                        https://chatgpt.com/share/69b0fd44-61e8-8005-957f-ed073172e429
+                                                                </CardDrawer>
 
-                                                                <div className="flex flex-row pt-[20px]">
-                                                                        <div className="flex-1 pr-[20px]">
-                                                                                <div className="jade-h4 m-[5px]">
-                                                                                        1b. Linear Algebra Complexity
-                                                                                </div>
-                                                                                <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        coming soon...
-                                                                                </div>
-                                                                        </div>
-                                                                </div>
+                                                                <CardDrawer id='1' name='1b. Linear Algebra Complexity'>
+                                                                        coming soon...
+                                                                </CardDrawer>
 
-                                                                <div className="flex flex-row pt-[20px]">
-                                                                        <div className="flex-1 pr-[20px]">
-                                                                                <div className="jade-h4 m-[5px]">
-                                                                                        1e. Batch Linear Projection (einsum)
-                                                                                </div>
-                                                                                <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        <div dangerouslySetInnerHTML={createMarkup(html1)} />
-                                                                                </div>
-                                                                        </div>
-
-                                                                </div>
-
-
+                                                                <CardDrawer id='1' name='1e. Batch Linear Projection (einsum)'>
+                                                                        <div dangerouslySetInnerHTML={createMarkup(html1)} />
+                                                                </CardDrawer>
 
                                                         </TileRowCell0>
                                                 </Tab2>
-
-
-
-
 
 
                                         </Tabs>

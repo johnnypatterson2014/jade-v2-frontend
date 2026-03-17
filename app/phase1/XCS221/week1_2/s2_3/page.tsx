@@ -1,0 +1,98 @@
+'use client';
+
+import Image from "next/image";
+import Tabs from '@/components/client/Tabs';
+import Tab2 from '@/components/client/Tab2';
+import TileRowCell0 from '@/components/client/TileRowCell0';
+import { MathJaxContext } from "better-react-mathjax";
+import React, { useEffect } from 'react';
+
+
+export default function Home() {
+
+        useEffect(() => {
+                // Check if MathJax is loaded and available in the window object
+                if (typeof window?.MathJax !== "undefined") {
+                        window.MathJax.typeset(); // Triggers typesetting
+                }
+        }, []); // Run once on component mount
+
+        function createMarkup(content: any) {
+                return { __html: content };
+        }
+
+        return (
+                <>
+                        <MathJaxContext>
+                                <div className='mt-[0px] ml-[40px] mr-[20px] mb-[12px]'>
+
+                                        <div className='jade-h1'>
+                                                XCS221 - AI Principles & Techniques
+                                        </div>
+
+                                        <div className='jade-h2 mt-[5px] mb-[20px]'>
+                                                Module 2: Machine Learning | Tensors and Einops
+                                        </div>
+
+
+                                        <Tabs>
+
+                                                <Tab2 title="Hypothesis Classes" isChecked={true}>
+                                                        <TileRowCell0>
+
+                                                                <h1>Hypothesis Classes</h1>
+                                                                <div>
+                                                                        Coming soon...
+                                                                </div>
+
+
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+                                                <Tab2 title="Zero-One Loss" isChecked={false}>
+                                                        <TileRowCell0>
+
+                                                                <h1>Zero-One Loss</h1>
+                                                                <div>
+                                                                        Coming soon...
+                                                                </div>
+
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+                                                <Tab2 title="Logistic Regression" isChecked={false}>
+                                                        <TileRowCell0>
+
+                                                                <h1>Logistic Regression</h1>
+                                                                <div>
+                                                                        Coming soon...
+                                                                </div>
+
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+                                                <Tab2 title="Multiclass Classification" isChecked={false}>
+                                                        <TileRowCell0>
+
+                                                                <h1>Multiclass Classification</h1>
+                                                                <div>
+                                                                        Coming soon...
+                                                                </div>
+
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+
+
+                                        </Tabs>
+
+
+                                </div>
+                        </MathJaxContext>
+                </>
+        );
+}

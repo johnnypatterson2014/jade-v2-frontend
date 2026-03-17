@@ -74,6 +74,14 @@
     background: var(--jade-card-background);
 }
 
+.jade-drawer2 {
+    border: 1px solid var(--jade-card-border);
+    border-radius: 2px;
+    background: #5f5e5e16;
+    margin: 3px;
+    padding: 3px;
+}
+
 .jade-collapse-title {
     margin: 0px;
     color: var(--jade-collapse-title);
@@ -361,6 +369,13 @@ mjx-container[jax="CHTML"][display="true"] {
     font-size: 18px;
     font-weight: 200;
     font-family: Consolas;
+    color: rgb(156, 220, 254);
+}
+
+.jade-h5 {
+    font-size: 16px;
+    font-weight: 200;
+    font-family: "Courier New", monospace;
     color: rgb(156, 220, 254);
 }
 
