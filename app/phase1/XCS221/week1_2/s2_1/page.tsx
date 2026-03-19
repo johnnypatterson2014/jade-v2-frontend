@@ -689,12 +689,6 @@ margin-bottom: 20px;
 
                                                                 <h1>Einsum Core Pattern</h1>
 
-
-
-                                                                <div className="">
-                                                                        <img src='/notes/IMG_4707.png' width='700px' />
-                                                                </div>
-
                                                                 <div className="flex flex-row w-[700px] gap-[3px]">
                                                                         <div className="flex-none jade-einsum-table pr-[20px]">
                                                                                 <div className="green">einsum:</div>
@@ -709,10 +703,9 @@ margin-bottom: 20px;
                                                                         </div>
                                                                 </div>
 
-
-
-
-
+                                                                <div className="">
+                                                                        <img src='/notes/IMG_4707.png' width='700px' />
+                                                                </div>
 
                                                         </TileRowCell0>
                                                 </Tab2>

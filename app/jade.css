@@ -534,9 +534,39 @@ mjx-container[jax="CHTML"][display="true"] {
 }
 
 .assignment-answer {
-    /* background-color: rgb(31, 31, 31); */
+    font-family: Consolas;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-zinc-400);
     background-color: #0000003e;
     border: 1px solid var(--jade-card-border);
+    border-radius: 10px;
+}
+
+.assignment-question {
     font-family: Consolas;
-    color: var(--color-zinc-400);
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-zinc-200);
+}
+
+.assignment-question-wrapper {
+    font-family: Consolas;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--color-zinc-200);
+    /* background-color: #8f8e8e1a; */
+    /* border: 1px solid var(--jade-card-border);
+    border-radius: 10px; */
+}
+
+.what-to-expect {
+    font-style: italic;
+    color: var(--color-orange-300);
+}
+
+.texttt {
+    font-family: monospace;
+    background-color: #d6d6d625;
+    color: var(--color-blue-300);
 }

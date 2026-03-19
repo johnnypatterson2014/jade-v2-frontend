@@ -1,150 +1,70 @@
-\documentclass[11pt]{article}
 
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{booktabs}
-\usepackage[margin=1in]{geometry}
 
-\title{Einstein Summation (einsum) Cheat Sheet for Machine Learning}
-\date{}
+There is a file in the tex/01-linear-algebra/ folder called 04-einstein-summation.pytex. 
 
-\begin{document}
 
-\maketitle
+Substitution rules:
+1. ignore the first line in the file
+2. ignore the text block that starts and ends with 🐍
+3. convert '\texttt{...}' to '<span className="texttt">...</span>'. For example, convert '\texttt{einsum}' to '<span className="texttt">einsum</span>'
+4. Convert text '->' to '-&gt;'
+5. Convert '\mathbf w ' to '\mathbf{w}' and '\mathbb R ' to '\mathbb{R}'
+6. Convert '$\rightarrow$' to '<span className="rightarrow">{"\\[\\rightarrow\\]"}</span>'
+7. Convert the text as per the following example (note that rules 3, 4 and 5 above have already been applied):
 
-\section*{Core Rule}
+## example input ## 
+Given $X \in \mathbb R^{n\times d}$ and $\mathbf w \in \mathbb R^d$: (i) write an \texttt{einsum} string 
+for $X\mathbf w$; (ii) for the pairwise dot-product matrix $XX^\top$; (iii) for $\operatorname{diag}(X^\top X)$ 
+(column-wise squared norms). Briefly justify each.
+\expect{Provide einsum strings (e.g., \texttt{n d, d m -> n m}).}
 
-Einstein summation follows two simple rules:
-
-\begin{itemize}
-\item Repeated indices are summed over.
-\item Indices that remain appear in the output tensor.
-\end{itemize}
-
-Example:
-
-\[
-C_{ij} = \sum_k A_{ik} B_{kj}
-\]
-
-Einsum pattern:
-
-\[
-\texttt{ik,kj -> ij}
-\]
+## example output ##
+<div className="assignment-question">
+Given <span className="math">{"\\[X \\in \\mathbb{R}^{n\\times d}\\]"}</span> and 
+<span className="math">{"\\[\\mathbf{w} \\in \\mathbb{R}^d\\]"}</span>: (i) write an 
+<span className="texttt">einsum</span> string for <span className="math">{"\\[X\\mathbf{w}\\]"}</span>; (ii) for the 
+pairwise dot-product matrix <span className="math">{"\\[XX^\\top\\]"}</span>; (iii) for 
+<span className="math">{"\\[\\operatorname{diag}(X^\\top X)\\]"}</span> (column-wise squared norms). 
+Briefly justify each.
+<span className="what-to-expect">Provide einsum strings (e.g., <span className="texttt">n d, d m -&gt; n m</span>).</span>
+</div>
 
 ---
 
-\section*{Common Einsum Patterns}
+Please apply the same conversion for the following text:
 
-\begin{center}
-\begin{tabular}{lll}
-\toprule
-Operation & Formula & Einsum Pattern \\
-\midrule
 
-Dot Product &
-\(
-x \cdot y = \sum_k x_k y_k
-\)
-&
-\texttt{k,k ->}
-\\[10pt]
 
-Matrix Multiplication &
-\(
-C_{ij} = \sum_k A_{ik} B_{kj}
-\)
-&
-\texttt{ik,kj -> ij}
-\\[10pt]
 
-Gram Matrix (Pairwise Dot Products) &
-\(
-S_{ij} = \sum_k X_{ik} X_{jk}
-\)
-&
-\texttt{ik,jk -> ij}
-\\[10pt]
+<CardDrawer id='1' name='1x. xxxxxxx'>
 
-Attention Scores &
-\(
-S_{bts} = \sum_d Q_{btd} K_{bsd}
-\)
-&
-\texttt{btd,bsd -> bts}
-\\[10pt]
+    <div className="assignment-question-wrapper p-[15px] mb-[0px]">
+        xxxxxx
+    </div>
 
-Attention Output &
-\(
-O_{btd} = \sum_s A_{bts} V_{bsd}
-\)
-&
-\texttt{bts,bsd -> btd}
-\\[10pt]
+    <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
+        <div className="assignment-answer mt-[10px] p-[15px]">
+            xxxxx
+        </div>
+    </div>
 
-Multi-Head Attention Scores &
-\(
-S_{bhts} = \sum_k Q_{bhtk} K_{bhsk}
-\)
-&
-\texttt{bhtk,bhsk -> bhts}
-\\
+</CardDrawer>
 
-\bottomrule
-\end{tabular}
-\end{center}
+replace:
+<span className="what-to-expect">
 
----
+wtih:
+<br /><br /><span className="what-to-expect">Expected: 
 
-\section*{Index Meaning in Transformers}
 
-\[
-\begin{array}{c|l}
-\text{Index} & \text{Meaning} \\
-\hline
-b & \text{batch size} \\
-t & \text{query token position} \\
-s & \text{key/value token position} \\
-d & \text{embedding dimension} \\
-h & \text{attention head} \\
-k & \text{head dimension}
-\end{array}
-\]
+  \begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{images/image1.png}
+    \end{center}
+  \end{figure}
 
----
 
-\section*{Mental Model}
 
-Most deep learning tensor operations follow the same pattern:
+<div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
 
-\[
-A_{\dots k} \; B_{\dots k} \rightarrow \sum_k
-\]
-
-Meaning:
-
-\begin{enumerate}
-\item Align tensors along a shared dimension.
-\item Multiply elementwise.
-\item Sum over the shared index.
-\end{enumerate}
-
-This produces a matrix or tensor of pairwise interactions.
-
----
-
-\section*{Key Insight}
-
-Most neural network layers reduce to computing many dot products:
-
-\begin{itemize}
-\item Linear layers $\rightarrow$ matrix multiplication
-\item Attention $\rightarrow$ query-key dot products
-\item Kernel methods $\rightarrow$ Gram matrices
-\item Convolutions $\rightarrow$ local dot products
-\end{itemize}
-
-Einstein summation simply makes these interactions explicit.
-
-\end{document}
+<div dangerouslySetInnerHTML={createMarkup(xxxxx)} />

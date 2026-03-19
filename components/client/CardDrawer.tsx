@@ -35,9 +35,9 @@ export default function CardDrawer({ name, id, children }: { name: string, id: s
                 </div>
                 <div className="collapse-content mb-[1px] mt-[5px] ml-[5px] mr-[5px]">
 
-                    <div className="assignment-answer p-[15px]">
-                        {children}
-                    </div>
+
+                    {children}
+
 
                 </div>
             </div>
