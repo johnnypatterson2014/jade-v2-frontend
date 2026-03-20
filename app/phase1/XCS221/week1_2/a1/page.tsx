@@ -486,6 +486,674 @@ export default function Home() {
 </div>
         `
 
+        const q1i = `
+        <div dir="ltr">
+        <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">prob_weighted_sum_einsum</span>() -&gt; <span
+                                style="color:rgb(78,201,176)">str</span>:</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Batch probability-weighted sums over value
+                                vectors using einsum.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Board-style intro:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Let P in R^{B x N} be per-batch probability
+                                weights (each row sums to 1).</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Let V in R^{B x N x D} be per-batch value
+                                vectors aligned with P along N.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Compute out[b,:] = sum_{j=1..N} P[b,j] *
+                                V[b,j,:] in R^{D} for each batch b.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Return a einops.einsum string that computes out
+                                = sum_j P[b,j] * V[b,j,:]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; for shapes P:(B,N), V:(B,N,D) -&gt;
+                                out:(B,D).</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; I.e., your returned string 'pattern' would be
+                                used as follows:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; </span><span
+                                style="color:rgb(197,134,192)">&gt;&gt;&gt; </span><span
+                                style="color:rgb(206,145,120)">out = einops.einsum(P, V, pattern)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; where P is a tensor with shape (B, N) and V is a
+                                tensor with shape (B, N, D).</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(206,145,120)">"b n, b n d -&gt; b d"</span></div>
+        </div>
+</div>
+        `
+
+        const q2b = `
+        <div dir="ltr">
+        <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">gradient_warmup</span>(<span
+                                style="color:rgb(156,220,254)">w</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">c</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>:</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Compute the gradient of f(w) = sum_i (w_i -
+                                c_i)^2 with respect to w.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Inputs:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - w: (d,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - c: (d,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - grad: (d,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(181,206,168)">2</span> <span style="color:rgb(212,212,212)">*</span>
+                        (<span style="color:rgb(156,220,254)">w</span> <span style="color:rgb(220,220,170)">-</span>
+                        <span style="color:rgb(156,220,254)">c</span>)
+                </div><br>
+                <div><span style="color:rgb(156,220,254)">w</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([<span
+                                style="color:rgb(181,206,168)">1.0</span>, <span
+                                style="color:rgb(212,212,212)">-</span><span style="color:rgb(181,206,168)">2.0</span>,
+                        <span style="color:rgb(181,206,168)">3.0</span>])
+                </div>
+                <div><span style="color:rgb(156,220,254)">c</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([<span
+                                style="color:rgb(181,206,168)">0.0</span>, <span
+                                style="color:rgb(181,206,168)">1.0</span>, <span
+                                style="color:rgb(212,212,212)">-</span><span style="color:rgb(181,206,168)">1.0</span>])
+                </div><br>
+                <div><span style="color:rgb(156,220,254)">grad</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(220,220,170)">gradient_warmup</span>(<span
+                                style="color:rgb(156,220,254)">w</span>, <span style="color:rgb(156,220,254)">c</span>)
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad:"</span>, <span
+                                style="color:rgb(156,220,254)">grad</span>)</div>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">grad: [ 2. -6. &nbsp;8.]</span></div>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+        </div>
+</div>
+        `
+        const q2d = `
+        <div dir="ltr">
+        <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">matrix_grad</span>(<span
+                                style="color:rgb(156,220,254)">A</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">B</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">Tuple</span>[<span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>]:</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; For s = sum_{i,j} (A B)_{i,j}, compute gradients
+                                wrt A and B.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; If A is (m, p) and B is (p, n):</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - grad_A[i, k] = sum_j B[k, j]
+                                &nbsp;(independent of i)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - grad_B[k, j] = sum_i A[i, k]
+                                &nbsp;(independent of j)</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns (grad_A, grad_B) with the same shapes as
+                                A and B, respectively.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Implementation notes:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Consider using einsum from einops for
+                                computing sums over dimensions.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Alternatively, NumPy sum operations are
+                                acceptable for this problem.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Use broadcasting to replicate values to the
+                                correct shapes.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">row_sum_B</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">B</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>(<span
+                                style="color:rgb(156,220,254)">axis</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>)
+                        &nbsp;<span style="color:rgb(106,153,85)"># (3,)</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">col_sum_A</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">A</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>(<span
+                                style="color:rgb(156,220,254)">axis</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">0</span>)
+                        &nbsp;<span style="color:rgb(106,153,85)"># (3,)</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">grad_A</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(156,220,254)">ones</span>((<span
+                                style="color:rgb(156,220,254)">A</span>.<span
+                                style="color:rgb(156,220,254)">shape</span>[<span
+                                style="color:rgb(181,206,168)">0</span>], <span
+                                style="color:rgb(181,206,168)">1</span>)) <span style="color:rgb(220,220,170)">@</span>
+                        <span style="color:rgb(156,220,254)">row_sum_B</span>[<span
+                                style="color:rgb(86,156,214)">None</span>, :]</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad_A:"</span>, <span
+                                style="color:rgb(156,220,254)">grad_A</span>)</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">grad_B</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">col_sum_A</span>[:, <span
+                                style="color:rgb(86,156,214)">None</span>] <span style="color:rgb(220,220,170)">@</span>
+                        <span style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(156,220,254)">ones</span>((<span
+                                style="color:rgb(181,206,168)">1</span>, <span
+                                style="color:rgb(156,220,254)">B</span>.<span
+                                style="color:rgb(156,220,254)">shape</span>[<span
+                                style="color:rgb(181,206,168)">1</span>]))</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad_B:"</span>, <span
+                                style="color:rgb(156,220,254)">grad_B</span>)</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> [<span
+                                style="color:rgb(156,220,254)">grad_A</span>, <span
+                                style="color:rgb(156,220,254)">grad_B</span>]</div><br>
+                <div><span style="color:rgb(79,193,255)">A</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([[<span
+                                style="color:rgb(181,206,168)">2</span>., <span
+                                style="color:rgb(181,206,168)">1</span>., <span
+                                style="color:rgb(181,206,168)">3</span>.],</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [<span style="color:rgb(181,206,168)">4</span>.,
+                        <span style="color:rgb(181,206,168)">5</span>., <span
+                                style="color:rgb(181,206,168)">6</span>.]]) &nbsp;<span style="color:rgb(106,153,85)">#
+                                (m=2, p=3)</span></div>
+                <div><span style="color:rgb(79,193,255)">B</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([[<span
+                                style="color:rgb(181,206,168)">7</span>., <span
+                                style="color:rgb(181,206,168)">8</span>.],</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [<span style="color:rgb(181,206,168)">9</span>.,
+                        <span style="color:rgb(181,206,168)">0</span>.],</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [<span style="color:rgb(181,206,168)">1</span>.,
+                        <span style="color:rgb(181,206,168)">2</span>.]]) &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(106,153,85)"># (p=3, n=2)</span></div><br>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"A:"</span>, <span
+                                style="color:rgb(79,193,255)">A</span>)</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"B:"</span>, <span
+                                style="color:rgb(79,193,255)">B</span>)</div><br>
+                <div><span style="color:rgb(79,193,255)">C</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(79,193,255)">A</span>, <span style="color:rgb(79,193,255)">B</span>,
+                        <span style="color:rgb(206,145,120)">"m p, p n -&gt; m n"</span>)</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"C:"</span>, <span
+                                style="color:rgb(79,193,255)">C</span>)</div><br>
+                <div><span style="color:rgb(156,220,254)">sum</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(79,193,255)">C</span>, <span style="color:rgb(206,145,120)">"i j
+                                -&gt;"</span>)</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"sum:"</span>, <span
+                                style="color:rgb(156,220,254)">sum</span>)</div><br>
+                <div><span style="color:rgb(156,220,254)">grad</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(220,220,170)">matrix_grad</span>(<span
+                                style="color:rgb(79,193,255)">A</span>, <span style="color:rgb(79,193,255)">B</span>)
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad:"</span>, <span
+                                style="color:rgb(156,220,254)">grad</span>)</div><br>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">A: [[2. 1. 3.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; [4. 5. 6.]]</span></div><br>
+                <div><span style="color:rgb(206,145,120)">B: [[7. 8.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; [9. 0.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; [1. 2.]]</span></div><br>
+                <div><span style="color:rgb(206,145,120)">C: [[26. 22.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; [79. 44.]]</span></div><br>
+                <div><span style="color:rgb(206,145,120)">sum: 171.0</span></div><br>
+                <div><span style="color:rgb(206,145,120)">grad_A: [[15. &nbsp;9. &nbsp;3.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[15. &nbsp;9.
+                                &nbsp;3.]]</span></div><br>
+                <div><span style="color:rgb(206,145,120)">grad_B: [[6. 6.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[6. 6.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[9. 9.]]</span></div><br>
+                <div><span style="color:rgb(206,145,120)">grad: [</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; array([</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp;[15., &nbsp;9., &nbsp;3.],</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp;[15., &nbsp;9., &nbsp;3.]</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; ]), </span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp;</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; array([</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp;[6., 6.],</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp;[6., 6.],</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp;[9., 9.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; ])]</span></div>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+        </div>
+</div>
+        `
+
+        const q2e = `
+        <div dir="ltr">
+        <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">lsq_grad</span>(<span
+                                style="color:rgb(156,220,254)">w</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">A</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">b</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>:</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Analytic gradient for f(w) = 1/2 * ||A w -
+                                b||_2^2 with respect to w.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Inputs:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - w: (d,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - A: (n, d)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - b: (n,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - grad: (d,) = A^T (A w - b)</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Implementation notes:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Consider using einsum from einops for
+                                matrix-vector operations.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Alternatively, NumPy @ operator is acceptable
+                                here for simplicity.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - No Python loops.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(156,220,254)">A</span>.<span style="color:rgb(156,220,254)">T</span>
+                        <span style="color:rgb(220,220,170)">@</span> (<span style="color:rgb(156,220,254)">A</span>
+                        <span style="color:rgb(220,220,170)">@</span> <span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(220,220,170)">-</span> <span style="color:rgb(156,220,254)">b</span>)
+                </div><br>
+                <div><span style="color:rgb(156,220,254)">rng</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">random</span>.<span
+                                style="color:rgb(220,220,170)">default_rng</span>(<span
+                                style="color:rgb(181,206,168)">42</span>)</div>
+                <div><span style="color:rgb(156,220,254)">n</span>, <span style="color:rgb(156,220,254)">d</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span style="color:rgb(181,206,168)">5</span>,
+                        <span style="color:rgb(181,206,168)">4</span>
+                </div>
+                <div><span style="color:rgb(79,193,255)">A</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">rng</span>.<span
+                                style="color:rgb(220,220,170)">standard_normal</span>((<span
+                                style="color:rgb(156,220,254)">n</span>, <span style="color:rgb(156,220,254)">d</span>))
+                </div>
+                <div><span style="color:rgb(156,220,254)">b</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">rng</span>.<span
+                                style="color:rgb(220,220,170)">standard_normal</span>(<span
+                                style="color:rgb(156,220,254)">n</span>)</div>
+                <div><span style="color:rgb(156,220,254)">w</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">rng</span>.<span
+                                style="color:rgb(220,220,170)">standard_normal</span>(<span
+                                style="color:rgb(156,220,254)">d</span>)</div><br>
+                <div><span style="color:rgb(156,220,254)">Aw</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(79,193,255)">A</span>, <span style="color:rgb(156,220,254)">w</span>,
+                        <span style="color:rgb(206,145,120)">"n d, d -&gt; n"</span>) <span
+                                style="color:rgb(220,220,170)">-</span> <span style="color:rgb(156,220,254)">b</span>
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"Aw:"</span>, <span
+                                style="color:rgb(156,220,254)">Aw</span>)</div>
+                <div><span style="color:rgb(156,220,254)">At</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(79,193,255)">A</span>, <span style="color:rgb(206,145,120)">"n d -&gt;
+                                d n"</span>)</div>
+                <div><span style="color:rgb(156,220,254)">grad</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(156,220,254)">At</span>, <span
+                                style="color:rgb(156,220,254)">Aw</span>, <span style="color:rgb(206,145,120)">"i j, j
+                                -&gt; i"</span>)
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad:"</span>, <span
+                                style="color:rgb(156,220,254)">grad</span>)</div>
+                <div><span style="color:rgb(156,220,254)">grad2</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(79,193,255)">A</span>.<span style="color:rgb(156,220,254)">T</span> <span
+                                style="color:rgb(220,220,170)">@</span> (<span style="color:rgb(79,193,255)">A</span>
+                        <span style="color:rgb(220,220,170)">@</span> <span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(220,220,170)">-</span> <span style="color:rgb(156,220,254)">b</span>)
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad2:"</span>, <span
+                                style="color:rgb(156,220,254)">grad2</span>)</div><br>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">Aw: &nbsp; &nbsp; [ 0.18641783 &nbsp;0.59098727 -1.02831734
+                                &nbsp;0.5475092 &nbsp; 0.08847468]</span></div>
+                <div><span style="color:rgb(206,145,120)">grad: &nbsp; [-1.01017781 &nbsp;0.44609487 -0.35516438
+                                -1.28626195]</span></div>
+                <div><span style="color:rgb(206,145,120)">grad2: &nbsp;[-1.01017781 &nbsp;0.44609487 -0.35516438
+                                -1.28626195]</span></div>
+                <div><span style="color:rgb(206,145,120)">'''</span></div><br>
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">lsq_finite_diff_grad</span>(<span
+                                style="color:rgb(156,220,254)">w</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>,</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(156,220,254)">A</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>,</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(156,220,254)">b</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>,</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(156,220,254)">epsilon</span>: <span
+                                style="color:rgb(78,201,176)">float</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(181,206,168)">1e-5</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>:
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Central-difference numerical gradient for f(w) =
+                                1/2 * ||A w - b||_2^2.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Inputs:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - w: (d,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - A: (n, d)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - b: (n,)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - epsilon: small step size for finite
+                                differences</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - grad_fd: (d,)</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Implementation notes:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Compute each component using central
+                                differences.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Vectorize the computation using NumPy
+                                broadcasting.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Consider using einsum from einops for
+                                matrix-vector operations.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - No Python loops over gradient
+                                components.</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">d</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">w</span>.<span
+                                style="color:rgb(156,220,254)">shape</span>[<span
+                                style="color:rgb(181,206,168)">0</span>]</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(79,193,255)">I</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">eye</span>(<span style="color:rgb(156,220,254)">d</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># All positive and negative perturbations at
+                                once:</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># W_plus[k] &nbsp;= w + epsilon * e_k</span>
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># W_minus[k] = w - epsilon * e_k</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">W_plus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">w</span>[<span style="color:rgb(86,156,214)">None</span>,
+                        :] <span style="color:rgb(220,220,170)">+</span> <span
+                                style="color:rgb(156,220,254)">epsilon</span> <span
+                                style="color:rgb(212,212,212)">*</span> <span style="color:rgb(79,193,255)">I</span>
+                        &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># shape: (d, d)</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">W_minus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">w</span>[<span style="color:rgb(86,156,214)">None</span>,
+                        :] <span style="color:rgb(220,220,170)">-</span> <span
+                                style="color:rgb(156,220,254)">epsilon</span> <span
+                                style="color:rgb(212,212,212)">*</span> <span style="color:rgb(79,193,255)">I</span>
+                        &nbsp; &nbsp; <span style="color:rgb(106,153,85)"># shape: (d, d)</span></div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># Compute A @ W_plus[k] and A @ W_minus[k] for
+                                all k at once.</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># Result shapes: (d, n)</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">AW_plus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(206,145,120)">'nd,kd-&gt;kn'</span>, <span
+                                style="color:rgb(156,220,254)">A</span>, <span
+                                style="color:rgb(156,220,254)">W_plus</span>)</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">AW_minus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(206,145,120)">'nd,kd-&gt;kn'</span>, <span
+                                style="color:rgb(156,220,254)">A</span>, <span
+                                style="color:rgb(156,220,254)">W_minus</span>)</div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># Residuals for each perturbed point</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">R_plus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">AW_plus</span> <span
+                                style="color:rgb(220,220,170)">-</span> <span
+                                style="color:rgb(156,220,254)">b</span>[<span style="color:rgb(86,156,214)">None</span>,
+                        :] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># shape: (d, n)</span>
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">R_minus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">AW_minus</span> <span
+                                style="color:rgb(220,220,170)">-</span> <span
+                                style="color:rgb(156,220,254)">b</span>[<span style="color:rgb(86,156,214)">None</span>,
+                        :] &nbsp; &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># shape: (d, n)</span></div>
+                <br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(106,153,85)"># f(w +/- epsilon e_k) for every k</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">f_plus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span style="color:rgb(181,206,168)">0.5</span>
+                        <span style="color:rgb(212,212,212)">*</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(206,145,120)">'kn,kn-&gt;k'</span>, <span
+                                style="color:rgb(156,220,254)">R_plus</span>, <span
+                                style="color:rgb(156,220,254)">R_plus</span>) &nbsp; <span
+                                style="color:rgb(106,153,85)"># shape: (d,)</span>
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">f_minus</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span style="color:rgb(181,206,168)">0.5</span>
+                        <span style="color:rgb(212,212,212)">*</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">einsum</span>(<span
+                                style="color:rgb(206,145,120)">'kn,kn-&gt;k'</span>, <span
+                                style="color:rgb(156,220,254)">R_minus</span>, <span
+                                style="color:rgb(156,220,254)">R_minus</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">grad_fd</span> <span
+                                style="color:rgb(212,212,212)">=</span> (<span
+                                style="color:rgb(156,220,254)">f_plus</span> <span
+                                style="color:rgb(212,212,212)">-</span> <span
+                                style="color:rgb(156,220,254)">f_minus</span>) <span
+                                style="color:rgb(212,212,212)">/</span> (<span style="color:rgb(181,206,168)">2.0</span>
+                        <span style="color:rgb(212,212,212)">*</span> <span
+                                style="color:rgb(156,220,254)">epsilon</span>)
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(156,220,254)">grad_fd</span></div><br>
+                <div><span style="color:rgb(156,220,254)">grad3</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(220,220,170)">lsq_finite_diff_grad</span>(<span
+                                style="color:rgb(156,220,254)">w</span>, <span style="color:rgb(79,193,255)">A</span>,
+                        <span style="color:rgb(156,220,254)">b</span>, <span
+                                style="color:rgb(156,220,254)">epsilon</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1e-5</span>)
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"grad3:"</span>, <span
+                                style="color:rgb(156,220,254)">grad3</span>)</div><br>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">grad3: [-1.01017781 &nbsp;0.44609487 -0.35516438
+                                -1.28626195]</span></div>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+        </div>
+</div>
+        `
+        const q3c = `
+        <div dir="ltr">
+        <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
+                <div><span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">gradient_descent_quadratic</span>(<span
+                                style="color:rgb(156,220,254)">x</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">w</span>: <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">theta0</span>: <span
+                                style="color:rgb(78,201,176)">float</span>, <span
+                                style="color:rgb(156,220,254)">lr</span>: <span
+                                style="color:rgb(78,201,176)">float</span>,</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp;<span style="color:rgb(156,220,254)">num_steps</span>: <span
+                                style="color:rgb(78,201,176)">int</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">float</span>:</div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Minimize f(θ) = sum_i w_i * (θ - x_i)^2 with
+                                gradient descent in 1D.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Inputs:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - x: (n,) data values</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - w: (n,) positive weights</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - theta0: initial scalar θ</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - lr: learning rate (stepsize)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - num_steps: number of gradient steps
+                                (non-negative integer)</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - theta: final scalar after num_steps
+                                updates</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Gradient: df/dθ = 2 * sum_i w_i * (θ -
+                                x_i).</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>):
+                </div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>(<span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(212,212,212)">*</span> (<span style="color:rgb(156,220,254)">theta</span>
+                        <span style="color:rgb(212,212,212)">-</span> <span
+                                style="color:rgb(156,220,254)">x</span>)<span
+                                style="color:rgb(212,212,212)">**</span><span style="color:rgb(181,206,168)">2</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">grad_f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>):
+                </div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(181,206,168)">2</span> <span style="color:rgb(212,212,212)">*</span>
+                        <span style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>(<span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(212,212,212)">*</span> (<span style="color:rgb(156,220,254)">theta</span>
+                        <span style="color:rgb(212,212,212)">-</span> <span style="color:rgb(156,220,254)">x</span>))
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">theta0</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta_star</span> <span
+                                style="color:rgb(212,212,212)">=</span> (<span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(220,220,170)">*</span> <span
+                                style="color:rgb(156,220,254)">x</span>).<span
+                                style="color:rgb(220,220,170)">sum</span>() <span
+                                style="color:rgb(212,212,212)">/</span> <span
+                                style="color:rgb(156,220,254)">w</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>()
+                </div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(86,156,214)">f</span><span style="color:rgb(206,145,120)">"theta_star
+                                is: </span><span style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">theta_star</span><span
+                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)">"</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">for</span> <span
+                                style="color:rgb(156,220,254)">iteration</span> <span
+                                style="color:rgb(197,134,192)">in</span> <span
+                                style="color:rgb(78,201,176)">range</span>(<span
+                                style="color:rgb(156,220,254)">num_steps</span>):</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(156,220,254)">f</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>)
+                </div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(86,156,214)">f</span><span style="color:rgb(206,145,120)">"theta:
+                        </span><span style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">theta</span><span
+                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)"> f_of_theta:
+                        </span><span style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">f</span><span style="color:rgb(86,156,214)">}</span><span
+                                style="color:rgb(206,145,120)">"</span>)</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">theta</span> <span
+                                style="color:rgb(212,212,212)">-</span> <span style="color:rgb(156,220,254)">lr</span>
+                        <span style="color:rgb(212,212,212)">*</span> <span
+                                style="color:rgb(220,220,170)">grad_f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(156,220,254)">theta</span></div><br>
+                <div><span style="color:rgb(156,220,254)">x</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([<span
+                                style="color:rgb(181,206,168)">0.0</span>, <span
+                                style="color:rgb(181,206,168)">10.0</span>])</div>
+                <div><span style="color:rgb(156,220,254)">w</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([<span
+                                style="color:rgb(181,206,168)">1.0</span>, <span
+                                style="color:rgb(181,206,168)">3.0</span>])</div>
+                <div><span style="color:rgb(156,220,254)">theta0</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(181,206,168)">100.0</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">lr</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(181,206,168)">0.25</span> <span style="color:rgb(212,212,212)">/</span>
+                        <span style="color:rgb(156,220,254)">w</span>.<span style="color:rgb(220,220,170)">sum</span>()
+                        &nbsp;<span style="color:rgb(106,153,85)"># stable stepsize (&lt; 1/(2*sum w))</span>
+                </div><br>
+                <div><span style="color:rgb(156,220,254)">theta</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(220,220,170)">gradient_descent_quadratic</span>(<span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>,
+                        <span style="color:rgb(156,220,254)">theta0</span>, <span
+                                style="color:rgb(156,220,254)">lr</span>, <span
+                                style="color:rgb(156,220,254)">num_steps</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">200</span>)
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
+                                style="color:rgb(206,145,120)">"theta: </span><span
+                                style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">theta</span><span
+                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)">"</span>)
+                </div><br>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">theta_star is: 7.5</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 100.0 f_of_theta: 34300.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 53.75 f_of_theta: 8631.25</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 30.625 f_of_theta: 2214.0625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 19.0625 f_of_theta: 609.765625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 13.28125 f_of_theta: 208.69140625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 10.390625 f_of_theta: 108.4228515625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 8.9453125 f_of_theta: 83.355712890625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 8.22265625 f_of_theta: 77.08892822265625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.861328125 f_of_theta: 75.52223205566406</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.6806640625 f_of_theta: 75.13055801391602</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.59033203125 f_of_theta: 75.032639503479</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.545166015625 f_of_theta: 75.00815987586975</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5225830078125 f_of_theta: 75.00203996896744</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.51129150390625 f_of_theta: 75.00050999224186</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">...</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000002629 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5000000000013145 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000003 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000002 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000001 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5</span></div>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+        </div>
+</div>
+        `
+
         return (
                 <>
                         <MathJaxContext>
@@ -759,7 +1427,7 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+                                                                                        <div dangerouslySetInnerHTML={createMarkup(q1i)} />
                                                                                 </div>
                                                                         </div>
 
@@ -829,7 +1497,7 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+                                                                                        <div dangerouslySetInnerHTML={createMarkup(q2b)} />
                                                                                 </div>
                                                                         </div>
 
@@ -962,7 +1630,7 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+                                                                                        <div dangerouslySetInnerHTML={createMarkup(q2d)} />
                                                                                 </div>
                                                                         </div>
 
@@ -1012,7 +1680,7 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+                                                                                        <div dangerouslySetInnerHTML={createMarkup(q2e)} />
                                                                                 </div>
                                                                         </div>
 
@@ -1142,7 +1810,7 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+                                                                                        <div dangerouslySetInnerHTML={createMarkup(q3c)} />
                                                                                 </div>
                                                                         </div>
 
@@ -1267,11 +1935,11 @@ export default function Home() {
                                                                                                         These should highlight its key purposes, typical task flows, and the core problems it addresses
                                                                                                         for users. Paste your screenshots into your <strong>PDF writeup for this part</strong>.</li>
                                                                                                 <li>Based on your hands-on use and official resources, describe what the product is designed to
-                                                                                                        do in 4–6 sentences. Identify at least two use cases and provide concrete examples (with
+                                                                                                        do in 4-6 sentences. Identify at least two use cases and provide concrete examples (with
                                                                                                         screenshots in your PDF) where appropriate.</li>
                                                                                         </ul>
 
-                                                                                        <span className="what-to-expect">Expected: Submit a brief description (4–6 sentences) of the product's
+                                                                                        <span className="what-to-expect">Expected: Submit a brief description (4-6 sentences) of the product's
                                                                                                 purpose and at least two concrete example user tasks. Include relevant screenshots in your PDF
                                                                                                 writeup.</span>
                                                                                 </div>
@@ -1280,7 +1948,33 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+
+                                                                                        The AI-powered product that I have chosen to use is Claude Code from Anthropic. <br /><br />
+
+                                                                                        Claude Code is an AI-powered coding assistant that reads your codebase, edits files, runs commands, and integrates with your
+                                                                                        development tools. Available in your terminal, IDE, desktop app, and browser. <br /><br />
+
+                                                                                        The Claude Code coding assistant can help you build features, fix bugs, and automate development
+                                                                                        tasks. It understands your entire codebase and can work across multiple files and tools to get things done.<br /><br />
+
+                                                                                        Use Case 1: Understand new codebases <br /><br />
+                                                                                        Suppose you've just joined a new project and need to understand its structure quickly. This project could be
+                                                                                        a newly downloaded codebase from github, or from an internal work-related repository. You can then ask
+                                                                                        Claude code to analyze the codebase and answer questions like: <br /><br />
+                                                                                        - 'give me an overview summary of this codebase' <br /><br />
+                                                                                        - 'explain the main architecture patterns used here'  <br /><br />
+                                                                                        - 'what are the key data models?' <br /><br />
+                                                                                        - 'how is authentication handled?' <br /><br />
+                                                                                        And Claude Code will be able to provide a summary of it's analysis of the code so that you can get up-and-running
+                                                                                        quickly to work with this codebase.  <br /><br />
+
+                                                                                        Use Case 2: Fix bugs efficiently <br /><br />
+                                                                                        Suppose you've encountered an error message and need to find and fix its source. You can ask Claude code to: <br /><br />
+                                                                                        - analyze the error message logs <br /><br />
+                                                                                        - ask for fix recommendations <br /><br />
+                                                                                        - make the fix and create a PR to merge the code to a github branch <br /><br />
+                                                                                        - create unit tests to test the fix  <br /><br />
+
                                                                                 </div>
                                                                         </div>
 
@@ -1305,7 +1999,27 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+                                                                                        Over the past 1-2 months, Anthropic and its developer-focused tool Claude Code have seen rapid product
+                                                                                        expansion alongside rising controversy and market momentum. On the product side, Anthropic launched new
+                                                                                        capabilities such as a "Code Review" (multi-agent system in Claude Code) to automatically analyze and
+                                                                                        fix AI-generated code, reflecting strong enterprise demand and a surge in AI-assisted development
+                                                                                        workflows (<a href="https://techcrunch.com/2026/03/09/anthropic-launches-code-review-tool-to-check-flood-of-ai-generated-code/" target="_blank">TechCrunch, Mar 2026</a>),
+                                                                                        while broader platform updates like task delegation across devices ("Cowork preview") aim to turn Claude into a
+                                                                                        full productivity agent (<a href="https://m.economictimes.com/tech/artificial-intelligence/claude-dispatch-anthropic-rolls-out-task-delegation-feature-for-claude-across-devices-in-cowork-preview/articleshow/129661771.cms" target="_blank">Economic Times, Mar 2026</a>).
+                                                                                        These releases build on major model upgrades like Claude Opus 4.6 and Sonnet 4.6, which significantly
+                                                                                        improve coding performance and long-context reasoning, and have even been used to discover real-world
+                                                                                        software vulnerabilities (e.g., Firefox bugs) (<a href="https://www.reuters.com/business/retail-consumer/anthropic-releases-ai-upgrade-market-punishes-software-stocks-2026-02-05/" target="_blank">Reuters, Feb 2026</a>).
+                                                                                        At the same time, Anthropic is scaling commercially at an exceptional pace, with reports of multi-billion-dollar revenue from Claude Code and a
+                                                                                        valuation reaching ~ 380B dollars after a major funding round (<a href="https://www.reuters.com/technology/anthropic-valued-380-billion-latest-funding-round-2026-02-12/" target="_blank">Reuters, Feb 2026</a>),
+                                                                                        alongside surging user growth and features like Projects/Artifacts and temporary usage-limit expansions to
+                                                                                        attract new users (<a href="https://www.tomsguide.com/ai/a-small-thank-you-to-users-claude-extends-usage-limits-for-every-user-but-theres-a-slight-catch" target="_blank">Tom's Guide, Mar 2026</a>).
+                                                                                        However, the company is also facing mounting challenges: security risks have emerged with malware campaigns impersonating "Claude Code" downloads,
+                                                                                        highlighting ecosystem vulnerabilities (<a href="https://www.techradar.com/pro/security/infostealers-are-being-disguised-as-claude-code-openclaw-and-other-ai-developer-tools" target="_blank">TechRadar, Mar 2026</a>),
+                                                                                        while legal pressure is intensifying via copyright lawsuits over
+                                                                                        training data (<a href="https://www.reuters.com/legal/litigation/bmg-sues-anthropic-using-bruno-mars-rolling-stones-lyrics-ai-training-2026-03-18/" target="_blank">Reuters, Mar 2026</a>) and
+                                                                                        geopolitical tensions, including U.S. government scrutiny and restrictions tied to national-security concerns. Overall, the latest developments
+                                                                                        show Anthropic rapidly pushing Claude Code toward a multi-agent, enterprise-grade coding platform, but doing so amid escalating legal, security,
+                                                                                        and regulatory pressures that could shape its trajectory in 2026.
                                                                                 </div>
                                                                         </div>
 
@@ -1336,7 +2050,24 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+
+
+                                                                                        <p><strong>Company mission.</strong> <br />
+                                                                                                Anthropic states its mission as: "to build reliable, interpretable, and steerable AI systems" and to ensure advanced AI systems are safe and beneficial for society.
+                                                                                        </p>
+
+                                                                                        <p><strong>Product goal (Claude Code).</strong> <br />
+                                                                                                Claude Code is designed to act as an AI-powered coding assistant that can generate, review, and improve code, with a focus on reliability, safety, and usefulness for developers, including features like automated code review and multi-step task execution.
+                                                                                        </p>
+
+                                                                                        <p><strong>Relationship between mission and product.</strong> <br />
+                                                                                                Claude Code closely aligns with Anthropic's mission by emphasizing safe and controllable AI in a high-impact domain (software development), where reliability and correctness are critical. However, there is some potential tension: as the product becomes more autonomous (e.g., multi-agent workflows and task delegation), ensuring interpretability and user control becomes harder, which could introduce mild mission drift if not carefully managed.
+                                                                                        </p>
+
+                                                                                        <p><strong>Alignment considerations.</strong> <br />
+                                                                                                While Claude Code generally behaves consistently with its goals (e.g., producing structured, safe, and well-reasoned code), like other large language models it can still exhibit misalignment issues such as confidently generating incorrect code or optimizing for superficial correctness (a form of reward hacking). Anthropic addresses these challenges through techniques like Constitutional AI (rule-based self-critique), reinforcement learning from human feedback (RLHF), and ongoing evaluations/red-teaming to ensure outputs remain aligned with user intent and safety objectives.
+                                                                                        </p>
+
                                                                                 </div>
                                                                         </div>
 
@@ -1373,11 +2104,30 @@ export default function Home() {
 
                                                                         <div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
                                                                                 <div className="assignment-answer mt-[10px] p-[15px]">
-                                                                                        xxxxx
+
+                                                                                        <p><strong>Pricing and access.</strong><br />
+                                                                                                Claude (including Claude Code capabilities) follows a tiered pricing model: a free tier with limited usage, a Pro plan (approximately $20/month) with higher usage limits and priority access, and higher-end Team/Enterprise plans with expanded limits, collaboration features, and API-based usage priced per token. The model is primarily usage- and tier-based rather than explicitly equitable (e.g., no widely advertised student discounts), and access may also be constrained by non-financial barriers such as API availability, regional rollout differences, and the need for sufficient technical infrastructure (e.g., development environments for Claude Code workflows). An alternative pricing model could be a compute-credit or pay-as-you-go system with subsidized academic tiers, which would improve accessibility for students and researchers but could reduce revenue predictability for Anthropic while increasing operational complexity.
+                                                                                        </p>
+
+                                                                                        <p><strong>Compute and environmental considerations.</strong><br />
+                                                                                                Running Claude Code relies on large-scale cloud GPU/TPU infrastructure, implying high computational and energy costs, though Anthropic discloses limited detailed public data on energy usage or carbon footprint; these costs are indirectly reflected in pricing tiers and usage limits. The environmental cost of training and serving large models (e.g., energy consumption and associated emissions) likely scales with usage, meaning that pricing structures both recover infrastructure costs and implicitly regulate demand, potentially limiting access for lower-budget users while aligning usage with resource constraints.
+                                                                                        </p>
                                                                                 </div>
                                                                         </div>
 
                                                                 </CardDrawer>
+
+                                                        </TileRowCell0>
+                                                </Tab2>
+
+                                                <Tab2 title="PDF" isChecked={false}>
+                                                        <TileRowCell0>
+
+                                                                <div className='lab-links'>
+                                                                        <ul>
+                                                                                <li><a href="/A1_Solutions.pdf" target="_blank">Assignment 1</a></li>
+                                                                        </ul>
+                                                                </div>
 
                                                         </TileRowCell0>
                                                 </Tab2>

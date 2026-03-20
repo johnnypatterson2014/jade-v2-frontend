@@ -114,7 +114,7 @@ export default function Header() {
                                             <Link onClick={() => blurInput()} href='/phase0/mmldss/course1/week1'>Phase 0: Math & Stats for ML</Link>
                                         </li>
                                         <li className='jade-menu-li'>
-                                            <Link onClick={() => blurInput()} href='/phase1/XCS221/week1_2/s2_1'>Phase 1: XCS221 - AI Principles</Link>
+                                            <Link onClick={() => blurInput()} href='/phase1/XCS221/week1_2/a1'>Phase 1: XCS221 - AI Principles</Link>
                                         </li>
 
                                     </ul>

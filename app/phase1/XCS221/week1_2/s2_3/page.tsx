@@ -31,7 +31,7 @@ export default function Home() {
                                         </div>
 
                                         <div className='jade-h2 mt-[5px] mb-[20px]'>
-                                                Module 2: Machine Learning | Tensors and Einops
+                                                Module 2: Machine Learning | Classification
                                         </div>
 
 

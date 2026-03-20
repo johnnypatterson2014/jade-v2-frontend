@@ -1,116 +1,169 @@
 <div dir="ltr">
         <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
                 <div><span style="color:rgb(86,156,214)">def</span> <span
-                                style="color:rgb(220,220,170)">mask_strictly_upper</span>(<span
-                                style="color:rgb(156,220,254)">scores</span>: <span
+                                style="color:rgb(220,220,170)">gradient_descent_quadratic</span>(<span
+                                style="color:rgb(156,220,254)">x</span>: <span
                                 style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(78,201,176)">ndarray</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">w</span>: <span
                                 style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(78,201,176)">ndarray</span>:</div>
+                                style="color:rgb(78,201,176)">ndarray</span>, <span
+                                style="color:rgb(156,220,254)">theta0</span>: <span
+                                style="color:rgb(78,201,176)">float</span>, <span
+                                style="color:rgb(156,220,254)">lr</span>: <span
+                                style="color:rgb(78,201,176)">float</span>,</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp;<span style="color:rgb(156,220,254)">num_steps</span>: <span
+                                style="color:rgb(78,201,176)">int</span>) -&gt; <span
+                                style="color:rgb(78,201,176)">float</span>:</div>
                 <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Mask strictly upper-triangular entries (j &gt;
-                                i) to -np.inf via broadcasting.</span></div><br>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Board-style intro:</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Let scores in R^{B x L x L} be a batch of
-                                square matrices.</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - For each matrix, we want to set entries with
-                                column index j greater than row index i to -inf.</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - Construct the boolean mask using broadcasted
-                                index grids; avoid loops.</span></div><br>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Shapes:</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - scores: (batch, L, L)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Minimize f(θ) = sum_i w_i * (θ - x_i)^2 with
+                                gradient descent in 1D.</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Inputs:</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - x: (n,) data values</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - w: (n,) positive weights</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - theta0: initial scalar θ</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - lr: learning rate (stepsize)</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - num_steps: number of gradient steps
+                                (non-negative integer)</span></div><br>
                 <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - masked_scores: (batch, L, L) where entries
-                                with column &gt; row are -inf.</span></div><br>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Use NumPy broadcasting to construct and apply
-                                the mask without loops.</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Note that the data type should be floats.</span>
-                </div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - theta: final scalar after num_steps
+                                updates</span></div><br>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Gradient: df/dθ = 2 * sum_i w_i * (θ -
+                                x_i).</span></div>
                 <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">i</span>, <span
-                                style="color:rgb(156,220,254)">j</span> <span style="color:rgb(212,212,212)">=</span>
+                <div>&nbsp; &nbsp; <span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>):
+                </div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>(<span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(212,212,212)">*</span> (<span style="color:rgb(156,220,254)">theta</span>
+                        <span style="color:rgb(212,212,212)">-</span> <span
+                                style="color:rgb(156,220,254)">x</span>)<span
+                                style="color:rgb(212,212,212)">**</span><span style="color:rgb(181,206,168)">2</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(86,156,214)">def</span> <span
+                                style="color:rgb(220,220,170)">grad_f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>):
+                </div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(181,206,168)">2</span> <span style="color:rgb(212,212,212)">*</span>
                         <span style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">triu_indices</span>(<span
-                                style="color:rgb(156,220,254)">scores</span>.<span
-                                style="color:rgb(156,220,254)">shape</span>[<span
-                                style="color:rgb(181,206,168)">1</span><wbr>], <span
-                                style="color:rgb(156,220,254)">k</span><span
-                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>)
-                </div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">scores</span>[:, <span
-                                style="color:rgb(156,220,254)">i</span>, <span style="color:rgb(156,220,254)">j</span>]
-                        <span style="color:rgb(212,212,212)">=</span> <span style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(78,201,176)">np</span>.<span style="color:rgb(156,220,254)">inf</span>
-                </div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
-                                style="color:rgb(156,220,254)">scores</span></div><br>
-                <div><span style="color:rgb(106,153,85)"># test data</span></div>
-                <div><span style="color:rgb(79,193,255)">B</span>, <span style="color:rgb(79,193,255)">L</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span style="color:rgb(181,206,168)">1</span>,
-                        <span style="color:rgb(181,206,168)">4</span>
-                </div>
-                <div><span style="color:rgb(156,220,254)">s</span> <span style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">arange</span>(<span
-                                style="color:rgb(79,193,255)">B</span> <span style="color:rgb(212,212,212)">*</span>
-                        <span style="color:rgb(79,193,255)">L</span> <span style="color:rgb(212,212,212)">*</span> <span
-                                style="color:rgb(79,193,255)">L</span>, <span
-                                style="color:rgb(156,220,254)">dtype</span><span
-                                style="color:rgb(212,212,212)">=</span><span
-                                style="color:rgb(78,201,176)">float</span>).<span
-                                style="color:rgb(220,220,170)">reshape</span>(<span
-                                style="color:rgb(79,193,255)">B</span>, <span style="color:rgb(79,193,255)">L</span>,
-                        <span style="color:rgb(79,193,255)">L</span>)
-                </div>
-                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
-                                style="color:rgb(206,145,120)">"s:"</span>, <span
-                                style="color:rgb(156,220,254)">s</span>)</div><br>
-                <div><span style="color:rgb(106,153,85)"># triu_indices returns the i, j indicies for the matrix.
-                        </span></div>
-                <div><span style="color:rgb(106,153,85)"># &nbsp; K=1 means to shift the diagonal, since we only want to
-                                mask the</span></div>
-                <div><span style="color:rgb(106,153,85)"># &nbsp; upper diagonal (exluding the diagonal)</span></div>
-                <div><span style="color:rgb(156,220,254)">i</span>, <span style="color:rgb(156,220,254)">j</span> <span
+                                style="color:rgb(220,220,170)">sum</span>(<span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(212,212,212)">*</span> (<span style="color:rgb(156,220,254)">theta</span>
+                        <span style="color:rgb(212,212,212)">-</span> <span style="color:rgb(156,220,254)">x</span>))
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta</span> <span
                                 style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">triu_indices</span>(<span
-                                style="color:rgb(156,220,254)">s</span>.<span
-                                style="color:rgb(156,220,254)">shape</span>[<span
-                                style="color:rgb(181,206,168)">1</span>], <span
-                                style="color:rgb(156,220,254)">k</span><span
-                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>)
+                                style="color:rgb(156,220,254)">theta0</span></div>
+                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta_star</span> <span
+                                style="color:rgb(212,212,212)">=</span> (<span style="color:rgb(156,220,254)">w</span>
+                        <span style="color:rgb(220,220,170)">*</span> <span
+                                style="color:rgb(156,220,254)">x</span>).<span
+                                style="color:rgb(220,220,170)">sum</span>() <span
+                                style="color:rgb(212,212,212)">/</span> <span
+                                style="color:rgb(156,220,254)">w</span>.<span
+                                style="color:rgb(220,220,170)">sum</span>()
                 </div>
-                <div><span style="color:rgb(156,220,254)">s</span>[:, <span style="color:rgb(156,220,254)">i</span>,
-                        <span style="color:rgb(156,220,254)">j</span>] <span style="color:rgb(212,212,212)">=</span>
-                        <span style="color:rgb(212,212,212)">-</span><span style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(156,220,254)">inf</span> &nbsp; &nbsp; <span
-                                style="color:rgb(106,153,85)"># here we provide just the indicies we want to
-                                assign</span>
+                <div>&nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(86,156,214)">f</span><span style="color:rgb(206,145,120)">"theta_star
+                                is: </span><span style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">theta_star</span><span
+                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)">"</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">for</span> <span
+                                style="color:rgb(156,220,254)">iteration</span> <span
+                                style="color:rgb(197,134,192)">in</span> <span
+                                style="color:rgb(78,201,176)">range</span>(<span
+                                style="color:rgb(156,220,254)">num_steps</span>):</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(156,220,254)">f</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>)
+                </div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(86,156,214)">f</span><span style="color:rgb(206,145,120)">"theta:
+                        </span><span style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">theta</span><span
+                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)"> f_of_theta:
+                        </span><span style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">f</span><span style="color:rgb(86,156,214)">}</span><span
+                                style="color:rgb(206,145,120)">"</span>)</div>
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">theta</span> <span
+                                style="color:rgb(212,212,212)">-</span> <span style="color:rgb(156,220,254)">lr</span>
+                        <span style="color:rgb(212,212,212)">*</span> <span
+                                style="color:rgb(220,220,170)">grad_f_of_theta</span>(<span
+                                style="color:rgb(156,220,254)">theta</span>, <span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>)
+                </div><br>
+                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
+                                style="color:rgb(156,220,254)">theta</span></div><br>
+                <div><span style="color:rgb(156,220,254)">x</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([<span
+                                style="color:rgb(181,206,168)">0.0</span>, <span
+                                style="color:rgb(181,206,168)">10.0</span>])</div>
+                <div><span style="color:rgb(156,220,254)">w</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">array</span>([<span
+                                style="color:rgb(181,206,168)">1.0</span>, <span
+                                style="color:rgb(181,206,168)">3.0</span>])</div>
+                <div><span style="color:rgb(156,220,254)">theta0</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(181,206,168)">100.0</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">lr</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(181,206,168)">0.25</span> <span style="color:rgb(212,212,212)">/</span>
+                        <span style="color:rgb(156,220,254)">w</span>.<span style="color:rgb(220,220,170)">sum</span>()
+                        &nbsp;<span style="color:rgb(106,153,85)"># stable stepsize (&lt; 1/(2*sum w))</span>
+                </div><br>
+                <div><span style="color:rgb(156,220,254)">theta</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(220,220,170)">gradient_descent_quadratic</span>(<span
+                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>,
+                        <span style="color:rgb(156,220,254)">theta0</span>, <span
+                                style="color:rgb(156,220,254)">lr</span>, <span
+                                style="color:rgb(156,220,254)">num_steps</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">200</span>)
                 </div>
                 <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
-                                style="color:rgb(206,145,120)">"s:"</span>, <span
-                                style="color:rgb(156,220,254)">s</span>) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
-                                style="color:rgb(106,153,85)"># we ignore the batch dimension, and just set the upper
-                        </span></div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
-                                style="color:rgb(106,153,85)"># diagonal indicies to -inf</span></div>
-                <div><span style="color:rgb(206,145,120)">''' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                &nbsp; &nbsp; &nbsp;</span></div>
-                <div><span style="color:rgb(206,145,120)">s: [[[ 0. &nbsp;1. &nbsp;2. &nbsp;3.]</span></div><span
-                        class="im">
-                        <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp;[ 4. &nbsp;5. &nbsp;6.
-                                        &nbsp;7.]</span></div>
-                        <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp;[ 8. &nbsp;9. 10. 11.]</span>
-                        </div>
-                </span>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp;[12. 13. 14. 15.]]]</span></div><br>
-                <div><span style="color:rgb(206,145,120)">s: [[[ &nbsp;0. -inf -inf -inf]</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp;[ &nbsp;4. &nbsp; 5. -inf -inf]</span>
+                                style="color:rgb(206,145,120)">"theta: </span><span
+                                style="color:rgb(86,156,214)">{</span><span
+                                style="color:rgb(156,220,254)">theta</span><span
+                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)">"</span>)
+                </div><br>
+                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">theta_star is: 7.5</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 100.0 f_of_theta: 34300.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 53.75 f_of_theta: 8631.25</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 30.625 f_of_theta: 2214.0625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 19.0625 f_of_theta: 609.765625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 13.28125 f_of_theta: 208.69140625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 10.390625 f_of_theta: 108.4228515625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 8.9453125 f_of_theta: 83.355712890625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 8.22265625 f_of_theta: 77.08892822265625</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.861328125 f_of_theta: 75.52223205566406</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.6806640625 f_of_theta: 75.13055801391602</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.59033203125 f_of_theta: 75.032639503479</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.545166015625 f_of_theta: 75.00815987586975</span>
                 </div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp;[ &nbsp;8. &nbsp; 9. &nbsp;10.
-                                -inf]</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp;[ 12. &nbsp;13. &nbsp;14.
-                                &nbsp;15.]]]</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5225830078125 f_of_theta: 75.00203996896744</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.51129150390625 f_of_theta: 75.00050999224186</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">...</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000002629 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5000000000013145 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000003 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000002 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000001 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5 f_of_theta: 75.0</span></div>
+                <div><span style="color:rgb(206,145,120)">theta: 7.5</span></div>
                 <div><span style="color:rgb(206,145,120)">'''</span></div>
         </div>
 </div>

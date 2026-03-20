@@ -31,16 +31,16 @@ export default function Home() {
                                         </div>
 
                                         <div className='jade-h2 mt-[5px] mb-[20px]'>
-                                                Module 2: Machine Learning | Foundational ML
+                                                Module 2: Machine Learning | Language Models
                                         </div>
 
 
                                         <Tabs>
 
-                                                <Tab2 title="Gradients" isChecked={true}>
+                                                <Tab2 title="xxxxxx" isChecked={true}>
                                                         <TileRowCell0>
 
-                                                                <h1>Gradients</h1>
+                                                                <h1>xxxx</h1>
                                                                 <div>
                                                                         Coming soon...
                                                                 </div>
@@ -50,29 +50,6 @@ export default function Home() {
                                                         </TileRowCell0>
                                                 </Tab2>
 
-                                                <Tab2 title="Computational Graphs and Backpropagation" isChecked={false}>
-                                                        <TileRowCell0>
-
-                                                                <h1>Computational Graphs and Backpropagation</h1>
-                                                                <div>
-                                                                        Coming soon...
-                                                                </div>
-
-
-                                                        </TileRowCell0>
-                                                </Tab2>
-
-                                                <Tab2 title="Linear Regression" isChecked={false}>
-                                                        <TileRowCell0>
-
-                                                                <h1>Linear Regression</h1>
-                                                                <div>
-                                                                        Coming soon...
-                                                                </div>
-
-
-                                                        </TileRowCell0>
-                                                </Tab2>
 
 
 

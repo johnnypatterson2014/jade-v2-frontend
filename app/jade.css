@@ -543,6 +543,10 @@ mjx-container[jax="CHTML"][display="true"] {
     border-radius: 10px;
 }
 
+.assignment-answer a {
+    color: var(--color-blue-300);
+}
+
 .assignment-question {
     font-family: Consolas;
     font-size: 14px;

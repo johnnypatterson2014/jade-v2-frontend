@@ -71,8 +71,8 @@ export default function MainNavP1() {
                 <NavDrawer id='XCS221' name='XCS221: AI Principles and Techniques'>
 
                     <NavDrawer2 id='2' parent_id='XCS221' name='Week 1 and 2'>
-                        <NavDrawerItem href='/phase1/XCS221/week1_2/reference' isFirst={true} isActive={pathname === "/phase1/XCS221/week1_2/reference"} >
-                            Stanford PDF review guides
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/a1' isFirst={true} isActive={pathname === "/phase1/XCS221/week1_2/a1"} >
+                            Assignment 1
                         </NavDrawerItem>
                         <NavDrawerItem href='/phase1/XCS221/week1_2/s2_1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s2_1"} >
                             2.1 | Tensors and Einops
@@ -86,12 +86,25 @@ export default function MainNavP1() {
                         <NavDrawerItem href='/phase1/XCS221/week1_2/s9_1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/s9_1"} >
                             9.1 | AI Ethics
                         </NavDrawerItem>
-                        <NavDrawerItem href='/phase1/XCS221/week1_2/a1' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/a1"} >
-                            Assignment 1
+                        <NavDrawerItem href='/phase1/XCS221/week1_2/reference' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/reference"} >
+                            Stanford PDF review guides
                         </NavDrawerItem>
                         <NavDrawerItem href='/phase1/XCS221/week1_2/misc_notes' isFirst={false} isActive={pathname === "/phase1/XCS221/week1_2/misc_notes"} >
                             Misc Notes
                         </NavDrawerItem>
+                    </NavDrawer2>
+
+                    <NavDrawer2 id='3' parent_id='XCS221' name='Week 3 and 4'>
+                        <NavDrawerItem href='/phase1/XCS221/week3_4/a2' isFirst={true} isActive={pathname === "/phase1/XCS221/week3_4/a2"} >
+                            Assignment 2
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week3_4/s2_4' isFirst={false} isActive={pathname === "/phase1/XCS221/week3_4/s2_4"} >
+                            2.4 | Language Models
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week3_4/s2_5' isFirst={false} isActive={pathname === "/phase1/XCS221/week3_4/s2_5"} >
+                            2.5 | Deep Learning
+                        </NavDrawerItem>
+
                     </NavDrawer2>
 
                 </NavDrawer>
