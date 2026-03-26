@@ -68,3 +68,9 @@ wtih:
 <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
 
 <div dangerouslySetInnerHTML={createMarkup(xxxxx)} />
+
+<div><span style="color:rgb(255 184 106);font-size:18px;font-family:Consolas;"><strong>xxxxxxxxx</strong></span></div>
+
+rgb(255 184 106)
+
+<strong>xxxxxxxxx</strong>

@@ -1,169 +1,722 @@
 <div dir="ltr">
         <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
-                <div><span style="color:rgb(86,156,214)">def</span> <span
-                                style="color:rgb(220,220,170)">gradient_descent_quadratic</span>(<span
-                                style="color:rgb(156,220,254)">x</span>: <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(78,201,176)">ndarray</span>, <span
-                                style="color:rgb(156,220,254)">w</span>: <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(78,201,176)">ndarray</span>, <span
-                                style="color:rgb(156,220,254)">theta0</span>: <span
-                                style="color:rgb(78,201,176)">float</span>, <span
-                                style="color:rgb(156,220,254)">lr</span>: <span
-                                style="color:rgb(78,201,176)">float</span>,</div>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- visualization, prediction and analysis "</span>)
+                </div><span class="im"><br>
+                        <div><span style="color:rgb(156,220,254)">df</span> <span
+                                        style="color:rgb(212,212,212)">=</span> <span
+                                        style="color:rgb(78,201,176)">pd</span>.<span
+                                        style="color:rgb(220,220,170)">read_csv</span>(<span
+                                        style="color:rgb(206,145,120)">"mall_customers.<wbr>csv"</span>, <span
+                                        style="color:rgb(156,220,254)">index_col</span><span
+                                        style="color:rgb(212,212,212)">=</span><span
+                                        style="color:rgb(181,206,168)">0</span>)</div>
+                        <div><span style="color:rgb(156,220,254)">df</span>.<span
+                                        style="color:rgb(156,220,254)">columns</span> <span
+                                        style="color:rgb(212,212,212)">=</span> [<span
+                                        style="color:rgb(206,145,120)">"Gender"</span>, <span
+                                        style="color:rgb(206,145,120)">"Age"</span>, <span
+                                        style="color:rgb(206,145,120)">"Income"</span>, <span
+                                        style="color:rgb(206,145,120)">"Spending"</span>]</div><br><br>
+                </span>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- plotting "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># display a scatter plot of age vs. spending</span></div>
+                <div><span style="color:rgb(106,153,85)"># example 1</span></div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span
+                                style="color:rgb(220,220,170)">figure</span>(<span
+                                style="color:rgb(156,220,254)">figsize</span><span
+                                style="color:rgb(212,212,212)">=</span>(<span
+                                style="color:rgb(181,206,168)">16</span>,<span style="color:rgb(181,206,168)">9</span>))
+                </div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span
+                                style="color:rgb(220,220,170)">grid</span>(<span
+                                style="color:rgb(86,156,214)">True</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span
+                                style="color:rgb(220,220,170)">title</span>(<span style="color:rgb(206,145,120)">"Age vs
+                                Spending"</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span
+                                style="color:rgb(220,220,170)">xlabel</span>(<span
+                                style="color:rgb(206,145,120)">"Age"</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span
+                                style="color:rgb(220,220,170)">ylabel</span>(<span
+                                style="color:rgb(206,145,120)">"Spending"</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span
+                                style="color:rgb(220,220,170)">scatter</span>(<span
+                                style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Age"</span>].<span
+                                style="color:rgb(156,220,254)">values</span>, <span
+                                style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Spending"</span>].<span
+                                style="color:rgb(156,220,254)">values</span>, <span
+                                style="color:rgb(156,220,254)">color</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"green"</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span style="color:rgb(220,220,170)">show</span>()
+                </div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- seaborn plots "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># display a seaborn pairplot for the mall_customers.csv
+                                data</span></div>
+                <div><span style="color:rgb(106,153,85)"># great tool to visualize correlations in your data</span>
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># example 1</span></div>
+                <div><span style="color:rgb(78,201,176)">sn</span>.<span
+                                style="color:rgb(220,220,170)">pairplot</span>(<span
+                                style="color:rgb(156,220,254)">df</span>)</div><br>
+                <div><span style="color:rgb(106,153,85)"># example 2</span></div>
+                <div><span style="color:rgb(78,201,176)">sn</span>.<span
+                                style="color:rgb(220,220,170)">pairplot</span>(<span
+                                style="color:rgb(156,220,254)">df</span>, <span
+                                style="color:rgb(156,220,254)">height</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">2</span>,
+                        <span style="color:rgb(156,220,254)">aspect</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>,
+                        <span style="color:rgb(156,220,254)">palette</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"husl"</span>, <span
+                                style="color:rgb(156,220,254)">hue</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Gender"</span>)
+                </div>
+                <div><span style="color:rgb(106,153,85)"># 'husl' palette: will try to choose colors of the same
+                                intensity</span></div>
+                <div><span style="color:rgb(106,153,85)"># hue=gender - normally choose a discreet column; graphs will
+                                be colorized based on the gender column</span></div>
+                <div><span style="color:rgb(106,153,85)"># plt.show()</span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- clustering with scikit-learn "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># scikit-learn: statistical / data analysis tools/packages;
+                                useful for analyzing and predicting data</span></div>
+                <div><span style="color:rgb(106,153,85)"># use scikit-learn to do: linear regression, polynomial
+                                regression, etc. </span></div>
+                <div><span style="color:rgb(106,153,85)"># here we will use scikit-learn to divide the data into
+                                clusters</span></div><br>
+                <div><span style="color:rgb(106,153,85)"># example 1 - show scatterplot of age vs. spending</span></div>
+                <div><span style="color:rgb(78,201,176)">sn</span>.<span
+                                style="color:rgb(220,220,170)">scatterplot</span>(<span
+                                style="color:rgb(156,220,254)">df</span>, <span
+                                style="color:rgb(156,220,254)">x</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Age"</span>, <span
+                                style="color:rgb(156,220,254)">y</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Spending"</span>, <span
+                                style="color:rgb(156,220,254)">palette</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"husl"</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span style="color:rgb(220,220,170)">show</span>()
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># example 2 - use one of many tools/techniques to visualize
+                                clusters of data</span></div>
+                <div><span style="color:rgb(106,153,85)"># KMeans clustering: </span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp;- assign each point to a different cluster based on avg
+                                values in each cluster and how far the value is from these averages</span></div>
+                <div><span style="color:rgb(156,220,254)">model</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(78,201,176)">KMeans</span>(<span
+                                style="color:rgb(156,220,254)">n_clusters</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">5</span>)
+                        &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># specify the num of clusters in advance</span>
+                </div>
+                <div><span style="color:rgb(79,193,255)">X</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">df</span>[[<span
+                                style="color:rgb(206,145,120)">"Age"</span>, <span
+                                style="color:rgb(206,145,120)">"Spending"</span>]] &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># specify the dataframe data we are interested in</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">fit</span>(<span style="color:rgb(79,193,255)">X</span>)
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(106,153,85)"># fit() will run the kmeans algorithm on dataframe
+                                X</span></div>
+                <div><span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Cluster"</span>] <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(156,220,254)">labels_</span> &nbsp; <span
+                                style="color:rgb(106,153,85)"># create a new column in our dataframe to store the kmeans
+                                cluster data; labels_ contains a value for each of the 5 clusters</span></div>
+                <div><span style="color:rgb(78,201,176)">sn</span>.<span
+                                style="color:rgb(220,220,170)">scatterplot</span>(<span
+                                style="color:rgb(156,220,254)">df</span>, <span
+                                style="color:rgb(156,220,254)">x</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Age"</span>, <span
+                                style="color:rgb(156,220,254)">y</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Spending"</span>, <span
+                                style="color:rgb(156,220,254)">palette</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"husl"</span>, <span
+                                style="color:rgb(156,220,254)">hue</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Cluster"</span>) <span style="color:rgb(106,153,85)">#
+                                use the cluster data to colorize the plot</span></div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span style="color:rgb(220,220,170)">show</span>()
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># example 3 - just 2 clusters</span></div>
+                <div><span style="color:rgb(156,220,254)">model</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(78,201,176)">KMeans</span>(<span
+                                style="color:rgb(156,220,254)">n_clusters</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">2</span>)
+                        <span style="color:rgb(106,153,85)"># specify the num of clusters in advance</span>
+                </div>
+                <div><span style="color:rgb(79,193,255)">X</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">df</span>[[<span
+                                style="color:rgb(206,145,120)">"Age"</span>, <span
+                                style="color:rgb(206,145,120)">"Spending"</span>]]</div>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">fit</span>(<span style="color:rgb(79,193,255)">X</span>)
+                </div>
+                <div><span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Cluster"</span>] <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(156,220,254)">labels_</span></div>
+                <div><span style="color:rgb(78,201,176)">sn</span>.<span
+                                style="color:rgb(220,220,170)">scatterplot</span>(<span
+                                style="color:rgb(156,220,254)">df</span>, <span
+                                style="color:rgb(156,220,254)">x</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Age"</span>, <span
+                                style="color:rgb(156,220,254)">y</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Spending"</span>, <span
+                                style="color:rgb(156,220,254)">palette</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"husl"</span>, <span
+                                style="color:rgb(156,220,254)">hue</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"Cluster"</span>)</div>
+                <div><span style="color:rgb(78,201,176)">plt</span>.<span style="color:rgb(220,220,170)">show</span>()
+                </div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- binning "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># create 3 bins to group high/med/low spending groups (will use
+                                this later for prediction using a neural net)</span></div>
+                <div><span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"SpendingGroup"</span>] <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">pd</span>.<span
+                                style="color:rgb(220,220,170)">cut</span>(<span
+                                style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Spending"</span>], <span
+                                style="color:rgb(156,220,254)">bins</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">3</span>,
+                        <span style="color:rgb(156,220,254)">labels</span><span
+                                style="color:rgb(212,212,212)">=</span>(<span style="color:rgb(181,206,168)">0</span>,
+                        <span style="color:rgb(181,206,168)">1</span>, <span style="color:rgb(181,206,168)">2</span>))
+                </div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(156,220,254)">df</span>)
+                </div><br>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Gender &nbsp;Age
+                                &nbsp;Income &nbsp;Spending SpendingGroup</span></div>
+                <div><span style="color:rgb(206,145,120)">CustomerID</span></div>
+                <div><span style="color:rgb(206,145,120)">1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 19
+                                &nbsp; &nbsp; &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp;39 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 21
+                                &nbsp; &nbsp; &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp;81 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; 2</span></div>
+                <div><span style="color:rgb(206,145,120)">3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 20 &nbsp;
+                                &nbsp; &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp; 6 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                0</span></div>
+                <div><span style="color:rgb(206,145,120)">4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 23 &nbsp;
+                                &nbsp; &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp;77 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                2</span></div>
+                <div><span style="color:rgb(206,145,120)">5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 31 &nbsp;
+                                &nbsp; &nbsp;17 &nbsp; &nbsp; &nbsp; &nbsp;40 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                1</span></div>
+                <div><span style="color:rgb(197,134,192)">... </span><span style="color:rgb(206,145,120)">&nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp;... &nbsp;... &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; ...
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ...</span></div>
+                <div><span style="color:rgb(206,145,120)">196 &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 35 &nbsp; &nbsp;
+                                120 &nbsp; &nbsp; &nbsp; &nbsp;79 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">197 &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 45 &nbsp; &nbsp;
+                                126 &nbsp; &nbsp; &nbsp; &nbsp;28 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span>
+                </div>
+                <div><span style="color:rgb(206,145,120)">198 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 32 &nbsp;
+                                &nbsp; 126 &nbsp; &nbsp; &nbsp; &nbsp;74 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                2</span></div>
+                <div><span style="color:rgb(206,145,120)">199 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 32 &nbsp;
+                                &nbsp; 137 &nbsp; &nbsp; &nbsp; &nbsp;18 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                0</span></div>
+                <div><span style="color:rgb(206,145,120)">200 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 30 &nbsp;
+                                &nbsp; 137 &nbsp; &nbsp; &nbsp; &nbsp;83 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                2</span></div><br>
+                <div><span style="color:rgb(206,145,120)">[200 rows x 5 columns]</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- categorical to numerical "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># add a new column for gender code, a numerical representation
+                                for male/female</span></div>
+                <div><span style="color:rgb(106,153,85)"># (we will use this later to input to a neural network)</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"GenderCode"</span>] <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">LabelEncoder</span>().<span
+                                style="color:rgb(220,220,170)">fit_transform</span>(<span
+                                style="color:rgb(156,220,254)">d<wbr>f</span>[<span
+                                style="color:rgb(206,145,120)">"Gender"</span>])</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(156,220,254)">df</span>)
+                </div><br>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Gender &nbsp;Age
+                                &nbsp;Income &nbsp;Spending SpendingGroup &nbsp;GenderCode</span></div>
+                <div><span style="color:rgb(206,145,120)">CustomerID</span></div>
+                <div><span style="color:rgb(206,145,120)">1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 19
+                                &nbsp; &nbsp; &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp;39 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 21
+                                &nbsp; &nbsp; &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp;81 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 20 &nbsp;
+                                &nbsp; &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp; 6 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 23 &nbsp;
+                                &nbsp; &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp;77 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 31 &nbsp;
+                                &nbsp; &nbsp;17 &nbsp; &nbsp; &nbsp; &nbsp;40 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(197,134,192)">... </span><span style="color:rgb(206,145,120)">&nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp;... &nbsp;... &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; ...
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; &nbsp; ...</span></div>
+                <div><span style="color:rgb(206,145,120)">196 &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 35 &nbsp; &nbsp;
+                                120 &nbsp; &nbsp; &nbsp; &nbsp;79 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">197 &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 45 &nbsp; &nbsp;
+                                126 &nbsp; &nbsp; &nbsp; &nbsp;28 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0 &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">198 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 32 &nbsp;
+                                &nbsp; 126 &nbsp; &nbsp; &nbsp; &nbsp;74 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">199 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 32 &nbsp;
+                                &nbsp; 137 &nbsp; &nbsp; &nbsp; &nbsp;18 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">200 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 30 &nbsp;
+                                &nbsp; 137 &nbsp; &nbsp; &nbsp; &nbsp;83 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div><br>
+                <div><span style="color:rgb(206,145,120)">[200 rows x 6 columns]</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- one hot encoding "</span>)
+                </div><span class="im"><br>
+                        <div><span style="color:rgb(156,220,254)">df</span> <span
+                                        style="color:rgb(212,212,212)">=</span> <span
+                                        style="color:rgb(78,201,176)">pd</span>.<span
+                                        style="color:rgb(220,220,170)">read_csv</span>(<span
+                                        style="color:rgb(206,145,120)">"mall_customers.<wbr>csv"</span>, <span
+                                        style="color:rgb(156,220,254)">index_col</span><span
+                                        style="color:rgb(212,212,212)">=</span><span
+                                        style="color:rgb(181,206,168)">0</span>)</div>
+                        <div><span style="color:rgb(156,220,254)">df</span>.<span
+                                        style="color:rgb(156,220,254)">columns</span> <span
+                                        style="color:rgb(212,212,212)">=</span> [<span
+                                        style="color:rgb(206,145,120)">"Gender"</span>, <span
+                                        style="color:rgb(206,145,120)">"Age"</span>, <span
+                                        style="color:rgb(206,145,120)">"Income"</span>, <span
+                                        style="color:rgb(206,145,120)">"Spending"</span>]</div><br>
+                </span>
+                <div><span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"SpendingGroup"</span>] <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">pd</span>.<span
+                                style="color:rgb(220,220,170)">cut</span>(<span
+                                style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Spending"</span>], <span
+                                style="color:rgb(156,220,254)">bins</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">3</span>,
+                        <span style="color:rgb(156,220,254)">labels</span><span
+                                style="color:rgb(212,212,212)">=</span>(<span style="color:rgb(181,206,168)">0</span>,
+                        <span style="color:rgb(181,206,168)">1</span>, <span style="color:rgb(181,206,168)">2</span>))
+                </div>
+                <div><span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"GenderCode"</span>] <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(78,201,176)">LabelEncoder</span>().<span
+                                style="color:rgb(220,220,170)">fit_transform</span>(<span
+                                style="color:rgb(156,220,254)">d<wbr>f</span>[<span
+                                style="color:rgb(206,145,120)">"Gender"</span>])</div><br>
+                <div><span style="color:rgb(156,220,254)">y</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">to_categorical</span>(<span
+                                style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"<wbr>SpendingGroup"</span>])</div><br>
+                <div><span style="color:rgb(106,153,85)"># run to_categorical on the column SpendingGroup </span></div>
+                <div><span style="color:rgb(106,153,85)"># returns a conversion to a 'one hot encoding' form</span>
+                </div>
+                <div><span style="color:rgb(106,153,85)"># SpendingGroup has values 0, 1, 2</span></div>
+                <div><span style="color:rgb(106,153,85)"># to_categorical has transformed this into the matrix
+                                below</span></div>
+                <div><span style="color:rgb(106,153,85)"># each row corresponds to a data sample. </span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; if SpendingGroup = 0, this is converted to [1. 0. 0.]
+                                - the index/position of the 1 determines the original value</span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; if SpendingGroup = 1, this is converted to [0. 1.
+                                0.]</span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; if SpendingGroup = 2, this is converted to [0. 0.
+                                1.]</span></div><br>
+                <div><span style="color:rgb(106,153,85)"># this encoding makes it easier to feed the data into a neural
+                                network</span></div>
+                <div><span style="color:rgb(106,153,85)"># the neural network will be trained to predict the value of
+                                SpendingGroup, and will have 3 outputs</span></div>
+                <div><span style="color:rgb(106,153,85)"># that will look like: [1. 0. 0.] to indicate the predicted
+                                value of SpendingGroup</span></div><br>
+                <div><span style="color:rgb(106,153,85)"># print(y)</span></div><br>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">[[0. 1. 0.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 0. 1.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[1. 0. 0.] &nbsp; &nbsp; # this corresponds to a
+                                SpendingGroup value of zero</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 0. 1.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 1. 0.] &nbsp; &nbsp; # this corresponds to a
+                                SpendingGroup value of 1</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 0. 1.] &nbsp; &nbsp; # this corresponds to a
+                                SpendingGroup value of 2</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[1. 0. 0.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 0. 1.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;...</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 0. 1.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[1. 0. 0.]</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp;[0. 0. 1.]]</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div><br>
+                <div><span style="color:rgb(106,153,85)"># print(df)</span></div><br>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Gender &nbsp;Age
+                                &nbsp;Income &nbsp;Spending SpendingGroup &nbsp;GenderCode</span></div>
+                <div><span style="color:rgb(206,145,120)">CustomerID</span></div>
+                <div><span style="color:rgb(206,145,120)">1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 19
+                                &nbsp; &nbsp; &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp;39 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 21
+                                &nbsp; &nbsp; &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp;81 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 20 &nbsp;
+                                &nbsp; &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp; 6 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 23 &nbsp;
+                                &nbsp; &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp;77 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 31 &nbsp;
+                                &nbsp; &nbsp;17 &nbsp; &nbsp; &nbsp; &nbsp;40 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(197,134,192)">... </span><span style="color:rgb(206,145,120)">&nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp;... &nbsp;... &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; ...
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; &nbsp; ...</span></div>
+                <div><span style="color:rgb(206,145,120)">196 &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 35 &nbsp; &nbsp;
+                                120 &nbsp; &nbsp; &nbsp; &nbsp;79 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">197 &nbsp; &nbsp; &nbsp; &nbsp; Female &nbsp; 45 &nbsp; &nbsp;
+                                126 &nbsp; &nbsp; &nbsp; &nbsp;28 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0 &nbsp;
+                                &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">198 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 32 &nbsp;
+                                &nbsp; 126 &nbsp; &nbsp; &nbsp; &nbsp;74 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">199 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 32 &nbsp;
+                                &nbsp; 137 &nbsp; &nbsp; &nbsp; &nbsp;18 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">200 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Male &nbsp; 30 &nbsp;
+                                &nbsp; 137 &nbsp; &nbsp; &nbsp; &nbsp;83 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div><br>
+                <div><span style="color:rgb(206,145,120)">[200 rows x 6 columns]</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- The Predictor Matrix "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># note: syntax for crating a dataframe</span></div>
+                <div><span style="color:rgb(156,220,254)">temp1</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(156,220,254)">df</span>[<span
+                                style="color:rgb(206,145,120)">"Age"</span>] &nbsp; &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># returns a data series</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">temp2</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(156,220,254)">df</span>[[<span
+                                style="color:rgb(206,145,120)">"Age"</span>]] &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># returns a dataframe</span>
+                </div><br>
+                <div><span style="color:rgb(79,193,255)">X</span> <span style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">df</span>[[<span
+                                style="color:rgb(206,145,120)">"Age"</span>, <span
+                                style="color:rgb(206,145,120)">"Income"</span>, <span
+                                style="color:rgb(206,145,120)">"GenderCode"</span>]]</div><br>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(79,193,255)">X</span>)
+                </div><br>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Age &nbsp;Income
+                                &nbsp;GenderCode</span></div>
+                <div><span style="color:rgb(206,145,120)">CustomerID</span></div>
+                <div><span style="color:rgb(206,145,120)">1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;19 &nbsp; &nbsp;
+                                &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;21 &nbsp; &nbsp;
+                                &nbsp;15 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;20 &nbsp; &nbsp;
+                                &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;23 &nbsp; &nbsp;
+                                &nbsp;16 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">5 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;31 &nbsp; &nbsp;
+                                &nbsp;17 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(197,134,192)">... </span><span style="color:rgb(206,145,120)">&nbsp; &nbsp;
+                                &nbsp; &nbsp; ... &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; &nbsp; ...</span></div>
+                <div><span style="color:rgb(206,145,120)">196 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;35 &nbsp; &nbsp; 120
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">197 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;45 &nbsp; &nbsp; 126
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0</span></div>
+                <div><span style="color:rgb(206,145,120)">198 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;32 &nbsp; &nbsp; 126
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">199 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;32 &nbsp; &nbsp; 137
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div>
+                <div><span style="color:rgb(206,145,120)">200 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;30 &nbsp; &nbsp; 137
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></div><br>
+                <div><span style="color:rgb(206,145,120)">[200 rows x 3 columns]</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- test train split "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># split X and y data into testing and training segments</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">X_train</span>, <span
+                                style="color:rgb(156,220,254)">X_test</span>, <span
+                                style="color:rgb(156,220,254)">y_train</span>, <span
+                                style="color:rgb(156,220,254)">y_test</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(220,220,170)">train_test_split</span>(<span
+                                style="color:rgb(79,193,255)">X</span>, <span style="color:rgb(156,220,254)">y</span>,
+                        <span style="color:rgb(156,220,254)">shuffle</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(86,156,214)">True</span>,
+                        <span style="color:rgb(156,220,254)">test_size</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">0.3</span>)
+                        &nbsp;<span style="color:rgb(106,153,85)"># test_size=0.3 means use 1/3 of the data</span>
+                </div>
+                <br>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(220,220,170)">len</span>(<span
+                                style="color:rgb(156,220,254)">X_train</span>)) &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># we have 140 rows of X data (age, income, genderCode) for
+                                training</span></div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(220,220,170)">len</span>(<span
+                                style="color:rgb(156,220,254)">y_train</span>)) &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># we have 140 rows of y data (SpendingGroup as a 1 hot
+                                encoding) for training</span></div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(220,220,170)">len</span>(<span
+                                style="color:rgb(156,220,254)">X_test</span>)) &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(106,153,85)"># 60 X values for testing</span></div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(220,220,170)">len</span>(<span
+                                style="color:rgb(156,220,254)">y_test</span>)) &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(106,153,85)"># 60 y values for testing</span></div><br>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">140</span></div>
+                <div><span style="color:rgb(206,145,120)">140</span></div>
+                <div><span style="color:rgb(206,145,120)">60</span></div>
+                <div><span style="color:rgb(206,145,120)">60</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- scaling "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># 2 reasons for scaling your data:</span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; &nbsp;1. you may have data series that exist on wildly
+                                different scales. Eg. temp (values are between 0 - 100) </span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; &nbsp; &nbsp; vs. micro meters (values are between -1M
+                                - 1M)</span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; &nbsp;2. training a neural network may encounter
+                                issues with overflow (ie. dealing with huge values/numbers that </span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; &nbsp; &nbsp; don't fit in a normal size byte)</span>
+                </div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp; &nbsp; &nbsp; &nbsp;- for training a neural net, input
+                                values in the range from zero to 1 work well</span></div><br>
+                <div><span style="color:rgb(156,220,254)">scaler</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(78,201,176)">StandardScaler</span>()
+                </div>
+                <div><span style="color:rgb(156,220,254)">X_train</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(156,220,254)">scaler</span>.<span
+                                style="color:rgb(220,220,170)">fit_transform</span>(<span
+                                style="color:rgb(156,220,254)">X_train</span>) &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># the scaler will scale the x_train segment.</span>
+                </div>
                 <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                        &nbsp; &nbsp;<span style="color:rgb(156,220,254)">num_steps</span>: <span
-                                style="color:rgb(78,201,176)">int</span>) -&gt; <span
-                                style="color:rgb(78,201,176)">float</span>:</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(206,145,120)">"""</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Minimize f(θ) = sum_i w_i * (θ - x_i)^2 with
-                                gradient descent in 1D.</span></div><br>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Inputs:</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - x: (n,) data values</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - w: (n,) positive weights</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - theta0: initial scalar θ</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - lr: learning rate (stepsize)</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - num_steps: number of gradient steps
-                                (non-negative integer)</span></div><br>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Returns:</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; - theta: final scalar after num_steps
-                                updates</span></div><br>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; Gradient: df/dθ = 2 * sum_i w_i * (θ -
-                                x_i).</span></div>
-                <div><span style="color:rgb(206,145,120)">&nbsp; &nbsp; """</span></div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(86,156,214)">def</span> <span
-                                style="color:rgb(220,220,170)">f_of_theta</span>(<span
-                                style="color:rgb(156,220,254)">theta</span>, <span
-                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>):
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(106,153,85)">#
+                                fit_transform: setup the scaler (figure out the parameters) and then transform</span>
                 </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">sum</span>(<span style="color:rgb(156,220,254)">w</span>
-                        <span style="color:rgb(212,212,212)">*</span> (<span style="color:rgb(156,220,254)">theta</span>
-                        <span style="color:rgb(212,212,212)">-</span> <span
-                                style="color:rgb(156,220,254)">x</span>)<span
-                                style="color:rgb(212,212,212)">**</span><span style="color:rgb(181,206,168)">2</span>)
+                <div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(106,153,85)">#
+                                the configuration will scale the data such that the average is zero, variance = 1</span>
+                </div>
+                <div><span style="color:rgb(156,220,254)">X_test</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(156,220,254)">scaler</span>.<span
+                                style="color:rgb(220,220,170)">transform</span>(<span
+                                style="color:rgb(156,220,254)">X_test</span>) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span
+                                style="color:rgb(106,153,85)"># transform: we do not need to do the setup operation
+                                anymore, just the transform</span>
                 </div><br>
-                <div>&nbsp; &nbsp; <span style="color:rgb(86,156,214)">def</span> <span
-                                style="color:rgb(220,220,170)">grad_f_of_theta</span>(<span
-                                style="color:rgb(156,220,254)">theta</span>, <span
-                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>):
+                <div><span style="color:rgb(106,153,85)"># the testing data X_test needs to be separate (a different
+                                segment) than the training data, so that it is tested with</span></div>
+                <div><span style="color:rgb(106,153,85)"># values it hasn't seen before. </span></div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- creating the neural network "</span>)
+                </div><br>
+                <div><span style="color:rgb(106,153,85)"># our model passes data through a sequence of layers. In
+                                reality, neurons are connected </span></div>
+                <div><span style="color:rgb(106,153,85)"># to each other in a web, but these take a lot longer to
+                                train.</span></div>
+                <div><span style="color:rgb(106,153,85)"># add a layer to our neural net (a dense layer - every neuron
+                                in this layer is densly </span></div>
+                <div><span style="color:rgb(106,153,85)"># connected to every neuron in the next and previous
+                                layers)</span></div>
+                <div><span style="color:rgb(106,153,85)"># activation="relu" - this means that every neuron will look at
+                                each of it's inputs</span></div>
+                <div><span style="color:rgb(106,153,85)"># (which are from other neurons, except the input layer which
+                                is our data set)</span></div>
+                <div><span style="color:rgb(106,153,85)"># each of these inputs will be multiplied by a weight and then
+                                added together</span></div>
+                <div><span style="color:rgb(106,153,85)"># and then we will run that through a non-linear function
+                                (which is vital for making a neural net work).</span></div>
+                <div><span style="color:rgb(106,153,85)"># In this example, we use a popular non-linear function called
+                                'relu'</span></div>
+                <div><span style="color:rgb(106,153,85)"># &nbsp;- all it does is: if the input is &lt;0 make it 0;
+                                otherwise don't change it</span></div>
+                <div><span style="color:rgb(156,220,254)">model</span> <span style="color:rgb(212,212,212)">=</span>
+                        <span style="color:rgb(78,201,176)">Sequential</span>() &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                 </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
-                                style="color:rgb(181,206,168)">2</span> <span style="color:rgb(212,212,212)">*</span>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">add</span>(<span
+                                style="color:rgb(78,201,176)">Dense</span>(<span
+                                style="color:rgb(181,206,168)">200</span>, <span
+                                style="color:rgb(156,220,254)">activation</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"relu"</span>)) &nbsp; &nbsp; &nbsp; &nbsp;</div><br>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">add</span>(<span
+                                style="color:rgb(78,201,176)">Dense</span>(<span
+                                style="color:rgb(181,206,168)">100</span>, <span
+                                style="color:rgb(156,220,254)">activation</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"relu"</span>)) &nbsp; &nbsp; &nbsp; &nbsp;<span
+                                style="color:rgb(106,153,85)"># typically the output size gets smaller with each
+                                layer</span></div><br>
+                <div><span style="color:rgb(106,153,85)"># we need our final output size to be 3; to predict our 3 value
+                                output to match out SpendingGroup category</span></div>
+                <div><span style="color:rgb(106,153,85)"># our final activation is softmax - this is a function that
+                                ensures that all the outputs adds up to 1</span></div>
+                <div><span style="color:rgb(106,153,85)"># so we can interpret them as probabilities. We will take the
+                                largest value of these as the prediction from our model</span></div>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">add</span>(<span
+                                style="color:rgb(78,201,176)">Dense</span>(<span
+                                style="color:rgb(181,206,168)">3</span>, <span
+                                style="color:rgb(156,220,254)">activation</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"softmax"</span>)) &nbsp; &nbsp; &nbsp; </div><br>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">compile</span>(<span
+                                style="color:rgb(156,220,254)">loss</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"<wbr>categorical_crossentropy"</span>, <span
+                                style="color:rgb(156,220,254)">optimizer</span><span
+                                style="color:rgb(212,212,212)">=</span><span
+                                style="color:rgb(206,145,120)">"adam"</span>, <span
+                                style="color:rgb(156,220,254)">metrics</span><span
+                                style="color:rgb(212,212,212)">=</span>[<span
+                                style="color:rgb(78,201,176)">Accuracy</span>()])</div>
+                <div><span style="color:rgb(106,153,85)"># need to specify a loss function</span></div>
+                <div><span style="color:rgb(106,153,85)"># categorical_crossentropy - need to go into information theory
+                                to understand this.</span></div>
+                <div><span style="color:rgb(106,153,85)"># All we need to know is that the loss function of
+                                categorical_crossentropy works really well with softmax.</span></div>
+                <div><span style="color:rgb(106,153,85)"># what is a loss function? It takes the output of the neural
+                                net and compares it with the desired output, </span></div>
+                <div><span style="color:rgb(106,153,85)"># and boils it all down to a single figure, which ranks how
+                                well the neural net performed on that run. </span></div>
+                <div><span style="color:rgb(106,153,85)"># The lower the loss, the better the result (ie. closer the fit
+                                of the predicted value with the desired value). </span></div>
+                <div><span style="color:rgb(106,153,85)"># optimizer="adam"; we train the network by adjusting the
+                                weights (that multiply the inputs of each neuron) </span></div>
+                <div><span style="color:rgb(106,153,85)"># so we need some technique to do that. And Adam is a variant
+                                of type 'gradient descent' (one of the oldest techniques)</span></div>
+                <div><span style="color:rgb(106,153,85)"># metrics=[Accuracy()] - accuracy scores just note how many
+                                correct predictions the model has made as you go along</span></div><br>
+                <div><span style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">fit</span>(<span
+                                style="color:rgb(156,220,254)">X_train</span>, <span
+                                style="color:rgb(156,220,254)">y_train</span>, <span
+                                style="color:rgb(156,220,254)">epochs</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">30</span>)
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span style="color:rgb(106,153,85)"># epochs - one end-to-end
+                                run is an epoch</span></div><br>
+                <div><span style="color:rgb(106,153,85)"># once the model is trained, you can save the neural net as a
+                                binary file and use it in other programs</span></div><br>
+                <div><span style="color:rgb(156,220,254)">y_predicted</span> <span
+                                style="color:rgb(212,212,212)">=</span> <span
+                                style="color:rgb(156,220,254)">model</span>.<span
+                                style="color:rgb(220,220,170)">predict</span>(<span
+                                style="color:rgb(156,220,254)">X_test</span>) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <span style="color:rgb(106,153,85)"># we will check how our model performs on the test
+                                set</span>
+                </div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>()</div>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"-----------------------<wbr>------- evaluating accuracy "</span>)
+                </div><br><br>
+                <div><span style="color:rgb(220,220,170)">print</span>(<span
+                                style="color:rgb(206,145,120)">"Score:"</span>, <span
+                                style="color:rgb(220,220,170)">accuracy_score</span>(<span
+                                style="color:rgb(78,201,176)">np</span>.<span
+                                style="color:rgb(220,220,170)">argmax</span>(<span
+                                style="color:rgb(156,220,254)">y_<wbr>test</span>, <span
+                                style="color:rgb(156,220,254)">axis</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>),
                         <span style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">sum</span>(<span style="color:rgb(156,220,254)">w</span>
-                        <span style="color:rgb(212,212,212)">*</span> (<span style="color:rgb(156,220,254)">theta</span>
-                        <span style="color:rgb(212,212,212)">-</span> <span style="color:rgb(156,220,254)">x</span>))
+                                style="color:rgb(220,220,170)">argmax</span>(<span
+                                style="color:rgb(156,220,254)">y_predicted</span>, <span
+                                style="color:rgb(156,220,254)">axis</span><span
+                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">1</span>)))
                 </div><br>
-                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(156,220,254)">theta0</span></div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta_star</span> <span
-                                style="color:rgb(212,212,212)">=</span> (<span style="color:rgb(156,220,254)">w</span>
-                        <span style="color:rgb(220,220,170)">*</span> <span
-                                style="color:rgb(156,220,254)">x</span>).<span
-                                style="color:rgb(220,220,170)">sum</span>() <span
-                                style="color:rgb(212,212,212)">/</span> <span
-                                style="color:rgb(156,220,254)">w</span>.<span
-                                style="color:rgb(220,220,170)">sum</span>()
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 1/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.0000e+00 -
+                                loss: 1.0620 &nbsp;</span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 2/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.0000e+00 -
+                                loss: 0.9777 </span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 3/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.0000e+00 -
+                                loss: 0.9280 </span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 4/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.0000e+00 -
+                                loss: 0.8821 </span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 28/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.0000e+00 -
+                                loss: 0.4983 </span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 29/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.0000e+00 -
+                                loss: 0.4909 </span></div>
+                <div><span style="color:rgb(206,145,120)">Epoch 30/30</span></div>
+                <div><span style="color:rgb(206,145,120)">5/5 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.0000e+00 -
+                                loss: 0.4928 </span></div>
+                <div><span style="color:rgb(206,145,120)">2/2 ━━━━━━━━━━━━━━━━━━━━ 0s 32ms/step</span></div><br>
+                <div><span style="color:rgb(206,145,120)">------------------------------ evaluating accuracy</span>
                 </div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
-                                style="color:rgb(86,156,214)">f</span><span style="color:rgb(206,145,120)">"theta_star
-                                is: </span><span style="color:rgb(86,156,214)">{</span><span
-                                style="color:rgb(156,220,254)">theta_star</span><span
-                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)">"</span>)
-                </div><br>
-                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">for</span> <span
-                                style="color:rgb(156,220,254)">iteration</span> <span
-                                style="color:rgb(197,134,192)">in</span> <span
-                                style="color:rgb(78,201,176)">range</span>(<span
-                                style="color:rgb(156,220,254)">num_steps</span>):</div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(156,220,254)">f</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(220,220,170)">f_of_theta</span>(<span
-                                style="color:rgb(156,220,254)">theta</span>, <span
-                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>)
-                </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(220,220,170)">print</span>(<span
-                                style="color:rgb(86,156,214)">f</span><span style="color:rgb(206,145,120)">"theta:
-                        </span><span style="color:rgb(86,156,214)">{</span><span
-                                style="color:rgb(156,220,254)">theta</span><span
-                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)"> f_of_theta:
-                        </span><span style="color:rgb(86,156,214)">{</span><span
-                                style="color:rgb(156,220,254)">f</span><span style="color:rgb(86,156,214)">}</span><span
-                                style="color:rgb(206,145,120)">"</span>)</div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(156,220,254)">theta</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(156,220,254)">theta</span> <span
-                                style="color:rgb(212,212,212)">-</span> <span style="color:rgb(156,220,254)">lr</span>
-                        <span style="color:rgb(212,212,212)">*</span> <span
-                                style="color:rgb(220,220,170)">grad_f_of_theta</span>(<span
-                                style="color:rgb(156,220,254)">theta</span>, <span
-                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>)
-                </div><br>
-                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
-                                style="color:rgb(156,220,254)">theta</span></div><br>
-                <div><span style="color:rgb(156,220,254)">x</span> <span style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">array</span>([<span
-                                style="color:rgb(181,206,168)">0.0</span>, <span
-                                style="color:rgb(181,206,168)">10.0</span>])</div>
-                <div><span style="color:rgb(156,220,254)">w</span> <span style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(78,201,176)">np</span>.<span
-                                style="color:rgb(220,220,170)">array</span>([<span
-                                style="color:rgb(181,206,168)">1.0</span>, <span
-                                style="color:rgb(181,206,168)">3.0</span>])</div>
-                <div><span style="color:rgb(156,220,254)">theta0</span> <span style="color:rgb(212,212,212)">=</span>
-                        <span style="color:rgb(181,206,168)">100.0</span>
-                </div>
-                <div><span style="color:rgb(156,220,254)">lr</span> <span style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(181,206,168)">0.25</span> <span style="color:rgb(212,212,212)">/</span>
-                        <span style="color:rgb(156,220,254)">w</span>.<span style="color:rgb(220,220,170)">sum</span>()
-                        &nbsp;<span style="color:rgb(106,153,85)"># stable stepsize (&lt; 1/(2*sum w))</span>
-                </div><br>
-                <div><span style="color:rgb(156,220,254)">theta</span> <span style="color:rgb(212,212,212)">=</span>
-                        <span style="color:rgb(220,220,170)">gradient_descent_quadratic</span>(<span
-                                style="color:rgb(156,220,254)">x</span>, <span style="color:rgb(156,220,254)">w</span>,
-                        <span style="color:rgb(156,220,254)">theta0</span>, <span
-                                style="color:rgb(156,220,254)">lr</span>, <span
-                                style="color:rgb(156,220,254)">num_steps</span><span
-                                style="color:rgb(212,212,212)">=</span><span style="color:rgb(181,206,168)">200</span>)
-                </div>
-                <div><span style="color:rgb(220,220,170)">print</span>(<span style="color:rgb(86,156,214)">f</span><span
-                                style="color:rgb(206,145,120)">"theta: </span><span
-                                style="color:rgb(86,156,214)">{</span><span
-                                style="color:rgb(156,220,254)">theta</span><span
-                                style="color:rgb(86,156,214)">}</span><span style="color:rgb(206,145,120)">"</span>)
-                </div><br>
-                <div><span style="color:rgb(206,145,120)">'''</span></div>
-                <div><span style="color:rgb(206,145,120)">theta_star is: 7.5</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 100.0 f_of_theta: 34300.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 53.75 f_of_theta: 8631.25</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 30.625 f_of_theta: 2214.0625</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 19.0625 f_of_theta: 609.765625</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 13.28125 f_of_theta: 208.69140625</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 10.390625 f_of_theta: 108.4228515625</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 8.9453125 f_of_theta: 83.355712890625</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 8.22265625 f_of_theta: 77.08892822265625</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.861328125 f_of_theta: 75.52223205566406</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.6806640625 f_of_theta: 75.13055801391602</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.59033203125 f_of_theta: 75.032639503479</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.545166015625 f_of_theta: 75.00815987586975</span>
-                </div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.5225830078125 f_of_theta: 75.00203996896744</span>
-                </div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.51129150390625 f_of_theta: 75.00050999224186</span>
-                </div>
-                <div><span style="color:rgb(206,145,120)">...</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.500000000002629 f_of_theta: 75.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.5000000000013145 f_of_theta: 75.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000003 f_of_theta: 75.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000002 f_of_theta: 75.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.500000000000001 f_of_theta: 75.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.5 f_of_theta: 75.0</span></div>
-                <div><span style="color:rgb(206,145,120)">theta: 7.5</span></div>
-                <div><span style="color:rgb(206,145,120)">'''</span></div>
+                <div><span style="color:rgb(206,145,120)">Score: 0.7666666666666667</span></div>
+                <div><span style="color:rgb(206,145,120)">"""</span></div>
         </div>
 </div>

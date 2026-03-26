@@ -8,14 +8,16 @@ import CardDrawer from '@/components/client/CardDrawer';
 import NavDrawer2 from '@/components/client/NavDrawer2';
 import TileRowCell0 from '@/components/client/TileRowCell0';
 import { MathJaxContext } from "better-react-mathjax";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 export default function Home() {
+        const [isClient, setIsClient] = useState(false);
 
         useEffect(() => {
+                setIsClient(true);
                 // Check if MathJax is loaded and available in the window object
-                if (typeof window?.MathJax !== "undefined") {
+                if (isClient && typeof window?.MathJax !== "undefined") {
                         window.MathJax.typeset(); // Triggers typesetting
                 }
         }, []); // Run once on component mount
