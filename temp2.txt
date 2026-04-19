@@ -1,0 +1,41 @@
+<div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
+
+    <div dangerouslySetInnerHTML={createMarkup(xxxxx)} />
+
+    <div><span style="color:rgb(255 184 106);font-size:18px;font-family:Consolas;"><strong>xxxxxxxxx</strong></span>
+    </div>
+
+    rgb(255 184 106)
+
+    <strong>xxxxxxxxx</strong>
+
+    <span className="math text-xl">{"\\[xxxxxxxxxxxxx\\]"}</span>
+
+    <span className="math">{"\\[xxxxxxxxxxxxx\\]"}</span>
+
+    <div className="code-inline bg-zinc-800">'mn-&gt;nm'</div>
+
+
+<p className="formula">{"\\[xxxxxxxxxxxx\\]"}</p>
+<p className="math">{"\\[xxxxxxxxxxxx\\]"}</p>
+
+<span className="math">{"\\[xxxxxxxxxxxx\\]"}</span>
+
+<p className="jade-h5">
+    1a. Feature Representation
+</p>
+
+
+<div className="assignment-question-wrapper p-[15px] mb-[0px]">
+        <div className="assignment-question">
+                <p className="jade-h5">
+                        xxxxxxxxxx
+                </p>
+        </div>
+</div>
+
+<div className="mt-[0px] mb-[15px] ml-[15px] mr-[15px]">
+        <div className="assignment-answer mt-[10px] p-[15px]">
+                xxxxx
+        </div>
+</div>

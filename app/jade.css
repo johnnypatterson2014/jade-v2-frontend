@@ -564,6 +564,11 @@ mjx-container[jax="CHTML"][display="true"] {
     border-radius: 10px; */
 }
 
+.bold {
+    font-weight: 500;
+    color: var(--color-zinc-300);
+}
+
 .what-to-expect {
     font-style: italic;
     color: var(--color-orange-300);

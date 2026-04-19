@@ -107,6 +107,20 @@ export default function MainNavP1() {
 
                     </NavDrawer2>
 
+                    <NavDrawer2 id='4' parent_id='XCS221' name='Week 5 and 6'>
+                        <NavDrawerItem href='/phase1/XCS221/week5_6/a3' isFirst={true} isActive={pathname === "/phase1/XCS221/week5_6/a3"} >
+                            Assignment 3
+                        </NavDrawerItem>
+
+                    </NavDrawer2>
+
+                    <NavDrawer2 id='4' parent_id='XCS221' name='Week 7 and 8'>
+                        <NavDrawerItem href='/phase1/XCS221/week7_8/a4' isFirst={true} isActive={pathname === "/phase1/XCS221/week7_8/a4"} >
+                            Assignment 4
+                        </NavDrawerItem>
+
+                    </NavDrawer2>
+
                 </NavDrawer>
 
 
