@@ -5,7 +5,7 @@ import Tabs from '@/components/client/Tabs';
 import Tab2 from '@/components/client/Tab2';
 import Button from '@/components/client/Button';
 import Modal from '@/components/client/Modal';
-import Testing from '@/components/client/Testing';
+import Testing from '@/components/client/Demo';
 import TileRowCell0 from '@/components/client/TileRowCell0';
 import { MathJaxContext } from "better-react-mathjax";
 import React, { useState, useEffect } from 'react';

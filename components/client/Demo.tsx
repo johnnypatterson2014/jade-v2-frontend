@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Button from '@/components/client/Button'
 import React, { useState, useEffect } from 'react';
 
-const Testing = () => {
+const Demo = () => {
     const [isLoadingAnswer, setIsLoadingAnswer] = useState(false)
     const [apiResponse, setApiResponse] = useState<string>('')
 
@@ -53,4 +53,4 @@ const Testing = () => {
     )
 }
 
-export default Testing
+export default Demo

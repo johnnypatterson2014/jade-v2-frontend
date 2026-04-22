@@ -45,3 +45,107 @@ export const getGraph = async () => {
     // TODO - log error
   }
 }
+
+const SEARCH_BASE = 'http://127.0.0.1:8000';
+
+export const startSearch = async (body: unknown) => {
+  const response = await fetch(`${SEARCH_BASE}/search/start`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body ?? {}),
+  });
+  const text = await response.text();
+  if (!response.ok) {
+    return new NextResponse(text, { status: response.status });
+  }
+  return new NextResponse(text, {
+    status: response.status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+
+export const stepSearch = async (sessionId: string) => {
+  const response = await fetch(`${SEARCH_BASE}/search/step/${encodeURIComponent(sessionId)}`, {
+    method: 'POST',
+  });
+  const text = await response.text();
+  return new NextResponse(text, {
+    status: response.status,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+    },
+  });
+};
+
+export const runSearchToEnd = async (sessionId: string) => {
+  const response = await fetch(`${SEARCH_BASE}/search/run_to_end/${encodeURIComponent(sessionId)}`, {
+    method: 'POST',
+  });
+  const text = await response.text();
+  return new NextResponse(text, {
+    status: response.status,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+    },
+  });
+};
+
+export const cancelSearch = async (sessionId: string) => {
+  const response = await fetch(`${SEARCH_BASE}/search/cancel/${encodeURIComponent(sessionId)}`, {
+    method: 'DELETE',
+  });
+  return new NextResponse(null, { status: response.status });
+};
+
+export const startMdp = async (body: unknown) => {
+  const response = await fetch(`${SEARCH_BASE}/mdp/start`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body ?? {}),
+  });
+  const text = await response.text();
+  if (!response.ok) {
+    return new NextResponse(text, { status: response.status });
+  }
+  return new NextResponse(text, {
+    status: response.status,
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+
+export const stepMdp = async (sessionId: string) => {
+  const response = await fetch(`${SEARCH_BASE}/mdp/step/${encodeURIComponent(sessionId)}`, {
+    method: 'POST',
+  });
+  const text = await response.text();
+  return new NextResponse(text, {
+    status: response.status,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+    },
+  });
+};
+
+export const runMdpToEnd = async (sessionId: string) => {
+  const response = await fetch(`${SEARCH_BASE}/mdp/run_to_end/${encodeURIComponent(sessionId)}`, {
+    method: 'POST',
+  });
+  const text = await response.text();
+  return new NextResponse(text, {
+    status: response.status,
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+    },
+  });
+};
+
+export const cancelMdp = async (sessionId: string) => {
+  const response = await fetch(`${SEARCH_BASE}/mdp/cancel/${encodeURIComponent(sessionId)}`, {
+    method: 'DELETE',
+  });
+  return new NextResponse(null, { status: response.status });
+};

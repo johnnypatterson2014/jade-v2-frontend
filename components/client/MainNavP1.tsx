@@ -121,6 +121,16 @@ export default function MainNavP1() {
 
                     </NavDrawer2>
 
+                    <NavDrawer2 id='4' parent_id='XCS221' name='Visualize'>
+                        <NavDrawerItem href='/phase1/XCS221/demo/shortest_path' isFirst={true} isActive={pathname === "/phase1/XCS221/demo/shortest_path"} >
+                            Shortest Path Visualizer
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/demo/mdp_vi' isFirst={true} isActive={pathname === "/phase1/XCS221/demo/mdp_vi"} >
+                            NumberLine Value Iteration Visualizer
+                        </NavDrawerItem>
+
+                    </NavDrawer2>
+
                 </NavDrawer>
 
 
