@@ -37,6 +37,19 @@
     width: 370px;
 }
 
+.main-nav-mm {
+    margin-top: 11px;
+    padding: 0px;
+    width: 150px;
+}
+
+.fesk-card {
+    border: 1px solid var(--fesk-card-border);
+    padding: 10px;
+    background: var(--fesk-card-background);
+    border-radius: 3px;
+}
+
 .jade-tab {
     background: var(--jade-card-background);
     border: 1px solid var(--jade-card-border);
@@ -327,6 +340,7 @@
 .math {
     font-family: 'Segoe UI Semibold';
     color: var(--color-green-300);
+    /* background-color: #ffffff; */
 }
 
 .formula {
@@ -578,4 +592,12 @@ mjx-container[jax="CHTML"][display="true"] {
     font-family: monospace;
     background-color: #d6d6d625;
     color: var(--color-blue-300);
+}
+
+table.markdown,
+table.markdown th,
+table.markdown td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 4px;
 }

@@ -113,8 +113,14 @@ export default function Header() {
                                         <li className='jade-menu-li jade-border-bottom'>
                                             <Link onClick={() => blurInput()} href='/phase0/mmldss/course1/week1'>Phase 0: Math & Stats for ML</Link>
                                         </li>
+                                        <li className='jade-menu-li jade-border-bottom'>
+                                            <Link onClick={() => blurInput()} href='/phase1/XCS221/week1_2/a1'>XCS221 - AI Principles</Link>
+                                        </li>
+                                        <li className='jade-menu-li jade-border-bottom'>
+                                            <Link onClick={() => blurInput()} href='/XCS236/m1/module_11'>XCS236 - Deep Generative Models</Link>
+                                        </li>
                                         <li className='jade-menu-li'>
-                                            <Link onClick={() => blurInput()} href='/phase1/XCS221/week1_2/a1'>Phase 1: XCS221 - AI Principles</Link>
+                                            <Link onClick={() => blurInput()} href='/mindmap/XCS236'>MindMap: XCS236</Link>
                                         </li>
 
                                     </ul>

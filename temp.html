@@ -1,156 +1,119 @@
-<div dir="ltr">
-        <div style="color:rgb(204,204,204);font-family:monospace;font-size:14px;line-height:18px;">
-                <div><span style="color:rgb(255,123,114)">def</span> <span
-                                style="color:rgb(210,168,255)">test_1</span>():</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(201,209,217)">mdp</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(78,201,176)">NumberLineMDP</span>(<span
-                                style="color:rgb(181,206,168)">10</span>, <span
-                                style="color:rgb(181,206,168)">50</span>, <span
-                                style="color:rgb(212,212,212)">-</span><span style="color:rgb(181,206,168)">5</span>,
-                        <span style="color:rgb(181,206,168)">2</span>)
-                </div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(201,209,217)">succAndRewardProb</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(210,168,255)">getSuccessRewardProbabilityDat<wbr>a</span>(<span
-                                style="color:rgb(201,209,217)">mdp</span>)</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(201,209,217)">pi</span> <span
-                                style="color:rgb(212,212,212)">=</span> <span
-                                style="color:rgb(210,168,255)">valueIteration</span>(<span
-                                style="color:rgb(201,209,217)">succAndRewardPr<wbr>ob</span>, <span
-                                style="color:rgb(201,209,217)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">discount</span>)</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(210,168,255)">print</span>(<span
-                                style="color:rgb(201,209,217)">pi</span>)</div><br><br>
-                <div><span style="color:rgb(255,123,114)">def</span> <span
-                                style="color:rgb(210,168,255)">getSuccessRewardProbabilityDat<wbr>a</span>(<span
-                                style="color:rgb(255,166,87)">mdp</span>: <span
-                                style="color:rgb(78,201,176)">NumberLineMDP</span>):</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(201,209,217)">succAndRewardProb</span> <span
-                                style="color:rgb(212,212,212)">=</span> {</div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; (<span style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">+</span> <span style="color:rgb(181,206,168)">1</span>,
-                        <span style="color:rgb(181,206,168)">1</span>): [(<span
-                                style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">+</span> <span style="color:rgb(181,206,168)">2</span>,
-                        <span style="color:rgb(181,206,168)">0.2</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>), (<span
-                                style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>,
-                        <span style="color:rgb(181,206,168)">0.8</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">leftReward</span>)],
-                </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; (<span style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">+</span> <span style="color:rgb(181,206,168)">1</span>,
-                        <span style="color:rgb(181,206,168)">2</span>): [(<span
-                                style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">+</span> <span style="color:rgb(181,206,168)">2</span>,
-                        <span style="color:rgb(181,206,168)">0.3</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>), (<span
-                                style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>,
-                        <span style="color:rgb(181,206,168)">0.7</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">leftReward</span>)],
-                </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; (<span style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">n</span> <span style="color:rgb(212,212,212)">-</span>
-                        <span style="color:rgb(181,206,168)">1</span>, <span style="color:rgb(181,206,168)">1</span>):
-                        [(<span style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">-</span> <span style="color:rgb(181,206,168)">2</span>,
-                        <span style="color:rgb(181,206,168)">0.8</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>), (<span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>,
-                        <span style="color:rgb(181,206,168)">0.2</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">rightReward</span>)],
-                </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; (<span style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">n</span> <span style="color:rgb(212,212,212)">-</span>
-                        <span style="color:rgb(181,206,168)">1</span>, <span style="color:rgb(181,206,168)">2</span>):
-                        [(<span style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">-</span> <span style="color:rgb(181,206,168)">2</span>,
-                        <span style="color:rgb(181,206,168)">0.7</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>), (<span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>,
-                        <span style="color:rgb(181,206,168)">0.3</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">rightReward</span>)]
-                </div>
-                <div>&nbsp; &nbsp; }</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">for</span> <span
-                                style="color:rgb(201,209,217)">s</span> <span style="color:rgb(197,134,192)">in</span>
-                        <span style="color:rgb(78,201,176)">range</span>(<span
-                                style="color:rgb(212,212,212)">-</span><span
-                                style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">+</span> <span style="color:rgb(181,206,168)">2</span>,
-                        <span style="color:rgb(255,166,87)">mdp</span>.<span style="color:rgb(201,209,217)">n</span>
-                        <span style="color:rgb(212,212,212)">-</span> <span style="color:rgb(181,206,168)">1</span>):
-                </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(201,209,217)">succAndRewardProb</span>[(<span
-                                style="color:rgb(201,209,217)">s</span>, <span style="color:rgb(181,206,168)">1</span>)]
-                        <span style="color:rgb(212,212,212)">=</span> [(<span
-                                style="color:rgb(201,209,217)">s</span><span
-                                style="color:rgb(212,212,212)">+</span><span style="color:rgb(181,206,168)">1</span>,
-                        <span style="color:rgb(181,206,168)">0.2</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>), (<span
-                                style="color:rgb(201,209,217)">s</span> <span style="color:rgb(212,212,212)">-</span>
-                        <span style="color:rgb(181,206,168)">1</span>, <span style="color:rgb(181,206,168)">0.8</span>,
-                        <span style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>)]
-                </div>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(201,209,217)">succAndRewardProb</span>[(<span
-                                style="color:rgb(201,209,217)">s</span>, <span style="color:rgb(181,206,168)">2</span>)]
-                        <span style="color:rgb(212,212,212)">=</span> [(<span
-                                style="color:rgb(201,209,217)">s</span><span
-                                style="color:rgb(212,212,212)">+</span><span style="color:rgb(181,206,168)">1</span>,
-                        <span style="color:rgb(181,206,168)">0.3</span>, <span
-                                style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>), (<span
-                                style="color:rgb(201,209,217)">s</span> <span style="color:rgb(212,212,212)">-</span>
-                        <span style="color:rgb(181,206,168)">1</span>, <span style="color:rgb(181,206,168)">0.7</span>,
-                        <span style="color:rgb(255,166,87)">mdp</span>.<span
-                                style="color:rgb(201,209,217)">penalty</span>)]
-                </div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(210,168,255)">print</span>()</div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(210,168,255)">print</span>(<span
-                                style="color:rgb(165,214,255)">"(state, action) = [forward: (nextState, prob, reward),
-                                backward: (nextState, prob, reward)]"</span>)</div><span class="im">
-                        <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">for</span> <span
-                                        style="color:rgb(201,209,217)">state</span>, <span
-                                        style="color:rgb(201,209,217)">action</span> <span
-                                        style="color:rgb(197,134,192)">in</span> <span
-                                        style="color:rgb(201,209,217)">succAndRewardProb</span>.<span
-                                        style="color:rgb(210,168,255)">keys</span>():</div>
-                </span>
-                <div>&nbsp; &nbsp; &nbsp; &nbsp; <span style="color:rgb(210,168,255)">print</span>(<span
-                                style="color:rgb(255,123,114)">f</span><span
-                                style="color:rgb(165,214,255)">"</span><span
-                                style="color:rgb(215,186,125)">\t</span><span
-                                style="color:rgb(165,214,255)">(</span><span
-                                style="color:rgb(255,123,114)">{</span><span
-                                style="color:rgb(201,209,217)">state</span><span
-                                style="color:rgb(255,123,114)">}</span><span style="color:rgb(165,214,255)">,
-                        </span><span style="color:rgb(255,123,114)">{</span><span
-                                style="color:rgb(201,209,217)">action</span><span
-                                style="color:rgb(255,123,114)">}</span><span style="color:rgb(165,214,255)">) =
-                        </span><span style="color:rgb(255,123,114)">{</span><span
-                                style="color:rgb(201,209,217)">succAndRewardProb</span>[(<span
-                                style="color:rgb(201,209,217)">state</span>, <span
-                                style="color:rgb(201,209,217)">action</span>)]<span
-                                style="color:rgb(255,123,114)">}</span><span style="color:rgb(165,214,255)">"</span>)
-                </div>
-                <div>&nbsp; &nbsp; <span style="color:rgb(197,134,192)">return</span> <span
-                                style="color:rgb(201,209,217)">succAndRewardProb</span></div>
+<div
+        style="color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-family: Consolas, 'Courier New', monospace; font-weight: normal; font-size: 14px; line-height: 19px; margin: auto; width: fit-content; overflow: auto; white-space: nowrap;">
+        <div><span style="color: #c586c0;">from</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">typing</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #c586c0;">import</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #c9d1d9;">Any</span><span style="color: #bbbebf;">,&nbsp;</span><span
+                        style="color: #4ec9b0;">Callable</span></div>
+        <div><span style="color: #c586c0;">from</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">dataclasses</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #c586c0;">import</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #d2a8ff;">dataclass</span></div>
+        <div><span style="color: #c586c0;">import</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">numpy</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #c586c0;">as</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">np</span></div>
+        <div><span style="color: #c586c0;">from</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">util</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #c586c0;">import</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #d2a8ff;">sample_dict</span><span style="color: #bbbebf;">,&nbsp;</span><span
+                        style="color: #d2a8ff;">set_random_seed</span></div>
+        <div><span style="color: #c9d1d9;">Policy</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #d4d4d4;">=</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">Callable</span><span style="color: #bbbebf;">[[</span><span
+                        style="color: #c9d1d9;">Any</span><span style="color: #bbbebf;">],&nbsp;</span><span
+                        style="color: #c9d1d9;">Any</span><span style="color: #bbbebf;">]</span></div>
+        <div><span style="color: #c9d1d9;">State</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #d4d4d4;">=</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #c9d1d9;">Any</span></div>
+        <div><span style="color: #c9d1d9;">Action</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #d4d4d4;">=</span><span style="color: #bbbebf;">&nbsp;</span><span
+                        style="color: #4ec9b0;">str</span></div>
+        <div><br></div>
+        <div><br></div>
+        <div><span style="color: #8b949e;">#&nbsp;-----------------------------</span></div>
+        <div><span style="color: #8b949e;">#&nbsp;td_learning_motivation()</span></div>
+        <div><span style="color: #8b949e;">#&nbsp;Temporal&nbsp;Difference&nbsp;(TD)&nbsp;Learning</span></div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">'''</span></div>
+        <div><span style="color: #a5d6ff;">Recall&nbsp;from&nbsp;RL:</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Value&nbsp;Iteration:&nbsp;V_π(s):&nbsp;value&nbsp;(expected&nbsp;utility)&nbsp;of&nbsp;following&nbsp;policy&nbsp;π&nbsp;from&nbsp;state&nbsp;s</span>
         </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Q&nbsp;Values:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Q_π(s,&nbsp;a):&nbsp;value&nbsp;(expected&nbsp;utility)&nbsp;of&nbsp;taking&nbsp;action&nbsp;a&nbsp;in&nbsp;state&nbsp;s,&nbsp;and&nbsp;then&nbsp;following&nbsp;policy&nbsp;π</span>
+        </div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">Recall&nbsp;SARSA&nbsp;from&nbsp;reinforcement&nbsp;learning:</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;On-policy:&nbsp;estimating&nbsp;Q-values&nbsp;of&nbsp;the&nbsp;current&nbsp;policy&nbsp;Q_π(s,&nbsp;a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;need&nbsp;to&nbsp;do&nbsp;full&nbsp;rollout?</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Bootstrapping:&nbsp;target&nbsp;is&nbsp;immediate&nbsp;reward&nbsp;+&nbsp;estimated&nbsp;future&nbsp;reward&nbsp;&nbsp;&nbsp;-&nbsp;iteratively&nbsp;update/approximate&nbsp;Q-values&nbsp;estimate&nbsp;until&nbsp;the&nbsp;change&nbsp;is&nbsp;smaller&nbsp;than&nbsp;some&nbsp;tollerance</span>
+        </div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">For&nbsp;games:</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;we&nbsp;know&nbsp;the&nbsp;states&nbsp;and&nbsp;transitions&nbsp;(the&nbsp;MDP),&nbsp;why&nbsp;not&nbsp;use&nbsp;value-iteration&nbsp;to&nbsp;solve&nbsp;it?</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;because&nbsp;the&nbsp;number&nbsp;of&nbsp;states&nbsp;is&nbsp;huge&nbsp;-&nbsp;think&nbsp;chess;&nbsp;you&nbsp;would&nbsp;need&nbsp;to&nbsp;explore&nbsp;every&nbsp;possible&nbsp;move</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;motivation:&nbsp;use&nbsp;function&nbsp;approximation&nbsp;to&nbsp;help&nbsp;deal&nbsp;with&nbsp;large&nbsp;state-space</span>
+        </div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">So&nbsp;we'll&nbsp;use&nbsp;reinforcement&nbsp;learning...</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;&nbsp;&nbsp;&nbsp;...not&nbsp;due&nbsp;to&nbsp;unknown&nbsp;MDP&nbsp;(original&nbsp;motivation),</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;&nbsp;&nbsp;&nbsp;...but&nbsp;because&nbsp;the&nbsp;number&nbsp;of&nbsp;states&nbsp;is&nbsp;exponential!</span>
+        </div>
+        <div><br></div>
+        <div><span
+                        style="color: #a5d6ff;">TD&nbsp;learning&nbsp;-&gt;&nbsp;V_π&nbsp;&nbsp;is&nbsp;analogous&nbsp;to:&nbsp;SARSA&nbsp;-&gt;&nbsp;Q_π</span>
+        </div>
+        <div><br></div>
+        <div><span
+                        style="color: #a5d6ff;">SARSA:&nbsp;Q_π(s,&nbsp;a)&nbsp;tells&nbsp;us&nbsp;how&nbsp;good&nbsp;each&nbsp;action&nbsp;is</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">TD&nbsp;learning:&nbsp;V_π(s)&nbsp;tells&nbsp;us&nbsp;how&nbsp;good&nbsp;each&nbsp;state&nbsp;is&nbsp;(since&nbsp;action&nbsp;→&nbsp;next&nbsp;state&nbsp;is&nbsp;known)</span>
+        </div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">idea:</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;train&nbsp;a&nbsp;neural&nbsp;net&nbsp;to&nbsp;do&nbsp;the&nbsp;function&nbsp;approximation;&nbsp;use&nbsp;gradient&nbsp;descent&nbsp;to&nbsp;update&nbsp;model&nbsp;weights/bias</span>
+        </div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">Basic&nbsp;idea:</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Get&nbsp;piece&nbsp;of&nbsp;experience&nbsp;(s,&nbsp;a,&nbsp;r,&nbsp;s')</span>
+        </div>
+        <div><span style="color: #a5d6ff;">&nbsp;-&nbsp;Model&nbsp;predicts&nbsp;V(s;&nbsp;w)</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Target&nbsp;(bootstrapping):&nbsp;r&nbsp;+&nbsp;γ&nbsp;*&nbsp;V(s';&nbsp;w)</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Define&nbsp;squared&nbsp;loss:&nbsp;L(w)&nbsp;=&nbsp;(V(s;&nbsp;w)&nbsp;-&nbsp;(r&nbsp;+&nbsp;γ&nbsp;*&nbsp;V(s';&nbsp;w)))&nbsp;^&nbsp;2</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;Take&nbsp;a&nbsp;gradient&nbsp;step:&nbsp;w&nbsp;=&nbsp;w&nbsp;-&nbsp;α&nbsp;*&nbsp;∇_w&nbsp;L(w)</span>
+        </div>
+        <div><br></div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">Summary:</span></div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;TD&nbsp;learning&nbsp;estimates&nbsp;V_π(s)&nbsp;from&nbsp;experience&nbsp;(s,&nbsp;a,&nbsp;r,&nbsp;s')</span>
+        </div>
+        <div><span
+                        style="color: #a5d6ff;">&nbsp;-&nbsp;On&nbsp;policy&nbsp;(we're&nbsp;not&nbsp;considering&nbsp;other&nbsp;actions)</span>
+        </div>
+        <div><span style="color: #a5d6ff;">&nbsp;-&nbsp;Uses&nbsp;bootstrapping</span></div>
+        <div><br></div>
+        <div><span style="color: #a5d6ff;">&nbsp;</span></div>
+        <div><span style="color: #a5d6ff;">'''</span></div>
+        <div><br></div>
+        <div><br></div>
 </div>

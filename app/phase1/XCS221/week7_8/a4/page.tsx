@@ -1022,7 +1022,6 @@ Algorithm:
 </pre>
         `
 
-
         return (
                 <>
                         <MathJaxContext>
@@ -1038,6 +1037,7 @@ Algorithm:
 
 
                                         <Tabs>
+
                                                 <Tab2 title="MDP" isChecked={true}>
                                                         <TileRowCell0>
 

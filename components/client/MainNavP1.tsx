@@ -115,8 +115,24 @@ export default function MainNavP1() {
                     </NavDrawer2>
 
                     <NavDrawer2 id='4' parent_id='XCS221' name='Week 7 and 8'>
-                        <NavDrawerItem href='/phase1/XCS221/week7_8/a4' isFirst={true} isActive={pathname === "/phase1/XCS221/week7_8/a4"} >
+                        <NavDrawerItem href='/phase1/XCS221/week7_8/notes' isFirst={true} isActive={pathname === "/phase1/XCS221/week7_8/notes"} >
+                            Notes
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week7_8/a4' isFirst={false} isActive={pathname === "/phase1/XCS221/week7_8/a4"} >
                             Assignment 4
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week9_10/a5' isFirst={false} isActive={pathname === "/phase1/XCS221/week9_10/a5"} >
+                            Assignment 5
+                        </NavDrawerItem>
+
+                    </NavDrawer2>
+
+                    <NavDrawer2 id='4' parent_id='XCS221' name='Week 9 and 10'>
+                        <NavDrawerItem href='/phase1/XCS221/week9_10/a6' isFirst={true} isActive={pathname === "/phase1/XCS221/week9_10/a6"} >
+                            Assignment 6
+                        </NavDrawerItem>
+                        <NavDrawerItem href='/phase1/XCS221/week9_10/a7' isFirst={false} isActive={pathname === "/phase1/XCS221/week9_10/a7"} >
+                            Assignment 7
                         </NavDrawerItem>
 
                     </NavDrawer2>
@@ -125,14 +141,13 @@ export default function MainNavP1() {
                         <NavDrawerItem href='/phase1/XCS221/demo/shortest_path' isFirst={true} isActive={pathname === "/phase1/XCS221/demo/shortest_path"} >
                             Shortest Path Visualizer
                         </NavDrawerItem>
-                        <NavDrawerItem href='/phase1/XCS221/demo/mdp_vi' isFirst={true} isActive={pathname === "/phase1/XCS221/demo/mdp_vi"} >
+                        <NavDrawerItem href='/phase1/XCS221/demo/mdp_vi' isFirst={false} isActive={pathname === "/phase1/XCS221/demo/mdp_vi"} >
                             NumberLine Value Iteration Visualizer
                         </NavDrawerItem>
 
                     </NavDrawer2>
 
                 </NavDrawer>
-
 
                 <NavDrawer id='references' name='Quick Reference'>
 
